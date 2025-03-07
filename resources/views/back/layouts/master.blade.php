@@ -12,7 +12,7 @@
     <meta content="Buy Brand Tools Admin" name="description" />
     <meta content="Buy Brand Tools Admin" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('back/assets/') }}/images/logoblog.svg">
+    <link rel="shortcut icon" href="{{ asset('back/assets/') }}/images/logo.png">
 
     <!-- jquery.vectormap css -->
     <link href="{{ asset('back/assets/') }}/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css"
