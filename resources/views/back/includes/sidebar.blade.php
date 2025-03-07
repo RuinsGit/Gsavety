@@ -60,7 +60,7 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
                         <i class="ri-share-line" style="color: white;"></i>
-                        <span >Sosial Media</span>
+                        <span style="color: white;">Sosial Media</span>
                     </a>
                     <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
                        
