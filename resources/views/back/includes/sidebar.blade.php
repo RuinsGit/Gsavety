@@ -43,13 +43,13 @@
                         <li>
                             <a href="{{ route('back.pages.seo.index') }}" style="color: white;">
                                 <i class="ri-earth-line" style="color: white;"></i>
-                                <span style="color: white;">SEO</span>
+                                <span >SEO</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('back.pages.logos.index') }}" style="color: white;">
                                 <i class="ri-file-line" style="color: white;"></i>
-                                <span style="color: white;">Logo</span>
+                                <span >Logo</span>
                             </a>
                         </li>
 
@@ -60,28 +60,28 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
                         <i class="ri-share-line" style="color: white;"></i>
-                        <span style="color: white;">Sosial Media</span>
+                        <span >Sosial Media</span>
                     </a>
                     <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
                        
                     <li>
                             <a href="{{ route('back.pages.social.index') }}" style="color: white;">
                                 <i class="ri-messenger-line" style="color: white;"></i>
-                                <span style="color: white;">Sosial Media</span>
+                                <span >Sosial Media</span>
                             </a>
                         </li>   
 
                         <li>
                         <a href="{{ route('back.pages.socialshare.index') }}" style="color: white;">
                             <i class="ri-share-line" style="color: white;"></i>
-                            <span style="color: white;">Sosial Share</span>
+                            <span >Sosial Share</span>
                         </a>
                     </li>  
 
                     <li>
                         <a href="{{ route('back.pages.socialfooter.index') }}" style="color: white;">
                             <i class="ri-mail-open-line" style="color: white;"></i>
-                            <span style="color: white;">Sosial Footer</span>
+                            <span >Sosial Footer</span>
                         </a>
                     </li>  
 
