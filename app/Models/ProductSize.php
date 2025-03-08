@@ -19,13 +19,13 @@ class ProductSize extends Model
         'sort_order',
     ];
     
-    // Çok dilli özellikler için accessor'lar
+   
     public function getSizeNameAttribute()
     {
         return $this->{'size_name_' . app()->getLocale()};
     }
     
-    // İlişkiler
+  
     public function product()
     {
         return $this->belongsTo(Product::class);

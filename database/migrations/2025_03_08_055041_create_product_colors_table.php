@@ -15,21 +15,21 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             
-            // Renk adı (çok dilli)
+         
             $table->string('color_name_az')->nullable();
             $table->string('color_name_en')->nullable();
             $table->string('color_name_ru')->nullable();
             
-            // Renk kodu (HEX)
+            
             $table->string('color_code')->nullable();
             
-            // Renk görseli
+           
             $table->string('color_image')->nullable();
             
-            // Renk durumu
+           
             $table->boolean('status')->default(true);
             
-            // Sıralama
+            
             $table->integer('sort_order')->default(0);
             
             $table->timestamps();

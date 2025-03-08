@@ -20,7 +20,7 @@ class ProductStock extends Model
         'status',
     ];
     
-    // İlişkiler
+
     public function product()
     {
         return $this->belongsTo(Product::class);

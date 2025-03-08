@@ -22,7 +22,7 @@ class SeoController extends Controller
 
     public function store(Request $request)
     {
-        // Check if the number of existing records is 11
+      
         if (Seo::count() >= 11) {
             return redirect()->route('back.pages.seo.index')->with('error', 'Maksimum 11 SEO məlumatı əlavə edilə bilər.');
         }

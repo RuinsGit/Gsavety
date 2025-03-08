@@ -566,7 +566,7 @@
 </div>
 
 <style>
-/* Genel Stiller */
+
 .card {
     transition: all 0.3s ease;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06) !important;
@@ -593,7 +593,7 @@
     vertical-align: middle;
 }
 
-/* Ürün Ana Görsel */
+
 .product-img-wrapper {
     height: 300px;
     overflow: hidden;
@@ -614,7 +614,7 @@
     transform: scale(1.05);
 }
 
-/* Bilgi Kartı */
+
 .product-info-card .info-row {
     transition: background-color 0.2s;
 }
@@ -623,7 +623,7 @@
     background-color: rgba(52, 152, 219, 0.05);
 }
 
-/* Tab Stilleri */
+
 .nav-pills .nav-link {
     padding: 10px 20px;
     font-weight: 500;
@@ -652,7 +652,7 @@
     background-color: #dc3545;
 }
 
-/* Tablolar */
+
 .table {
     font-size: 0.95rem;
 }
@@ -668,7 +668,7 @@
     letter-spacing: 0.5px;
 }
 
-/* Galeri */
+
 .product-gallery-img {
     height: 200px;
     object-fit: cover;
@@ -679,12 +679,12 @@
     transform: scale(1.05);
 }
 
-/* Özel Renk */
+
 .bg-purple {
     background-color: #6f42c1;
 }
 
-/* Responsive */
+
 @media (max-width: 767.98px) {
     .product-img-wrapper {
         height: 250px;

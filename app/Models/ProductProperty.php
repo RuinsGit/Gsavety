@@ -21,7 +21,7 @@ class ProductProperty extends Model
         'sort_order',
     ];
     
-    // Çok dilli özellikler için accessor'lar
+   
     public function getPropertyNameAttribute()
     {
         return $this->{'property_name_' . app()->getLocale()};
@@ -32,7 +32,7 @@ class ProductProperty extends Model
         return $this->{'property_value_' . app()->getLocale()};
     }
     
-    // İlişkiler
+  
     public function product()
     {
         return $this->belongsTo(Product::class);

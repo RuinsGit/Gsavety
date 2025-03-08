@@ -21,7 +21,7 @@ class ProductImage extends Model
         'sort_order',
     ];
     
-    // Çok dilli özellikler için accessor'lar
+  
     public function getAltTextAttribute()
     {
         return $this->{'alt_text_' . app()->getLocale()};

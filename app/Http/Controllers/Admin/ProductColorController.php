@@ -10,27 +10,21 @@ use Illuminate\Support\Facades\File;
 
 class ProductColorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $colors = ProductColor::with('product')->get();
         return view('back.admin.product_colors.index', compact('colors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         $products = Product::where('status', 1)->get();
         return view('back.admin.product_colors.create', compact('products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
         $request->validate([
@@ -51,7 +45,7 @@ class ProductColorController extends Controller
         $color->status = $request->has('status') ? 1 : 0;
         $color->sort_order = $request->sort_order ?? 0;
         
-        // Renk görseli yükleme
+       
         if ($request->hasFile('color_image')) {
             $image = $request->file('color_image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -64,18 +58,14 @@ class ProductColorController extends Controller
         return redirect()->route('back.pages.product_colors.index')->with('success', 'Ürün rengi başarıyla eklendi.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(string $id)
     {
         $color = ProductColor::with('product')->findOrFail($id);
         return view('back.admin.product_colors.show', compact('color'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
     {
         $color = ProductColor::findOrFail($id);
@@ -83,9 +73,7 @@ class ProductColorController extends Controller
         return view('back.admin.product_colors.edit', compact('color', 'products'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -106,9 +94,9 @@ class ProductColorController extends Controller
         $color->status = $request->has('status') ? 1 : 0;
         $color->sort_order = $request->sort_order ?? 0;
         
-        // Renk görseli yükleme
+       
         if ($request->hasFile('color_image')) {
-            // Eski görseli sil
+            
             if ($color->color_image && File::exists(public_path($color->color_image))) {
                 File::delete(public_path($color->color_image));
             }
@@ -124,27 +112,23 @@ class ProductColorController extends Controller
         return redirect()->route('back.pages.product_colors.index')->with('success', 'Ürün rengi başarıyla güncellendi.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(string $id)
     {
         $color = ProductColor::findOrFail($id);
         
-        // Renk görselini sil
+       
         if ($color->color_image && File::exists(public_path($color->color_image))) {
             File::delete(public_path($color->color_image));
         }
         
-        // Rengi sil (ilişkili kayıtlar cascade ile silinecek)
+       
         $color->delete();
         
         return redirect()->route('back.pages.product_colors.index')->with('success', 'Ürün rengi başarıyla silindi.');
     }
     
-    /**
-     * Toggle color status.
-     */
+   
     public function toggleStatus($id)
     {
         $color = ProductColor::findOrFail($id);

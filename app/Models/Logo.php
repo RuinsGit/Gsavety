@@ -9,7 +9,7 @@ class Logo extends Model
 {
     use HasFactory;
 
-    // Toplu atama için izin verilen alanlar
+  
     protected $fillable = [
         'logo_1_image',
         'logo_2_image',

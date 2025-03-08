@@ -20,13 +20,13 @@ class ProductColor extends Model
         'sort_order',
     ];
     
-    // Çok dilli özellikler için accessor'lar
+   
     public function getColorNameAttribute()
     {
         return $this->{'color_name_' . app()->getLocale()};
     }
     
-    // İlişkiler
+   
     public function product()
     {
         return $this->belongsTo(Product::class);

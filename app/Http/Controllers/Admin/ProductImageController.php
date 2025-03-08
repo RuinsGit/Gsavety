@@ -11,18 +11,14 @@ use Illuminate\Support\Facades\File;
 
 class ProductImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+ 
     public function index()
     {
         $images = ProductImage::with(['product', 'color'])->get();
         return view('back.admin.product_images.index', compact('images'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         $products = Product::where('status', 1)->get();
@@ -30,9 +26,7 @@ class ProductImageController extends Controller
         return view('back.admin.product_images.create', compact('products', 'colors'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+ 
     public function store(Request $request)
     {
         $request->validate([
@@ -54,7 +48,7 @@ class ProductImageController extends Controller
         $image->status = $request->has('status') ? 1 : 0;
         $image->sort_order = $request->sort_order ?? 0;
         
-        // Resim yükleme
+       
         if ($request->hasFile('image')) {
             $imageFile = $request->file('image');
             $imageName = time() . '.' . $imageFile->getClientOriginalExtension();
@@ -64,7 +58,7 @@ class ProductImageController extends Controller
         
         $image->save();
         
-        // Eğer bu resim ana resim olarak işaretlendiyse, diğer resimlerin ana resim işaretini kaldır
+        
         if ($image->is_main) {
             ProductImage::where('product_id', $request->product_id)
                 ->where('id', '!=', $image->id)
@@ -74,18 +68,14 @@ class ProductImageController extends Controller
         return redirect()->route('back.pages.product_images.index')->with('success', 'Ürün resmi başarıyla eklendi.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(string $id)
     {
         $image = ProductImage::with(['product', 'color'])->findOrFail($id);
         return view('back.admin.product_images.show', compact('image'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
     {
         $image = ProductImage::findOrFail($id);
@@ -94,9 +84,7 @@ class ProductImageController extends Controller
         return view('back.admin.product_images.edit', compact('image', 'products', 'colors'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -118,9 +106,9 @@ class ProductImageController extends Controller
         $image->status = $request->has('status') ? 1 : 0;
         $image->sort_order = $request->sort_order ?? 0;
         
-        // Resim yükleme
+       
         if ($request->hasFile('image')) {
-            // Eski resmi sil
+           
             if ($image->image_path && File::exists(public_path($image->image_path))) {
                 File::delete(public_path($image->image_path));
             }
@@ -133,7 +121,7 @@ class ProductImageController extends Controller
         
         $image->save();
         
-        // Eğer bu resim ana resim olarak işaretlendiyse, diğer resimlerin ana resim işaretini kaldır
+       
         if ($image->is_main) {
             ProductImage::where('product_id', $request->product_id)
                 ->where('id', '!=', $image->id)
@@ -143,14 +131,12 @@ class ProductImageController extends Controller
         return redirect()->route('back.pages.product_images.index')->with('success', 'Ürün resmi başarıyla güncellendi.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(string $id)
     {
         $image = ProductImage::findOrFail($id);
         
-        // Resmi sil
+      
         if ($image->image_path && File::exists(public_path($image->image_path))) {
             File::delete(public_path($image->image_path));
         }
@@ -160,9 +146,7 @@ class ProductImageController extends Controller
         return redirect()->route('back.pages.product_images.index')->with('success', 'Ürün resmi başarıyla silindi.');
     }
     
-    /**
-     * Toggle image status.
-     */
+  
     public function toggleStatus($id)
     {
         $image = ProductImage::findOrFail($id);
@@ -172,27 +156,23 @@ class ProductImageController extends Controller
         return redirect()->route('back.pages.product_images.index')->with('success', 'Resim durumu başarıyla değiştirildi.');
     }
     
-    /**
-     * Set as main image.
-     */
+   
     public function setAsMain($id)
     {
         $image = ProductImage::findOrFail($id);
         
-        // Önce tüm resimlerin ana resim işaretini kaldır
+     
         ProductImage::where('product_id', $image->product_id)
             ->update(['is_main' => 0]);
             
-        // Bu resmi ana resim olarak işaretle
+       
         $image->is_main = 1;
         $image->save();
         
         return redirect()->route('back.pages.product_images.index')->with('success', 'Ana resim başarıyla değiştirildi.');
     }
     
-    /**
-     * Get colors by product.
-     */
+  
     public function getColorsByProduct($productId)
     {
         $colors = ProductColor::where('product_id', $productId)

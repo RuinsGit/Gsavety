@@ -34,7 +34,7 @@ class Product extends Model
         'slug_ru',
     ];
     
-    // Çok dilli özellikler için accessor'lar
+  
     public function getNameAttribute()
     {
         return $this->{'name_' . app()->getLocale()};
@@ -60,7 +60,7 @@ class Product extends Model
         return $this->{'slug_' . app()->getLocale()};
     }
     
-    // İlişkiler
+ 
     public function properties()
     {
         return $this->hasMany(ProductProperty::class);
@@ -86,7 +86,7 @@ class Product extends Model
         return $this->hasMany(ProductStock::class);
     }
     
-    // Ana resmi getir
+ 
     public function getMainImageAttribute($value)
     {
         if ($value) {

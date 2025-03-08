@@ -11,18 +11,14 @@ use Illuminate\Http\Request;
 
 class ProductStockController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
         $stocks = ProductStock::with(['product', 'color', 'size'])->get();
         return view('back.admin.product_stocks.index', compact('stocks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         $products = Product::where('status', 1)->get();
@@ -31,9 +27,7 @@ class ProductStockController extends Controller
         return view('back.admin.product_stocks.create', compact('products', 'colors', 'sizes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
         $request->validate([
@@ -46,7 +40,7 @@ class ProductStockController extends Controller
             'discount_price' => 'nullable|numeric|min:0',
         ]);
 
-        // Aynı ürün, renk ve boyut kombinasyonu için stok var mı kontrol et
+      
         $existingStock = ProductStock::where('product_id', $request->product_id)
             ->where('product_color_id', $request->product_color_id)
             ->where('product_size_id', $request->product_size_id)
@@ -71,18 +65,14 @@ class ProductStockController extends Controller
         return redirect()->route('back.pages.product_stocks.index')->with('success', 'Ürün stoğu başarıyla eklendi.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+  
     public function show(string $id)
     {
         $stock = ProductStock::with(['product', 'color', 'size'])->findOrFail($id);
         return view('back.admin.product_stocks.show', compact('stock'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+   
     public function edit(string $id)
     {
         $stock = ProductStock::findOrFail($id);
@@ -92,9 +82,7 @@ class ProductStockController extends Controller
         return view('back.admin.product_stocks.edit', compact('stock', 'products', 'colors', 'sizes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -109,7 +97,7 @@ class ProductStockController extends Controller
 
         $stock = ProductStock::findOrFail($id);
         
-        // Aynı ürün, renk ve boyut kombinasyonu için başka stok var mı kontrol et
+        
         $existingStock = ProductStock::where('product_id', $request->product_id)
             ->where('product_color_id', $request->product_color_id)
             ->where('product_size_id', $request->product_size_id)
@@ -134,9 +122,7 @@ class ProductStockController extends Controller
         return redirect()->route('back.pages.product_stocks.index')->with('success', 'Ürün stoğu başarıyla güncellendi.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+  
     public function destroy(string $id)
     {
         $stock = ProductStock::findOrFail($id);
@@ -145,9 +131,7 @@ class ProductStockController extends Controller
         return redirect()->route('back.pages.product_stocks.index')->with('success', 'Ürün stoğu başarıyla silindi.');
     }
     
-    /**
-     * Toggle stock status.
-     */
+   
     public function toggleStatus($id)
     {
         $stock = ProductStock::findOrFail($id);
@@ -157,9 +141,7 @@ class ProductStockController extends Controller
         return redirect()->route('back.pages.product_stocks.index')->with('success', 'Stok durumu başarıyla değiştirildi.');
     }
     
-    /**
-     * Get colors by product.
-     */
+    
     public function getColorsByProduct($productId)
     {
         $colors = ProductColor::where('product_id', $productId)
@@ -169,9 +151,7 @@ class ProductStockController extends Controller
         return response()->json($colors);
     }
     
-    /**
-     * Get sizes by product.
-     */
+   
     public function getSizesByProduct($productId)
     {
         $sizes = ProductSize::where('product_id', $productId)

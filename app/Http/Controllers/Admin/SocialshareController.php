@@ -14,7 +14,7 @@ class SocialshareController extends Controller
     {   
         $this->destinationPath = public_path('uploads');
         
-        // Uploads klasörü yoksa oluştur
+       
         if (!file_exists($this->destinationPath)) {
             mkdir($this->destinationPath, 0775, true);
         }
@@ -52,7 +52,7 @@ class SocialshareController extends Controller
             $data['order'] = Socialshare::max('order') + 1;
         }
 
-        // Varsayılan status değeri 1 olarak ayarlandı
+       
         $data['status'] = 1;
 
         Socialshare::create($data);
@@ -80,7 +80,7 @@ class SocialshareController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Delete old image
+           
             if ($socialshare->image) {
                 $oldImagePath = public_path($socialshare->image);
                 if (file_exists($oldImagePath)) {
@@ -94,7 +94,7 @@ class SocialshareController extends Controller
             $data['image'] = 'uploads/' . $fileName;
         }
 
-        // Varsayılan status değeri 1 olarak ayarlandı
+       
         $data['status'] = 1;
 
         $socialshare->update($data);
@@ -107,7 +107,7 @@ class SocialshareController extends Controller
     {
         $socialshare = Socialshare::findOrFail($id);
         
-        // Delete image
+     
         if ($socialshare->image) {
             $imagePath = public_path($socialshare->image);
             if (file_exists($imagePath)) {

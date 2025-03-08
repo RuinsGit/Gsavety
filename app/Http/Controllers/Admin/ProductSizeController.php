@@ -9,27 +9,21 @@ use Illuminate\Http\Request;
 
 class ProductSizeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+  
     public function index()
     {
         $sizes = ProductSize::with('product')->get();
         return view('back.admin.product_sizes.index', compact('sizes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create()
     {
         $products = Product::where('status', 1)->get();
         return view('back.admin.product_sizes.create', compact('products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -54,18 +48,14 @@ class ProductSizeController extends Controller
         return redirect()->route('back.pages.product_sizes.index')->with('success', 'Ürün boyutu başarıyla eklendi.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(string $id)
     {
         $size = ProductSize::with('product')->findOrFail($id);
         return view('back.admin.product_sizes.show', compact('size'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+   
     public function edit(string $id)
     {
         $size = ProductSize::findOrFail($id);
@@ -73,9 +63,7 @@ class ProductSizeController extends Controller
         return view('back.admin.product_sizes.edit', compact('size', 'products'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -100,22 +88,18 @@ class ProductSizeController extends Controller
         return redirect()->route('back.pages.product_sizes.index')->with('success', 'Ürün boyutu başarıyla güncellendi.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(string $id)
     {
         $size = ProductSize::findOrFail($id);
         
-        // Boyutu sil (ilişkili kayıtlar cascade ile silinecek)
+       
         $size->delete();
         
         return redirect()->route('back.pages.product_sizes.index')->with('success', 'Ürün boyutu başarıyla silindi.');
     }
     
-    /**
-     * Toggle size status.
-     */
+  
     public function toggleStatus($id)
     {
         $size = ProductSize::findOrFail($id);
