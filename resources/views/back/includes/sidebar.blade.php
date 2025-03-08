@@ -90,6 +90,44 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
+                        <i class="ri-shopping-cart-line" style="color: white;"></i>
+                        <span style="color: white;">Məhsul İdarəetməsi</span>
+                    </a>
+                    <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
+                        <li>
+                            <a href="{{ route('back.pages.products.index') }}" style="color: white;">
+                                <i class="ri-shopping-bag-line" style="color: white;"></i>
+                                <span>Məhsullar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('back.pages.product_colors.index') }}" style="color: white;">
+                                <i class="ri-palette-line" style="color: white;"></i>
+                                <span>Rənglər</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('back.pages.product_sizes.index') }}" style="color: white;">
+                                <i class="ri-ruler-line" style="color: white;"></i>
+                                <span>Ölçülər</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('back.pages.product_images.index') }}" style="color: white;">
+                                <i class="ri-image-line" style="color: white;"></i>
+                                <span>Şəkillər</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('back.pages.product_stocks.index') }}" style="color: white;">
+                                <i class="ri-stack-line" style="color: white;"></i>
+                                <span>Stoklar</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
               
                    
                     </ul>

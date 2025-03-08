@@ -9,6 +9,11 @@ use App\Http\Controllers\Admin\LogoController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\SocialshareController;
 use App\Http\Controllers\Admin\SocialfooterController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductColorController;
+use App\Http\Controllers\Admin\ProductSizeController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\ProductStockController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +112,31 @@ Route::prefix('admin')->group(function () {
               Route::delete('socialfooter/{id}', [SocialfooterController::class, 'destroy'])->name('socialfooter.destroy');
               Route::post('socialfooter/order', [SocialfooterController::class, 'order'])->name('socialfooter.order');
               Route::post('socialfooter/toggle-status/{id}', [SocialfooterController::class, 'toggleStatus'])->name('socialfooter.toggle-status');
+
+              // Product routes
+              Route::resource('products', ProductController::class);
+              Route::post('products/toggle-status/{id}', [ProductController::class, 'toggleStatus'])->name('products.toggle-status');
+              Route::post('products/toggle-featured/{id}', [ProductController::class, 'toggleFeatured'])->name('products.toggle-featured');
+              
+              // Product Color routes
+              Route::resource('product_colors', ProductColorController::class);
+              Route::post('product_colors/toggle-status/{id}', [ProductColorController::class, 'toggleStatus'])->name('product_colors.toggle-status');
+              
+              // Product Size routes
+              Route::resource('product_sizes', ProductSizeController::class);
+              Route::post('product_sizes/toggle-status/{id}', [ProductSizeController::class, 'toggleStatus'])->name('product_sizes.toggle-status');
+              
+              // Product Image routes
+              Route::resource('product_images', ProductImageController::class);
+              Route::post('product_images/toggle-status/{id}', [ProductImageController::class, 'toggleStatus'])->name('product_images.toggle-status');
+              Route::post('product_images/set-as-main/{id}', [ProductImageController::class, 'setAsMain'])->name('product_images.set-as-main');
+              Route::get('product_images/get-colors-by-product/{productId}', [ProductImageController::class, 'getColorsByProduct'])->name('product_images.get-colors-by-product');
+              
+              // Product Stock routes
+              Route::resource('product_stocks', ProductStockController::class);
+              Route::post('product_stocks/toggle-status/{id}', [ProductStockController::class, 'toggleStatus'])->name('product_stocks.toggle-status');
+              Route::get('product_stocks/get-colors-by-product/{productId}', [ProductStockController::class, 'getColorsByProduct'])->name('product_stocks.get-colors-by-product');
+              Route::get('product_stocks/get-sizes-by-product/{productId}', [ProductStockController::class, 'getSizesByProduct'])->name('product_stocks.get-sizes-by-product');
 
 
 
