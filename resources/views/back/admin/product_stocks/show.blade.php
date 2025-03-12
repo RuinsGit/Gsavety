@@ -153,7 +153,11 @@
                                         <h5 class="card-title mb-0">Stok Hərəkətləri</h5>
                                     </div>
                                     <div class="card-body">
-                                        @if(count($stock->stockMovements) > 0)
+                                        <div class="alert alert-info mb-0">
+                                            Bu xüsusiyyət hal hazırda aktiv deyil.
+                                        </div>
+                                        <!-- stock movements content is temporarily disabled 
+                                        @if(isset($stock->stockMovements) && count($stock->stockMovements) > 0)
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-striped">
                                                     <thead>
@@ -189,6 +193,7 @@
                                                 Bu stok üçün hərəkət tapılmadı.
                                             </div>
                                         @endif
+                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -199,9 +204,9 @@
                                 <a href="{{ route('back.pages.product_stocks.index') }}" class="btn btn-secondary">
                                     <i class="fas fa-arrow-left"></i> Geri qayıt
                                 </a>
-                                <a href="{{ route('back.pages.product_stocks.add-movement', $stock->id) }}" class="btn btn-success">
+                                <!-- <a href="{{ route('back.pages.product_stocks.add-movement', $stock->id) }}" class="btn btn-success">
                                     <i class="fas fa-plus"></i> Stok Hərəkəti Əlavə Et
-                                </a>
+                                </a> -->
                             </div>
                         </div>
                     </div>

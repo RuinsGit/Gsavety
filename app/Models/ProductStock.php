@@ -35,4 +35,11 @@ class ProductStock extends Model
     {
         return $this->belongsTo(ProductSize::class, 'product_size_id');
     }
+    
+    /* Currently disabled due to missing StockMovement model
+    public function stockMovements()
+    {
+        return $this->hasMany(StockMovement::class, 'product_stock_id');
+    }
+    */
 }

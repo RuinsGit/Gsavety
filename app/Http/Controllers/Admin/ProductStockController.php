@@ -160,4 +160,60 @@ class ProductStockController extends Controller
             
         return response()->json($sizes);
     }
+    
+    /**
+     * Stok hareketi ekleme formunu göster
+     */
+    public function addMovement($id)
+    {
+        $stock = ProductStock::with(['product', 'color', 'size'])->findOrFail($id);
+        return view('back.admin.product_stocks.add-movement', compact('stock'));
+    }
+    
+    /**
+     * Stok hareketini kaydet
+     */
+    public function storeMovement(Request $request, $id)
+    {
+        $request->validate([
+            'type' => 'required|in:in,out',
+            'quantity' => 'required|integer|min:1',
+            'reason' => 'nullable|string',
+            'reference' => 'nullable|string',
+            'note' => 'nullable|string',
+        ]);
+        
+        $stock = ProductStock::findOrFail($id);
+        
+        // Stok çıkışı için kontrol
+        if ($request->type == 'out' && $request->quantity > $stock->quantity) {
+            return redirect()->back()->with('error', 'Stok çıkışı mevcut stok miktarından fazla olamaz.');
+        }
+        
+        // Stok miktarını güncelle
+        if ($request->type == 'in') {
+            $stock->quantity += $request->quantity;
+        } else {
+            $stock->quantity -= $request->quantity;
+        }
+        
+        $stock->save();
+        
+        // Bu noktada, eğer StockMovement modeli olsaydı, hareket kaydı eklenebilirdi
+        // Şu an bunu devre dışı bırakıyoruz ama gelecekte eklenebilir
+        /*
+        $movement = new StockMovement();
+        $movement->product_stock_id = $stock->id;
+        $movement->type = $request->type;
+        $movement->quantity = $request->quantity;
+        $movement->reason = $request->reason;
+        $movement->reference = $request->reference;
+        $movement->note = $request->note;
+        $movement->user_id = auth()->id();
+        $movement->save();
+        */
+        
+        return redirect()->route('back.pages.product_stocks.show', $stock->id)
+            ->with('success', 'Stok hareketi başarıyla kaydedildi.');
+    }
 }
