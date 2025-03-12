@@ -9,6 +9,7 @@ use App\Models\ProductImage;
 use App\Models\ProductProperty;
 use App\Models\ProductSize;
 use App\Models\ProductStock;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -25,7 +26,8 @@ class ProductController extends Controller
     
     public function create()
     {
-        return view('back.admin.products.create');
+        $categories = Category::where('status', 1)->get();
+        return view('back.admin.products.create', compact('categories'));
     }
 
     
@@ -43,6 +45,8 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'discount_price' => 'nullable|numeric',
             'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         $product = new Product();
@@ -80,7 +84,12 @@ class ProductController extends Controller
         
         $product->save();
         
-      
+        // Kategorileri ürüne atama
+        if ($request->has('categories') && is_array($request->categories)) {
+            $product->categories()->attach($request->categories);
+        }
+        
+        // Ürün özelliklerini kaydetme
         if ($request->has('property_name_az') && is_array($request->property_name_az)) {
             foreach ($request->property_name_az as $key => $name) {
                 if (!empty($name)) {
@@ -110,7 +119,8 @@ class ProductController extends Controller
             'colors',
             'sizes',
             'images',
-            'stocks'
+            'stocks',
+            'categories'
         ])->findOrFail($id);
         
         return view('back.admin.products.show', compact('product'));
@@ -119,8 +129,11 @@ class ProductController extends Controller
     
     public function edit(string $id)
     {
-        $product = Product::with('properties')->findOrFail($id);
-        return view('back.admin.products.edit', compact('product'));
+        $product = Product::with(['properties', 'categories'])->findOrFail($id);
+        $categories = Category::where('status', 1)->get();
+        $selectedCategories = $product->categories->pluck('id')->toArray();
+        
+        return view('back.admin.products.edit', compact('product', 'categories', 'selectedCategories'));
     }
 
    
@@ -138,6 +151,8 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'discount_price' => 'nullable|numeric',
             'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         $product = Product::findOrFail($id);
@@ -179,6 +194,9 @@ class ProductController extends Controller
         }
         
         $product->save();
+        
+        // Kategorileri güncelle (önce tüm ilişkileri kaldırıp, yeni kategorileri eklemek)
+        $product->categories()->sync($request->categories ?? []);
         
         
         if ($request->has('property_name_az') && is_array($request->property_name_az)) {

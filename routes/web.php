@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ProductColorController;
 use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductStockController;
+use App\Http\Controllers\Admin\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -141,12 +142,9 @@ Route::prefix('admin')->group(function () {
               Route::get('product_stocks/{id}/add-movement', [ProductStockController::class, 'addMovement'])->name('product_stocks.add-movement');
               Route::post('product_stocks/{id}/store-movement', [ProductStockController::class, 'storeMovement'])->name('product_stocks.store-movement');
 
-
-
-
-
-
-
+              // Kategori rotaları
+              Route::resource('categories', CategoryController::class);
+              Route::post('categories/toggle-status/{id}', [CategoryController::class, 'toggleStatus'])->name('categories.toggle-status');
         });
 
         

@@ -60,6 +60,11 @@ class Product extends Model
         return $this->{'slug_' . app()->getLocale()};
     }
     
+    // Ürünün ait olduğu kategoriler
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_product');
+    }
  
     public function properties()
     {

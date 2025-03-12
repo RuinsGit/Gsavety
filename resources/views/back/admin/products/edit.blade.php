@@ -61,6 +61,11 @@
                                         <i class="ri-list-check-2 me-1 align-middle"></i> Məhsul Xüsusiyyətləri
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#product_categories" role="tab" style="color:rgb(0, 0, 0);">
+                                        <i class="ri-folder-line me-1 align-middle"></i> Kateqoriyalar
+                                    </a>
+                                </li>
                             </ul>
 
                             <!-- Ana Sekme İçerikleri -->
@@ -287,8 +292,8 @@
                                     <div class="card border shadow-none mb-4">
                                         <div class="card-header bg-light d-flex justify-content-between align-items-center">
                                             <h5 class="card-title mb-0">Məhsul Xüsusiyyətləri</h5>
-                                            <button type="button" id="add-property" class="btn btn-sm btn-success">
-                                                <i class="ri-add-line align-bottom me-1"></i> Xüsusiyyət Əlavə Et
+                                            <button type="button" id="add-property" class="btn btn-sm btn-primary">
+                                                <i class="ri-add-line align-bottom"></i> Xüsusiyyət Əlavə Et
                                             </button>
                                         </div>
                                         <div class="card-body">
@@ -339,47 +344,73 @@
                                                         </div>
                                                     @endforeach
                                                 @else
-                                                    <div class="row">
-                                                        <div class="col-md-12 mb-3">
-                                                            <div class="d-flex justify-content-between align-items-center">
-                                                                <h6 class="mb-0">Xüsusiyyət #1</h6>
-                                                                <button type="button" class="btn btn-sm btn-danger remove-property">
-                                                                    <i class="ri-delete-bin-line"></i>
-                                                                </button>
+                                                    <div class="property-item mb-4 p-3 border rounded bg-light">
+                                                        <div class="row">
+                                                            <div class="col-md-12 mb-3">
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <h6 class="mb-0">Xüsusiyyət #1</h6>
+                                                                    <button type="button" class="btn btn-sm btn-danger remove-property">
+                                                                        <i class="ri-delete-bin-line"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Xüsusiyyət Adı (AZ)</label>
+                                                                <input type="text" class="form-control" name="property_name_az[]">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Xüsusiyyət Adı (EN)</label>
+                                                                <input type="text" class="form-control" name="property_name_en[]">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Xüsusiyyət Adı (RU)</label>
+                                                                <input type="text" class="form-control" name="property_name_ru[]">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Xüsusiyyət Dəyəri (AZ)</label>
+                                                                <input type="text" class="form-control" name="property_value_az[]" placeholder="AZ">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Xüsusiyyət Dəyəri (EN)</label>
+                                                                <input type="text" class="form-control" name="property_value_en[]" placeholder="EN">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label class="form-label">Xüsusiyyət Dəyəri (RU)</label>
+                                                                <input type="text" class="form-control" name="property_value_ru[]" placeholder="RU">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Xüsusiyyət Adı (AZ)</label>
-                                                            <input type="text" class="form-control" name="property_name_az[]">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Xüsusiyyət Adı (EN)</label>
-                                                            <input type="text" class="form-control" name="property_name_en[]">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Xüsusiyyət Adı (RU)</label>
-                                                            <input type="text" class="form-control" name="property_name_ru[]">
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Xüsusiyyət Dəyəri (AZ)</label>
-                                                            <input type="text" class="form-control" name="property_value_az[]" placeholder="AZ">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Xüsusiyyət Dəyəri (EN)</label>
-                                                            <input type="text" class="form-control" name="property_value_en[]" placeholder="EN">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Xüsusiyyət Dəyəri (RU)</label>
-                                                            <input type="text" class="form-control" name="property_value_ru[]" placeholder="RU">
-                                                        </div>
-                                                    </div>
                                                 @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Kateqoriyalar Sekmesi -->
+                                <div class="tab-pane" id="product_categories" role="tabpanel">
+                                    <div class="card border shadow-none mb-4">
+                                        <div class="card-header bg-light">
+                                            <h5 class="card-title mb-0">Kateqoriyalar</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label for="categories" class="form-label">Məhsul Kateqoriyaları <span class="text-danger">*</span></label>
+                                                <select class="form-select select2" id="categories" name="categories[]" multiple>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{ $category->id }}" {{ in_array($category->id, $selectedCategories) ? 'selected' : '' }}>
+                                                            {{ $category->name_az }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="form-text text-muted">
+                                                    Ən azı bir kateqoriya seçilməlidir. Birdən çox seçmək üçün CTRL düyməsini basılı saxlayın.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -447,6 +478,11 @@
         border-color: #3498db;
         box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
     }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #3498db;
+        border-color: #2980b9;
+    }
 </style>
 @endsection
 
@@ -458,6 +494,7 @@
             var propertyCount = $('.property-item').length + 1;
             var propertyItem = $('.property-item').first().clone();
             propertyItem.find('input').val('');
+            propertyItem.find('select').val('fit');
             propertyItem.find('h6').text('Xüsusiyyət #' + propertyCount);
             $('#properties-container').append(propertyItem);
         });
@@ -485,6 +522,13 @@
                 }
                 reader.readAsDataURL(this.files[0]);
             }
+        });
+
+        // Select2 için
+        $('.select2').select2({
+            placeholder: 'Kateqoriyaları seçin',
+            allowClear: true,
+            width: '100%'
         });
     });
 </script>
