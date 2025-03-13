@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\HomeHeroController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\HomeFollowController;
 use App\Http\Controllers\Admin\HomeCartSectionController;
+use App\Http\Controllers\Admin\HomeFeaturedBoxController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -165,6 +166,10 @@ Route::prefix('admin')->group(function () {
               // Home Cart Section routes
               Route::resource('home-cart-sections', HomeCartSectionController::class);
               Route::post('home-cart-sections/toggle-status/{id}', [HomeCartSectionController::class, 'toggleStatus'])->name('home-cart-sections.toggle-status');
+              
+              // Home Featured Box routes
+              Route::resource('home-featured-boxes', HomeFeaturedBoxController::class);
+              Route::post('home-featured-boxes/toggle-status/{id}', [HomeFeaturedBoxController::class, 'toggleStatus'])->name('home-featured-boxes.toggle-status');
         });
 
         

@@ -174,6 +174,12 @@
                                 <span>Kartlar</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.home-featured-boxes.index') }}" style="color: white;">
+                                <i class="ri-folder-line" style="color: white;"></i>
+                                <span>Featured Boxlar</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 
