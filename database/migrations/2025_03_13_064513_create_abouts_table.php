@@ -11,24 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('home_cart_sections', function (Blueprint $table) {
+        Schema::create('abouts', function (Blueprint $table) {
             $table->id();
             
-          
+        
             $table->string('title_az')->nullable();
             $table->string('title_en')->nullable();
             $table->string('title_ru')->nullable();
             
-          
+    
             $table->text('description_az')->nullable();
             $table->text('description_en')->nullable();
             $table->text('description_ru')->nullable();
-       
-            $table->string('image')->nullable();
             
-           
+      
+            $table->string('image')->nullable();
+            $table->string('icon')->nullable();
+            
+        
             $table->boolean('status')->default(true);
-            $table->integer('order')->default(0);
             
             $table->timestamps();
         });
@@ -39,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('home_cart_sections');
+        Schema::dropIfExists('abouts');
     }
 };

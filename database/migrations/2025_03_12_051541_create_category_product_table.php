@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             
-            // Bu tabloda her ürün-kategori ikilisi benzersiz olmalı
+          
             $table->unique(['category_id', 'product_id']);
         });
     }
