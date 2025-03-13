@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductStockController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\HomeHeroController;
+use App\Http\Controllers\Admin\PartnerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -138,13 +140,21 @@ Route::prefix('admin')->group(function () {
               Route::post('product_stocks/toggle-status/{id}', [ProductStockController::class, 'toggleStatus'])->name('product_stocks.toggle-status');
               Route::get('product_stocks/get-colors-by-product/{productId}', [ProductStockController::class, 'getColorsByProduct'])->name('product_stocks.get-colors-by-product');
               Route::get('product_stocks/get-sizes-by-product/{productId}', [ProductStockController::class, 'getSizesByProduct'])->name('product_stocks.get-sizes-by-product');
-              // Stok hareketi rotaları
+              // Stock routes
               Route::get('product_stocks/{id}/add-movement', [ProductStockController::class, 'addMovement'])->name('product_stocks.add-movement');
               Route::post('product_stocks/{id}/store-movement', [ProductStockController::class, 'storeMovement'])->name('product_stocks.store-movement');
 
-              // Kategori rotaları
+              // Category routes
               Route::resource('categories', CategoryController::class);
               Route::post('categories/toggle-status/{id}', [CategoryController::class, 'toggleStatus'])->name('categories.toggle-status');
+              
+              // Home Hero routes
+              Route::resource('home-heroes', HomeHeroController::class);
+              Route::post('home-heroes/toggle-status/{id}', [HomeHeroController::class, 'toggleStatus'])->name('home-heroes.toggle-status');
+
+              // Partner routes
+              Route::resource('partners', PartnerController::class);
+              Route::post('partners/toggle-status/{id}', [PartnerController::class, 'toggleStatus'])->name('partners.toggle-status');
         });
 
         
