@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\HomeFollow;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class HomeFollowController extends Controller
@@ -54,11 +55,20 @@ class HomeFollowController extends Controller
             'name_en' => 'nullable|string|max:255',
             'name_ru' => 'nullable|string|max:255',
             'link' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'order' => 'nullable|integer',
         ]);
 
         $data = $request->all();
         $data['status'] = $request->has('status') ? 1 : 0;
+
+        // Resim yükleme
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/home-follows'), $imageName);
+            $data['image'] = 'uploads/home-follows/' . $imageName;
+        }
 
         HomeFollow::create($data);
 
@@ -95,12 +105,26 @@ class HomeFollowController extends Controller
             'name_en' => 'nullable|string|max:255',
             'name_ru' => 'nullable|string|max:255',
             'link' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'order' => 'nullable|integer',
         ]);
 
         $homeFollow = HomeFollow::findOrFail($id);
         $data = $request->all();
         $data['status'] = $request->has('status') ? 1 : 0;
+
+        // Resim yükleme
+        if ($request->hasFile('image')) {
+            // Eski resmi varsa sil
+            if ($homeFollow->image && File::exists(public_path($homeFollow->image))) {
+                File::delete(public_path($homeFollow->image));
+            }
+            
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/home-follows'), $imageName);
+            $data['image'] = 'uploads/home-follows/' . $imageName;
+        }
 
         $homeFollow->update($data);
 
@@ -113,6 +137,12 @@ class HomeFollowController extends Controller
     public function destroy(string $id)
     {
         $homeFollow = HomeFollow::findOrFail($id);
+        
+        // Resim varsa sil
+        if ($homeFollow->image && File::exists(public_path($homeFollow->image))) {
+            File::delete(public_path($homeFollow->image));
+        }
+        
         $homeFollow->delete();
 
         return redirect()->route('back.pages.home-follows.index')->with('success', 'Sosial hesab uğurla silindi.');

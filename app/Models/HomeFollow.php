@@ -17,6 +17,7 @@ class HomeFollow extends Model
         'name_en',
         'name_ru',
         'link',
+        'image',
         'status',
         'order'
     ];

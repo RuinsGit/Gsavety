@@ -40,7 +40,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('back.pages.home-follows.store') }}" method="POST">
+                        <form action="{{ route('back.pages.home-follows.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <!-- Ana Sekmeler -->
@@ -75,6 +75,18 @@
                                                         @error('link')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
+                                                    </div>
+                                                    
+                                                    <div class="mb-3">
+                                                        <label for="image" class="form-label">Şəkil</label>
+                                                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                                                        <div class="form-text">Tövsiyə edilən ölçü: 600x600px</div>
+                                                        @error('image')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div id="image-preview" class="mt-3 d-none">
+                                                        <img src="" alt="Şəkil önizləmə" class="img-thumbnail" style="max-height: 150px;">
                                                     </div>
                                                     
                                                     <div class="mb-3">
@@ -270,4 +282,22 @@
         box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
     }
 </style>
-@endsection 
+@endsection
+
+@push('js')
+<script>
+    $(document).ready(function() {
+        // Şəkil önizləmə
+        $('#image').change(function() {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#image-preview').removeClass('d-none');
+                    $('#image-preview img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+</script>
+@endpush 

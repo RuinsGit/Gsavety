@@ -7,6 +7,34 @@
         .swal2-popup {
             border-radius: 50px;
         }
+
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .follow-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .image-preview:hover .follow-img {
+            transform: scale(1.05);
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
     </style>
 
     @if(session('success'))
@@ -100,6 +128,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>Şəkil</th>
                                                     <th>Başlıq (AZ)</th>
                                                     <th>Ad (AZ)</th>
                                                     <th>Link</th>
@@ -112,6 +141,15 @@
                                                 @foreach($homeFollows as $follow)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
+                                                        <td>
+                                                            <div class="image-preview">
+                                                                @if($follow->image)
+                                                                    <img src="{{ asset($follow->image) }}" alt="{{ $follow->title_az }}" class="follow-img">
+                                                                @else
+                                                                    <span class="badge bg-danger">Şəkil Yoxdur</span>
+                                                                @endif
+                                                            </div>
+                                                        </td>
                                                         <td>{{ $follow->title_az }}</td>
                                                         <td>{{ $follow->name_az }}</td>
                                                         <td>
@@ -153,6 +191,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>Şəkil</th>
                                                     <th>Başlıq (EN)</th>
                                                     <th>Ad (EN)</th>
                                                     <th>Link</th>
@@ -165,6 +204,15 @@
                                                 @foreach($homeFollows as $follow)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
+                                                        <td>
+                                                            <div class="image-preview">
+                                                                @if($follow->image)
+                                                                    <img src="{{ asset($follow->image) }}" alt="{{ $follow->title_en }}" class="follow-img">
+                                                                @else
+                                                                    <span class="badge bg-danger">Şəkil Yoxdur</span>
+                                                                @endif
+                                                            </div>
+                                                        </td>
                                                         <td>{{ $follow->title_en }}</td>
                                                         <td>{{ $follow->name_en }}</td>
                                                         <td>
@@ -206,6 +254,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>Şəkil</th>
                                                     <th>Başlıq (RU)</th>
                                                     <th>Ad (RU)</th>
                                                     <th>Link</th>
@@ -218,6 +267,15 @@
                                                 @foreach($homeFollows as $follow)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
+                                                        <td>
+                                                            <div class="image-preview">
+                                                                @if($follow->image)
+                                                                    <img src="{{ asset($follow->image) }}" alt="{{ $follow->title_ru }}" class="follow-img">
+                                                                @else
+                                                                    <span class="badge bg-danger">Şəkil Yoxdur</span>
+                                                                @endif
+                                                            </div>
+                                                        </td>
                                                         <td>{{ $follow->title_ru }}</td>
                                                         <td>{{ $follow->name_ru }}</td>
                                                         <td>
