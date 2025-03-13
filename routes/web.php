@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\ProductStockController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeHeroController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\HomeFollowController;
+use App\Http\Controllers\Admin\HomeCartSectionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -155,6 +157,14 @@ Route::prefix('admin')->group(function () {
               // Partner routes
               Route::resource('partners', PartnerController::class);
               Route::post('partners/toggle-status/{id}', [PartnerController::class, 'toggleStatus'])->name('partners.toggle-status');
+
+              // Home Follow routes
+              Route::resource('home-follows', HomeFollowController::class);
+              Route::post('home-follows/toggle-status/{id}', [HomeFollowController::class, 'toggleStatus'])->name('home-follows.toggle-status');
+              
+              // Home Cart Section routes
+              Route::resource('home-cart-sections', HomeCartSectionController::class);
+              Route::post('home-cart-sections/toggle-status/{id}', [HomeCartSectionController::class, 'toggleStatus'])->name('home-cart-sections.toggle-status');
         });
 
         

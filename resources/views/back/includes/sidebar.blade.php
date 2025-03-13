@@ -162,6 +162,18 @@
                                 <span>Partnyorlar</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.home-follows.index') }}" style="color: white;">
+                                <i class="ri-folder-line" style="color: white;"></i>
+                                <span>Sosial Hesablar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('back.pages.home-cart-sections.index') }}" style="color: white;">
+                                <i class="ri-folder-line" style="color: white;"></i>
+                                <span>Kartlar</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 
