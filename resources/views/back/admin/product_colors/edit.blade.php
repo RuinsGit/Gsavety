@@ -128,7 +128,7 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <label for="color_image" class="form-label">Rəng Şəkli</label>
                                     @if($color->color_image)
                                         <div class="mb-2">
@@ -139,7 +139,7 @@
                                     @error('color_image')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="row mb-3">

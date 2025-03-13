@@ -127,13 +127,13 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <label for="color_image" class="form-label">Rəng Şəkli</label>
                                     <input type="file" class="form-control @error('color_image') is-invalid @enderror" id="color_image" name="color_image">
                                     @error('color_image')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="row mb-3">
