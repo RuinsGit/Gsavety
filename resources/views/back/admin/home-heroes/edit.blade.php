@@ -88,7 +88,7 @@
                                                     <div class="mb-3">
                                                         <label for="image" class="form-label">Şəkil</label>
                                                         <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
-                                                        <div class="mt-2 text-muted small">Tövsiyə olunan ölçü: 1920x800px</div>
+                                                        <div class="mt-2 text-muted small">Tövsiyə olunan ölçü: 1440x960px</div>
                                                         @error('image')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror

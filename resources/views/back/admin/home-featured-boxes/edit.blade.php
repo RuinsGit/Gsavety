@@ -95,7 +95,7 @@
                                             @error('image')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
-                                            <small class="text-muted">Tövsiyə edilən ölçü: 800x600px, Maksimum 2MB</small>
+                                            <small class="text-muted">Tövsiyə edilən ölçü: 80x80px, Maksimum 2MB</small>
                                         </div>
                                         <div class="col-md-3 mt-2">
                                             <div class="image-preview-container">

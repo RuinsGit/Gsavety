@@ -87,7 +87,7 @@
                                                     <div class="mb-3">
                                                         <label for="image" class="form-label">Şəkil</label>
                                                         <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
-                                                        <div class="mt-2 text-muted small">Tövsiyə olunan ölçü: 800x600px</div>
+                                                        <div class="mt-2 text-muted small">Tövsiyə olunan ölçü: 325x452px</div>
                                                         @error('image')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -99,7 +99,7 @@
                                                     <div class="mb-3 mt-4">
                                                         <label for="icon" class="form-label">İkon</label>
                                                         <input type="file" class="form-control @error('icon') is-invalid @enderror" id="icon" name="icon">
-                                                        <div class="mt-2 text-muted small">Tövsiyə edilən ikonlar PNG, SVG formatında, şəffaf fon ilə</div>
+                                                        <div class="mt-2 text-muted small">Tövsiyə edilən ikonlar PNG, SVG formatında, şəffaf fon ilə (24x24px)</div>
                                                         @error('icon')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
