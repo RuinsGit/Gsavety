@@ -157,6 +157,15 @@ class HomeCartSectionController extends Controller
         $homeCartSection->status = !$homeCartSection->status;
         $homeCartSection->save();
 
+        // AJAX yanıtı için JSON dönüşü yap
+        if(request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Kart statusu uğurla dəyişdirildi.',
+                'status' => $homeCartSection->status
+            ]);
+        }
+
         return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Kart statusu uğurla dəyişdirildi.');
     }
 }

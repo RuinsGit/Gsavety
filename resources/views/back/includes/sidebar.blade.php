@@ -195,6 +195,12 @@
                                 <span>Haqqımızda Hero</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.about-cart-sections.index') }}" style="color: white;">
+                                <i class="ri-folder-line" style="color: white;"></i>
+                                <span>Haqqımızda Kart</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 

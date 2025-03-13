@@ -349,8 +349,45 @@
     $(document).ready(function() {
         $('.toggle-status').change(function() {
             var id = $(this).data('id');
-            var form = $(this).closest('form');
-            form.submit();
+            var csrfToken = '{{ csrf_token() }}';
+            
+            $.ajax({
+                url: '{{ route("back.pages.home-cart-sections.toggle-status", "") }}/' + id,
+                type: 'POST',
+                data: {
+                    _token: csrfToken
+                },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Status uğurla dəyişdirildi",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: "Xəta baş verdi",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "Xəta baş verdi",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    // Toggle'ı eski durumuna geri getir
+                    $(this).prop('checked', !$(this).prop('checked'));
+                }
+            });
         });
 
         $('.table').DataTable({

@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\HomeFollowController;
 use App\Http\Controllers\Admin\HomeCartSectionController;
 use App\Http\Controllers\Admin\HomeFeaturedBoxController;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\AboutCartSectionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,8 +78,8 @@ Route::prefix('admin')->group(function () {
              Route::get('seo/{id}/edit', [SeoController::class, 'edit'])->name('seo.edit');
              Route::put('seo/{id}', [SeoController::class, 'update'])->name('seo.update');
              Route::delete('seo/{id}', [SeoController::class, 'destroy'])->name('seo.destroy');
-             Route::get('seo/toggle-status/{id}', [SeoController::class, 'toggleStatus'])->name('seo.toggle-status');
              Route::post('seo/toggle-status/{id}', [SeoController::class, 'toggleStatus'])->name('seo.toggle-status.post');
+             Route::post('seo/toggle-status/{id}', [SeoController::class, 'toggleStatus'])->name('seo.toggle-status');
 
              // Logo routes
              Route::get('logos', [LogoController::class, 'index'])->name('logos.index');
@@ -175,6 +176,10 @@ Route::prefix('admin')->group(function () {
               // About routes
               Route::resource('about', AboutController::class);
               Route::post('about/toggle-status/{id}', [AboutController::class, 'toggleStatus'])->name('about.toggle-status');
+              
+              // About Cart Section routes
+              Route::resource('about-cart-sections', AboutCartSectionController::class);
+              Route::post('about-cart-sections/toggle-status/{id}', [AboutCartSectionController::class, 'toggleStatus'])->name('about-cart-sections.toggle-status');
         });
 
         

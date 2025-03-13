@@ -69,4 +69,25 @@ class SeoController extends Controller
         $seo->delete();
         return redirect()->route('back.pages.seo.index')->with('success', 'SEO məlumatları uğurla silindi');
     }
+
+    /**
+     * Toggle status of the specified resource.
+     */
+    public function toggleStatus(string $id)
+    {
+        $seo = Seo::findOrFail($id);
+        $seo->status = !$seo->status;
+        $seo->save();
+
+        // AJAX yanıtı için JSON dönüşü yap
+        if(request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Status uğurla dəyişdirildi.',
+                'status' => $seo->status
+            ]);
+        }
+
+        return redirect()->route('back.pages.seo.index')->with('success', 'Status uğurla dəyişdirildi.');
+    }
 }
