@@ -40,6 +40,7 @@ class CategoryController extends Controller
             'description_en' => 'nullable|string',
             'description_ru' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
         $category = new Category();
@@ -67,6 +68,14 @@ class CategoryController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/categories'), $imageName);
             $category->image = 'uploads/categories/' . $imageName;
+        }
+        
+        // İkon yükleme
+        if ($request->hasFile('icon')) {
+            $icon = $request->file('icon');
+            $iconName = 'icon_' . time() . '.' . $icon->getClientOriginalExtension();
+            $icon->move(public_path('uploads/categories/icons'), $iconName);
+            $category->icon = 'uploads/categories/icons/' . $iconName;
         }
         
         $category->save();
@@ -105,6 +114,7 @@ class CategoryController extends Controller
             'description_en' => 'nullable|string',
             'description_ru' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
         
         $category = Category::findOrFail($id);
@@ -140,6 +150,19 @@ class CategoryController extends Controller
             $category->image = 'uploads/categories/' . $imageName;
         }
         
+        // İkon yükleme
+        if ($request->hasFile('icon')) {
+            // Eski ikon varsa sil
+            if ($category->icon && File::exists(public_path($category->icon))) {
+                File::delete(public_path($category->icon));
+            }
+            
+            $icon = $request->file('icon');
+            $iconName = 'icon_' . time() . '.' . $icon->getClientOriginalExtension();
+            $icon->move(public_path('uploads/categories/icons'), $iconName);
+            $category->icon = 'uploads/categories/icons/' . $iconName;
+        }
+        
         $category->save();
         
         return redirect()->route('back.pages.categories.index')->with('success', 'Kategori başarıyla güncellendi');
@@ -155,6 +178,11 @@ class CategoryController extends Controller
         // Kategori resmi varsa sil
         if ($category->image && File::exists(public_path($category->image))) {
             File::delete(public_path($category->image));
+        }
+        
+        // Kategori ikonu varsa sil
+        if ($category->icon && File::exists(public_path($category->icon))) {
+            File::delete(public_path($category->icon));
         }
         
         $category->delete();

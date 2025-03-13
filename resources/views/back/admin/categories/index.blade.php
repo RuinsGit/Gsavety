@@ -94,6 +94,7 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Şəkil</th>
+                                                    <th>İkon</th>
                                                     <th>Kateqoriya Adı (AZ)</th>
                                                     <th>Sıra</th>
                                                     <th>Status</th>
@@ -110,6 +111,15 @@
                                                                     <img src="{{ asset($category->image) }}" alt="{{ $category->name_az }}" class="category-img">
                                                                 @else
                                                                     <span class="badge bg-danger">Şəkil Yoxdur</span>
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="icon-preview">
+                                                                @if($category->icon)
+                                                                    <img src="{{ asset($category->icon) }}" alt="{{ $category->name_az }}" class="icon-img">
+                                                                @else
+                                                                    <span class="badge bg-warning">İkon Yoxdur</span>
                                                                 @endif
                                                             </div>
                                                         </td>
@@ -152,6 +162,7 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Şəkil</th>
+                                                    <th>İkon</th>
                                                     <th>Kateqoriya Adı (EN)</th>
                                                     <th>Sıra</th>
                                                     <th>Status</th>
@@ -168,6 +179,15 @@
                                                                     <img src="{{ asset($category->image) }}" alt="{{ $category->name_en }}" class="category-img">
                                                                 @else
                                                                     <span class="badge bg-danger">Şəkil Yoxdur</span>
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="icon-preview">
+                                                                @if($category->icon)
+                                                                    <img src="{{ asset($category->icon) }}" alt="{{ $category->name_en }}" class="icon-img">
+                                                                @else
+                                                                    <span class="badge bg-warning">İkon Yoxdur</span>
                                                                 @endif
                                                             </div>
                                                         </td>
@@ -210,6 +230,7 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Şəkil</th>
+                                                    <th>İkon</th>
                                                     <th>Kateqoriya Adı (RU)</th>
                                                     <th>Sıra</th>
                                                     <th>Status</th>
@@ -226,6 +247,15 @@
                                                                     <img src="{{ asset($category->image) }}" alt="{{ $category->name_ru }}" class="category-img">
                                                                 @else
                                                                     <span class="badge bg-danger">Şəkil Yoxdur</span>
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="icon-preview">
+                                                                @if($category->icon)
+                                                                    <img src="{{ asset($category->icon) }}" alt="{{ $category->name_ru }}" class="icon-img">
+                                                                @else
+                                                                    <span class="badge bg-warning">İkon Yoxdur</span>
                                                                 @endif
                                                             </div>
                                                         </td>
@@ -288,6 +318,29 @@
 
     .image-preview:hover .category-img {
         transform: scale(1.05);
+    }
+    
+    .icon-preview {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-img {
+        max-width: 40px;
+        max-height: 40px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+
+    .icon-preview:hover .icon-img {
+        transform: scale(1.1);
     }
 
     .card {

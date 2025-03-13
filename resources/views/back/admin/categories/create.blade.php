@@ -95,6 +95,18 @@
                                                     <div id="image-preview" class="mt-3 d-none">
                                                         <img src="" alt="Önizləmə" class="img-thumbnail" style="max-height: 200px;">
                                                     </div>
+                                                    
+                                                    <div class="mb-3 mt-4">
+                                                        <label for="icon" class="form-label">İkon</label>
+                                                        <input type="file" class="form-control @error('icon') is-invalid @enderror" id="icon" name="icon">
+                                                        <div class="mt-2 text-muted small">Tövsiyə edilən ikonlar PNG, SVG formatında, şəffaf fon ilə</div>
+                                                        @error('icon')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div id="icon-preview" class="mt-3 d-none">
+                                                        <img src="" alt="İkon önizləmə" class="img-thumbnail" style="max-height: 50px; max-width: 50px;">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="card border shadow-none mb-4">
@@ -273,6 +285,18 @@
                 reader.onload = function(e) {
                     $('#image-preview').removeClass('d-none');
                     $('#image-preview img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+        
+        // İkon önizləmə
+        $('#icon').change(function() {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#icon-preview').removeClass('d-none');
+                    $('#icon-preview img').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(this.files[0]);
             }

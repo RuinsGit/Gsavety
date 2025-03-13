@@ -23,7 +23,8 @@ class Category extends Model
         'slug_az',
         'slug_en',
         'slug_ru',
-        'image'
+        'image',
+        'icon'
     ];
     
     // Şu anki dil için ad
