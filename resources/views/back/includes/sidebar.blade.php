@@ -188,6 +188,7 @@
                         <i class="ri-folder-line" style="color: white;"></i>
                         <span style="color: white;">Haqqımızda</span>
                     </a>
+                    
                     <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
                         <li>
                             <a href="{{ route('back.pages.about.index') }}" style="color: white;">
@@ -195,6 +196,7 @@
                                 <span>Haqqımızda Hero</span>
                             </a>
                         </li>
+
                         <li>
                             <a href="{{ route('back.pages.about-cart-sections.index') }}" style="color: white;">
                                 <i class="ri-folder-line" style="color: white;"></i>
@@ -208,7 +210,7 @@
 
             </ul>
         </div>
-        <!-- Sidebar -->
+     
     </div>
 </div>
-<!-- Left Sidebar End -->
+
