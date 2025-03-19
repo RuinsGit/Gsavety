@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\SeoController;
 use App\Http\Controllers\Api\SocialMediaApiController;
 use App\Http\Controllers\Api\SocialshareApiController;
 use App\Http\Controllers\Api\SocialfooterApiController;
-
+use App\Http\Controllers\Api\ContactApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -66,4 +66,13 @@ Route::prefix('social-footer')->group(function () {
     Route::post('/', [SocialfooterApiController::class, 'store']);
     Route::put('/{id}', [SocialfooterApiController::class, 'update']);
     Route::delete('/{id}', [SocialfooterApiController::class, 'destroy']);
+});
+
+// Contact Routes
+Route::prefix('contacts')->group(function () {
+    Route::get('/', [ContactApiController::class, 'index']);
+    Route::get('/{id}', [ContactApiController::class, 'show']);
+    Route::post('/', [ContactApiController::class, 'store']);
+    Route::put('/{id}', [ContactApiController::class, 'update']);
+    Route::delete('/{id}', [ContactApiController::class, 'destroy']);
 });

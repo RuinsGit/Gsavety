@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\HomeCartSectionController;
 use App\Http\Controllers\Admin\HomeFeaturedBoxController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AboutCartSectionController;
+use App\Http\Controllers\Admin\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -180,6 +181,14 @@ Route::prefix('admin')->group(function () {
               // About Cart Section routes
               Route::resource('about-cart-sections', AboutCartSectionController::class);
               Route::post('about-cart-sections/toggle-status/{id}', [AboutCartSectionController::class, 'toggleStatus'])->name('about-cart-sections.toggle-status');
+
+               // Contact routes
+            Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
+            Route::get('contact/create', [ContactController::class, 'create'])->name('contact.create');
+            Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+            Route::get('contact/{id}/edit', [ContactController::class, 'edit'])->name('contact.edit');
+            Route::put('contact/{id}', [ContactController::class, 'update'])->name('contact.update');
+            Route::delete('contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
         });
 
         

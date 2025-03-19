@@ -146,37 +146,37 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
-                        <i class="ri-folder-line" style="color: white;"></i>
+                        <i class="ri-home-line" style="color: white;"></i>
                         <span style="color: white;">Ana Səhifə</span>
                     </a>
                     <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
                         <li>
                             <a href="{{ route('back.pages.home-heroes.index') }}" style="color: white;">
-                                <i class="ri-folder-line" style="color: white;"></i>
+                                <i class="ri-home-line" style="color: white;"></i>
                                 <span>Home Hero</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('back.pages.partners.index') }}" style="color: white;">
-                                <i class="ri-folder-line" style="color: white;"></i>
+                                <i class="ri-home-line" style="color: white;"></i>
                                 <span>Partnyorlar</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('back.pages.home-follows.index') }}" style="color: white;">
-                                <i class="ri-folder-line" style="color: white;"></i>
+                                <i class="ri-home-line" style="color: white;"></i>
                                 <span>Sosial Hesablar</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('back.pages.home-cart-sections.index') }}" style="color: white;">
-                                <i class="ri-folder-line" style="color: white;"></i>
+                                <i class="ri-home-line" style="color: white;"></i>
                                 <span>Kartlar</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('back.pages.home-featured-boxes.index') }}" style="color: white;">
-                                <i class="ri-folder-line" style="color: white;"></i>
+                                <i class="ri-home-line" style="color: white;"></i>
                                 <span>Featured Boxlar</span>
                             </a>
                         </li>
@@ -185,24 +185,41 @@
 
                     <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
-                        <i class="ri-folder-line" style="color: white;"></i>
+                        <i class="ri-information-line" style="color: white;"></i>
                         <span style="color: white;">Haqqımızda</span>
                     </a>
                     
                     <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
                         <li>
                             <a href="{{ route('back.pages.about.index') }}" style="color: white;">
-                                <i class="ri-folder-line" style="color: white;"></i>
+                                <i class="ri-information-line" style="color: white;"></i>
                                 <span>Haqqımızda Hero</span>
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ route('back.pages.about-cart-sections.index') }}" style="color: white;">
-                                <i class="ri-folder-line" style="color: white;"></i>
+                                <i class="ri-information-line" style="color: white;"></i>
                                 <span>Haqqımızda Kart</span>
                             </a>
                         </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
+                        <i class="ri-phone-line" style="color: white;"></i>
+                        <span style="color: white;">Əlaqə</span>
+                    </a>
+                    
+                    <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
+                        <li>
+                            <a href="{{ route('back.pages.contact.index') }}" style="color: white;">
+                                <i class="ri-phone-line" style="color: white;"></i>
+                                <span>Əlaqə</span>
+                            </a>
+                        </li>
+
+                        
                     </ul>
                 </li>
                 
