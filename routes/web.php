@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\HomeCartSectionController;
 use App\Http\Controllers\Admin\HomeFeaturedBoxController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AboutCartSectionController;
+use App\Http\Controllers\Admin\AboutCenterCartController;
 use App\Http\Controllers\Admin\ContactController;
 /*
 |--------------------------------------------------------------------------
@@ -189,6 +190,14 @@ Route::prefix('admin')->group(function () {
             Route::get('contact/{id}/edit', [ContactController::class, 'edit'])->name('contact.edit');
             Route::put('contact/{id}', [ContactController::class, 'update'])->name('contact.update');
             Route::delete('contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+
+            // About Center Cart routes
+            Route::resource('about-center-cart', AboutCenterCartController::class);
+
+            
+            Route::post('about-center-cart/toggle-status/{id}', [AboutCenterCartController::class, 'toggleStatus'])->name('about-center-cart.toggle-status');
+            Route::post('/admin/about-center-cart/upload-image', [AboutCenterCartController::class, 'uploadImage'])->name('about-center-cart.upload-image');
+            
         });
 
         

@@ -203,6 +203,12 @@
                                 <span>Haqqımızda Kart</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.about-center-cart.index') }}" style="color: white;">
+                                <i class="ri-information-line" style="color: white;"></i>
+                                <span>Center Kart</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -7,10 +8,10 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Buy Brand Tools | Admin</title>
+    <title>@yield('title') | Admin Panel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Buy Brand Tools Admin" name="description" />
-    <meta content="Buy Brand Tools Admin" name="author" />
+    <meta content="Admin Panel" name="description" />
+    <meta content="Admin Panel" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('back/assets/') }}/images/logo.png">
 
@@ -34,6 +35,13 @@
     <!-- App Css-->
     <link href="{{ asset('back/assets/') }}/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/back-styles.css') }}" rel="stylesheet">
+    
+    <!-- CKEditor 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ckeditor5-build-classic@39.0.1/build/content-styles.css">
+    
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+    
     @stack('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -84,20 +92,28 @@
     <script src="{{ asset('back/assets/') }}/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('back/assets/') }}/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
-    <script src="{{ asset('back/assets/') }}/js/pages/dashboard.init.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    
+    <!-- CKEditor 5 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
     <!-- App js -->
     <script src="{{ asset('back/assets/') }}/js/app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // AJAX için CSRF token ayarı
+       
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        
+        // Dashboard chartsları sadece dashboard sayfasında yükle
+        if (window.location.pathname.includes('dashboard')) {
+            // Dashboard chart init
+            $.getScript("{{ asset('back/assets/') }}/js/pages/dashboard.init.js");
+        }
     </script>
     @stack('js')
 </body>
