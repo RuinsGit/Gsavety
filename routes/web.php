@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AboutCartSectionController;
 use App\Http\Controllers\Admin\AboutCenterCartController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\AboutFeaturedBoxController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -174,6 +175,10 @@ Route::prefix('admin')->group(function () {
               // Home Featured Box routes
               Route::resource('home-featured-boxes', HomeFeaturedBoxController::class);
               Route::post('home-featured-boxes/toggle-status/{id}', [HomeFeaturedBoxController::class, 'toggleStatus'])->name('home-featured-boxes.toggle-status');
+
+              // About Featured Box routes
+              Route::resource('about-featured-boxes', AboutFeaturedBoxController::class);
+              Route::post('about-featured-boxes/toggle-status/{id}', [AboutFeaturedBoxController::class, 'toggleStatus'])->name('about-featured-boxes.toggle-status');
               
               // About routes
               Route::resource('about', AboutController::class);

@@ -209,6 +209,13 @@
                                 <span>Center Kart</span>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('back.pages.about-featured-boxes.index') }}" style="color: white;">
+                                <i class="ri-information-line" style="color: white;"></i>
+                                <span>Featured Boxlar</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
