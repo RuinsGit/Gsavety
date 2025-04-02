@@ -264,6 +264,6 @@ class ProductController extends Controller
         $product->is_featured = !$product->is_featured;
         $product->save();
         
-        return redirect()->route('back.pages.products.index')->with('success', 'Ürün öne çıkarma durumu uğurla dəyişdirildi.');
+        return redirect()->route('back.pages.products.index')->with('success', ' Önə Çıxma statusu uğurla dəyişdirildi.');
     }
 }
