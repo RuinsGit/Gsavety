@@ -65,7 +65,7 @@ class ProductImageController extends Controller
                 ->update(['is_main' => 0]);
         }
         
-        return redirect()->route('back.pages.product_images.index')->with('success', 'Ürün resmi başarıyla eklendi.');
+        return redirect()->route('back.pages.product_images.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     
@@ -128,7 +128,7 @@ class ProductImageController extends Controller
                 ->update(['is_main' => 0]);
         }
         
-        return redirect()->route('back.pages.product_images.index')->with('success', 'Ürün resmi başarıyla güncellendi.');
+        return redirect()->route('back.pages.product_images.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
    
@@ -143,7 +143,7 @@ class ProductImageController extends Controller
         
         $image->delete();
         
-        return redirect()->route('back.pages.product_images.index')->with('success', 'Ürün resmi başarıyla silindi.');
+        return redirect()->route('back.pages.product_images.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
     
   
@@ -153,7 +153,7 @@ class ProductImageController extends Controller
         $image->status = !$image->status;
         $image->save();
         
-        return redirect()->route('back.pages.product_images.index')->with('success', 'Resim durumu başarıyla değiştirildi.');
+        return redirect()->route('back.pages.product_images.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
     
    
@@ -169,7 +169,7 @@ class ProductImageController extends Controller
         $image->is_main = 1;
         $image->save();
         
-        return redirect()->route('back.pages.product_images.index')->with('success', 'Ana resim başarıyla değiştirildi.');
+        return redirect()->route('back.pages.product_images.index')->with('success', 'Ana resim uğurla dəyişdirildi.');
     }
     
   

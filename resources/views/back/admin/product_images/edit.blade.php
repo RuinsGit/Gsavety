@@ -169,7 +169,7 @@
 @push('js')
 <script>
     $(document).ready(function() {
-        // Sayfa yüklendiğinde mevcut ürün için renkleri getir
+     
         var productId = $('#product_id').val();
         var selectedColorId = "{{ $image->product_color_id }}";
         
@@ -177,7 +177,7 @@
             getColors(productId, selectedColorId);
         }
         
-        // Ürün seçildiğinde renkleri getir
+        
         $('#product_id').change(function() {
             var productId = $(this).val();
             if (productId) {

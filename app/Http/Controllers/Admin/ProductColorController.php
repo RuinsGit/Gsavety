@@ -55,7 +55,7 @@ class ProductColorController extends Controller
         
         $color->save();
         
-        return redirect()->route('back.pages.product_colors.index')->with('success', 'Ürün rengi başarıyla eklendi.');
+        return redirect()->route('back.pages.product_colors.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     
@@ -109,7 +109,7 @@ class ProductColorController extends Controller
         
         $color->save();
         
-        return redirect()->route('back.pages.product_colors.index')->with('success', 'Ürün rengi başarıyla güncellendi.');
+        return redirect()->route('back.pages.product_colors.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
    
@@ -125,7 +125,7 @@ class ProductColorController extends Controller
        
         $color->delete();
         
-        return redirect()->route('back.pages.product_colors.index')->with('success', 'Ürün rengi başarıyla silindi.');
+        return redirect()->route('back.pages.product_colors.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
     
    
@@ -135,6 +135,6 @@ class ProductColorController extends Controller
         $color->status = !$color->status;
         $color->save();
         
-        return redirect()->route('back.pages.product_colors.index')->with('success', 'Renk durumu başarıyla değiştirildi.');
+        return redirect()->route('back.pages.product_colors.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
 }

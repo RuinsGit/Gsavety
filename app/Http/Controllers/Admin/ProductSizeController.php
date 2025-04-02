@@ -45,7 +45,7 @@ class ProductSizeController extends Controller
         
         $size->save();
         
-        return redirect()->route('back.pages.product_sizes.index')->with('success', 'Ürün boyutu başarıyla eklendi.');
+        return redirect()->route('back.pages.product_sizes.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
    
@@ -85,7 +85,7 @@ class ProductSizeController extends Controller
         
         $size->save();
         
-        return redirect()->route('back.pages.product_sizes.index')->with('success', 'Ürün boyutu başarıyla güncellendi.');
+        return redirect()->route('back.pages.product_sizes.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
     
@@ -96,7 +96,7 @@ class ProductSizeController extends Controller
        
         $size->delete();
         
-        return redirect()->route('back.pages.product_sizes.index')->with('success', 'Ürün boyutu başarıyla silindi.');
+        return redirect()->route('back.pages.product_sizes.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
     
   
@@ -106,6 +106,6 @@ class ProductSizeController extends Controller
         $size->status = !$size->status;
         $size->save();
         
-        return redirect()->route('back.pages.product_sizes.index')->with('success', 'Boyut durumu başarıyla değiştirildi.');
+        return redirect()->route('back.pages.product_sizes.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
 }

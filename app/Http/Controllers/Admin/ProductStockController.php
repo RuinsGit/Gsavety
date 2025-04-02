@@ -47,7 +47,7 @@ class ProductStockController extends Controller
             ->first();
             
         if ($existingStock) {
-            return redirect()->back()->with('error', 'Bu ürün, renk ve boyut kombinasyonu için zaten stok kaydı mevcut.');
+            return redirect()->back()->with('error', 'Bu məhsul, reng və ölçü kombinasiyası üçün hal hazırda stok qeydi mövcuddur.');
         }
 
         $stock = new ProductStock();
@@ -62,7 +62,7 @@ class ProductStockController extends Controller
         
         $stock->save();
         
-        return redirect()->route('back.pages.product_stocks.index')->with('success', 'Ürün stoğu başarıyla eklendi.');
+        return redirect()->route('back.pages.product_stocks.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
   
@@ -105,7 +105,7 @@ class ProductStockController extends Controller
             ->first();
             
         if ($existingStock) {
-            return redirect()->back()->with('error', 'Bu ürün, renk ve boyut kombinasyonu için zaten stok kaydı mevcut.');
+            return redirect()->back()->with('error', 'Bu məhsul, reng və ölçü kombinasiyası üçün hal hazırda stok qeydi mövcuddur.');
         }
 
         $stock->product_id = $request->product_id;
@@ -119,7 +119,7 @@ class ProductStockController extends Controller
         
         $stock->save();
         
-        return redirect()->route('back.pages.product_stocks.index')->with('success', 'Ürün stoğu başarıyla güncellendi.');
+        return redirect()->route('back.pages.product_stocks.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
   
@@ -128,7 +128,7 @@ class ProductStockController extends Controller
         $stock = ProductStock::findOrFail($id);
         $stock->delete();
         
-        return redirect()->route('back.pages.product_stocks.index')->with('success', 'Ürün stoğu başarıyla silindi.');
+        return redirect()->route('back.pages.product_stocks.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
     
    
@@ -138,7 +138,7 @@ class ProductStockController extends Controller
         $stock->status = !$stock->status;
         $stock->save();
         
-        return redirect()->route('back.pages.product_stocks.index')->with('success', 'Stok durumu başarıyla değiştirildi.');
+        return redirect()->route('back.pages.product_stocks.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
     
     
@@ -187,7 +187,7 @@ class ProductStockController extends Controller
         
         // Stok çıkışı için kontrol
         if ($request->type == 'out' && $request->quantity > $stock->quantity) {
-            return redirect()->back()->with('error', 'Stok çıkışı mevcut stok miktarından fazla olamaz.');
+            return redirect()->back()->with('error', 'Stok çıxışı mövcud stok miqdarından çox ola bilməz.');
         }
         
         // Stok miktarını güncelle
@@ -214,6 +214,6 @@ class ProductStockController extends Controller
         */
         
         return redirect()->route('back.pages.product_stocks.show', $stock->id)
-            ->with('success', 'Stok hareketi başarıyla kaydedildi.');
+            ->with('success', 'Stok məlumatları uğurla yadda saxlandı.');
     }
 }

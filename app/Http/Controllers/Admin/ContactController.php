@@ -50,7 +50,7 @@ class ContactController extends Controller
                 return 'uploads/' . $webpFileName;
             }
 
-            throw new \Exception('Resim işlenirken bir hata oluştu.');
+            throw new \Exception('Şəkil yaradılarkən xəta baş verdi.');
         }
     }
 
@@ -120,7 +120,7 @@ class ContactController extends Controller
 
             return redirect()->route('back.pages.contact.index')->with('success', 'Əlaqə məlumatları uğurla əlavə edildi.');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'Resim işlenirken bir hata oluştu: ' . $e->getMessage()]);
+            return redirect()->back()->withErrors(['error' => 'Şəkil yaradılarkən xəta baş verdi: ' . $e->getMessage()]);
         }
     }
 
@@ -151,7 +151,7 @@ class ContactController extends Controller
             if ($request->hasFile('number_image')) {
                 $file = $request->file('number_image');
                 if (!in_array($file->getMimeType(), $this->allowedMimeTypes)) {
-                    return redirect()->back()->withErrors(['number_image' => 'Desteklenmeyen dosya formatı. Lütfen JPG, JPEG, PNG, GIF, SVG veya WEBP formatında bir dosya yükleyin.']);
+                    return redirect()->back()->withErrors(['number_image' => 'Desdeklenmeyen format. Lütfen JPG, JPEG, PNG, GIF, SVG veya WEBP formatında bir dosya yükleyin.']);
                 }
 
                 if ($contact->number_image) {
@@ -168,7 +168,7 @@ class ContactController extends Controller
             if ($request->hasFile('mail_image')) {
                 $file = $request->file('mail_image');
                 if (!in_array($file->getMimeType(), $this->allowedMimeTypes)) {
-                    return redirect()->back()->withErrors(['mail_image' => 'Desteklenmeyen dosya formatı. Lütfen JPG, JPEG, PNG, GIF, SVG veya WEBP formatında bir dosya yükleyin.']);
+                    return redirect()->back()->withErrors(['mail_image' => 'Desdeklenmeyen format. Lütfen JPG, JPEG, PNG, GIF, SVG veya WEBP formatında bir dosya yükleyin.']);
                 }
 
                 if ($contact->mail_image) {
@@ -185,7 +185,7 @@ class ContactController extends Controller
             if ($request->hasFile('address_image')) {
                 $file = $request->file('address_image');
                 if (!in_array($file->getMimeType(), $this->allowedMimeTypes)) {
-                    return redirect()->back()->withErrors(['address_image' => 'Desteklenmeyen dosya formatı. Lütfen JPG, JPEG, PNG, GIF, SVG veya WEBP formatında bir dosya yükleyin.']);
+                    return redirect()->back()->withErrors(['address_image' => 'Desdeklenmeyen format. Lütfen JPG, JPEG, PNG, GIF, SVG veya WEBP formatında bir dosya yükleyin.']);
                 }
 
                 if ($contact->address_image) {

@@ -53,7 +53,7 @@ class PartnerController extends Controller
 
         Partner::create($data);
 
-        return redirect()->route('back.pages.partners.index')->with('success', 'Partner uğurla əlavə edildi.');
+        return redirect()->route('back.pages.partners.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     /**

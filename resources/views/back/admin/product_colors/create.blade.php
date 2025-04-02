@@ -167,12 +167,11 @@
 @push('js')
 <script>
     $(document).ready(function() {
-        // Renk seçici değiştiğinde input değerini güncelle
+      
         $('#color_picker').change(function() {
             $('#color_code').val($(this).val());
         });
 
-        // Input değeri değiştiğinde renk seçiciyi güncelle
         $('#color_code').change(function() {
             $('#color_picker').val($(this).val());
         });

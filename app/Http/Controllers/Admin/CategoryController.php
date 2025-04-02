@@ -80,7 +80,7 @@ class CategoryController extends Controller
         
         $category->save();
         
-        return redirect()->route('back.pages.categories.index')->with('success', 'Kategori başarıyla oluşturuldu');
+        return redirect()->route('back.pages.categories.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     /**
@@ -165,7 +165,7 @@ class CategoryController extends Controller
         
         $category->save();
         
-        return redirect()->route('back.pages.categories.index')->with('success', 'Kategori başarıyla güncellendi');
+        return redirect()->route('back.pages.categories.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
     /**
@@ -187,7 +187,7 @@ class CategoryController extends Controller
         
         $category->delete();
         
-        return redirect()->route('back.pages.categories.index')->with('success', 'Kategori başarıyla silindi');
+        return redirect()->route('back.pages.categories.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
     
     /**
@@ -199,6 +199,6 @@ class CategoryController extends Controller
         $category->status = !$category->status;
         $category->save();
         
-        return redirect()->route('back.pages.categories.index')->with('success', 'Kategori durumu başarıyla değiştirildi');
+        return redirect()->route('back.pages.categories.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
 }

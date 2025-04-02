@@ -436,7 +436,7 @@
 @push('js')
 <script>
     $(document).ready(function() {
-        // Xüsusiyyət əlavə etmə
+      
         $('#add-property').click(function() {
             var propertyCount = $('.property-item').length + 1;
             var propertyItem = $('.property-item').first().clone();
@@ -446,11 +446,11 @@
             $('#properties-container').append(propertyItem);
         });
 
-        // Xüsusiyyət silmə
+       
         $(document).on('click', '.remove-property', function() {
             if ($('.property-item').length > 1) {
                 $(this).closest('.property-item').remove();
-                // Xüsusiyyət başlıqlarını yenidən numaralandır
+              
                 $('.property-item').each(function(index) {
                     $(this).find('h6').text('Xüsusiyyət #' + (index + 1));
                 });
@@ -459,7 +459,7 @@
             }
         });
         
-        // Şəkil önizləmə
+        
         $('#main_image').change(function() {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
@@ -471,7 +471,7 @@
             }
         });
 
-        // Select2 için
+    
         $('.select2').select2({
             placeholder: 'Kateqoriyaları seçin',
             allowClear: true,

@@ -72,7 +72,7 @@ class HomeFollowController extends Controller
 
         HomeFollow::create($data);
 
-        return redirect()->route('back.pages.home-follows.index')->with('success', 'Sosial hesab uğurla əlavə edildi.');
+        return redirect()->route('back.pages.home-follows.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     /**
@@ -128,7 +128,7 @@ class HomeFollowController extends Controller
 
         $homeFollow->update($data);
 
-        return redirect()->route('back.pages.home-follows.index')->with('success', 'Sosial hesab uğurla yeniləndi.');
+        return redirect()->route('back.pages.home-follows.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
     /**
@@ -145,7 +145,7 @@ class HomeFollowController extends Controller
         
         $homeFollow->delete();
 
-        return redirect()->route('back.pages.home-follows.index')->with('success', 'Sosial hesab uğurla silindi.');
+        return redirect()->route('back.pages.home-follows.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
 
     /**
@@ -157,6 +157,6 @@ class HomeFollowController extends Controller
         $homeFollow->status = !$homeFollow->status;
         $homeFollow->save();
 
-        return redirect()->route('back.pages.home-follows.index')->with('success', 'Sosial hesab statusu uğurla dəyişdirildi.');
+        return redirect()->route('back.pages.home-follows.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
 }

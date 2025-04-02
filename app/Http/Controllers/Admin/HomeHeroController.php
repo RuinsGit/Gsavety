@@ -55,7 +55,7 @@ class HomeHeroController extends Controller
         
         $hero->save();
         
-        return redirect()->route('back.pages.home-heroes.index')->with('success', 'Hero başarıyla eklendi.');
+        return redirect()->route('back.pages.home-heroes.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     /**
@@ -111,7 +111,7 @@ class HomeHeroController extends Controller
         
         $hero->save();
         
-        return redirect()->route('back.pages.home-heroes.index')->with('success', 'Hero başarıyla güncellendi.');
+        return redirect()->route('back.pages.home-heroes.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
     /**
@@ -128,7 +128,7 @@ class HomeHeroController extends Controller
         
         $hero->delete();
         
-        return redirect()->route('back.pages.home-heroes.index')->with('success', 'Hero başarıyla silindi.');
+        return redirect()->route('back.pages.home-heroes.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
     
     /**
@@ -140,6 +140,6 @@ class HomeHeroController extends Controller
         $hero->status = !$hero->status;
         $hero->save();
         
-        return redirect()->route('back.pages.home-heroes.index')->with('success', 'Hero durumu başarıyla değiştirildi.');
+        return redirect()->route('back.pages.home-heroes.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
 }

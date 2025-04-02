@@ -27,7 +27,7 @@ class LogoController extends Controller
         $logoCount = Logo::count();
 
         if ($logoCount >= 1) {
-            return redirect()->route('back.pages.logos.index')->with('error', 'Zaten bir logo mevcut. Yeni bir logo ekleyemezsiniz.');
+            return redirect()->route('back.pages.logos.index')->with('error', 'Hal hazırda bir logo mövcuddur. Yeni bir logo əlavə edə bilməzsiniz.');
         }
 
         $request->validate([

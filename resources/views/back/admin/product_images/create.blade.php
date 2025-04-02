@@ -160,7 +160,7 @@
 @push('js')
 <script>
     $(document).ready(function() {
-        // Ürün seçildiğinde renkleri getir
+     
         $('#product_id').change(function() {
             var productId = $(this).val();
             if (productId) {

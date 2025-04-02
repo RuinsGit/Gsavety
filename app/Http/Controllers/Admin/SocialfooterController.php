@@ -88,7 +88,7 @@ class SocialfooterController extends Controller
         $socialfooter->status = 1;
         $socialfooter->save();
 
-        return redirect()->route('back.pages.socialfooter.index')->with('success', 'Sosial media uğurla yeniləndi');
+        return redirect()->route('back.pages.socialfooter.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
     public function destroy($id)
@@ -101,7 +101,7 @@ class SocialfooterController extends Controller
         
         $socialfooter->delete();
 
-        return redirect()->route('back.pages.socialfooter.index')->with('success', 'Sosial media uğurla silindi');
+        return redirect()->route('back.pages.socialfooter.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
 
     public function updateOrder(Request $request)

@@ -70,7 +70,7 @@ class HomeFeaturedBoxController extends Controller
 
         HomeFeaturedBox::create($data);
 
-        return redirect()->route('back.pages.home-featured-boxes.index')->with('success', 'Featured Box uğurla əlavə edildi.');
+        return redirect()->route('back.pages.home-featured-boxes.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     /**
@@ -122,7 +122,7 @@ class HomeFeaturedBoxController extends Controller
 
         $homeFeaturedBox->update($data);
 
-        return redirect()->route('back.pages.home-featured-boxes.index')->with('success', 'Featured Box uğurla yeniləndi.');
+        return redirect()->route('back.pages.home-featured-boxes.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
     /**
@@ -139,7 +139,7 @@ class HomeFeaturedBoxController extends Controller
         
         $homeFeaturedBox->delete();
 
-        return redirect()->route('back.pages.home-featured-boxes.index')->with('success', 'Featured Box uğurla silindi.');
+        return redirect()->route('back.pages.home-featured-boxes.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
 
     /**
@@ -151,6 +151,6 @@ class HomeFeaturedBoxController extends Controller
         $homeFeaturedBox->status = !$homeFeaturedBox->status;
         $homeFeaturedBox->save();
 
-        return redirect()->route('back.pages.home-featured-boxes.index')->with('success', 'Featured Box statusu uğurla dəyişdirildi.');
+        return redirect()->route('back.pages.home-featured-boxes.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
 }

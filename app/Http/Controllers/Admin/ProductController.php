@@ -108,7 +108,7 @@ class ProductController extends Controller
             }
         }
         
-        return redirect()->route('back.pages.products.index')->with('success', 'Ürün başarıyla eklendi.');
+        return redirect()->route('back.pages.products.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     
@@ -221,7 +221,7 @@ class ProductController extends Controller
             }
         }
         
-        return redirect()->route('back.pages.products.index')->with('success', 'Ürün başarıyla güncellendi.');
+        return redirect()->route('back.pages.products.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
    
@@ -244,7 +244,7 @@ class ProductController extends Controller
         
         $product->delete();
         
-        return redirect()->route('back.pages.products.index')->with('success', 'Ürün başarıyla silindi.');
+        return redirect()->route('back.pages.products.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
     
    
@@ -254,7 +254,7 @@ class ProductController extends Controller
         $product->status = !$product->status;
         $product->save();
         
-        return redirect()->route('back.pages.products.index')->with('success', 'Ürün durumu başarıyla değiştirildi.');
+        return redirect()->route('back.pages.products.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
     
    
@@ -264,6 +264,6 @@ class ProductController extends Controller
         $product->is_featured = !$product->is_featured;
         $product->save();
         
-        return redirect()->route('back.pages.products.index')->with('success', 'Ürün öne çıkarma durumu başarıyla değiştirildi.');
+        return redirect()->route('back.pages.products.index')->with('success', 'Ürün öne çıkarma durumu uğurla dəyişdirildi.');
     }
 }

@@ -73,7 +73,7 @@ class HomeCartSectionController extends Controller
 
         HomeCartSection::create($data);
 
-        return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Kart uğurla əlavə edildi.');
+        return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Məlumatlar uğurla əlavə edildi.');
     }
 
     /**
@@ -128,7 +128,7 @@ class HomeCartSectionController extends Controller
 
         $homeCartSection->update($data);
 
-        return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Kart uğurla yeniləndi.');
+        return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Məlumatlar uğurla yeniləndi.');
     }
 
     /**
@@ -145,7 +145,7 @@ class HomeCartSectionController extends Controller
         
         $homeCartSection->delete();
 
-        return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Kart uğurla silindi.');
+        return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Məlumatlar uğurla silindi.');
     }
 
     /**
@@ -161,11 +161,11 @@ class HomeCartSectionController extends Controller
         if(request()->ajax()) {
             return response()->json([
                 'success' => true,
-                'message' => 'Kart statusu uğurla dəyişdirildi.',
+                'message' => 'Status uğurla dəyişdirildi.',
                 'status' => $homeCartSection->status
             ]);
         }
 
-        return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Kart statusu uğurla dəyişdirildi.');
+        return redirect()->route('back.pages.home-cart-sections.index')->with('success', 'Status uğurla dəyişdirildi.');
     }
 }
