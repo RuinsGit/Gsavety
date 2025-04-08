@@ -24,6 +24,9 @@ class PartnerBannerController extends Controller
      */
     public function create()
     {
+        if(PartnerBanner::count() >= 1){
+            return redirect()->route('back.pages.partner-banners.index')->with('error', 'Partner-Bannerların sayı 1-dən çox ola bilməz.');
+        }
         return view('back.admin.partner-banners.create');
     }
 

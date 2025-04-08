@@ -1,6 +1,6 @@
 @extends('back.layouts.master')
 
-@section('title', 'Partner-Bannerlar')
+@section('title', 'Partner Hero')
 
 @section('content')
     <style>
@@ -44,11 +44,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Partner-Bannerlar</h4>
+                        <h4 class="mb-sm-0">Partner Hero</h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Ana səhifə</a></li>
-                                <li class="breadcrumb-item active">Partner-Bannerlar</li>
+                                <li class="breadcrumb-item active">Partner Hero</li>
                             </ol>
                         </div>
                     </div>
@@ -60,12 +60,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="col-12 d-flex justify-content-end mb-4">
-                                @if($partnerBanners->count() < 1)
-                                    <a href="{{ route('back.pages.partner-banners.create') }}" class="btn btn-success">
-                                        <i class="fas fa-plus"></i> Yeni Partner-Banner Əlavə Et
+                                @if($partnerHeroes->count() < 1)
+                                    <a href="{{ route('back.pages.partner-heroes.create') }}" class="btn btn-success">
+                                        <i class="fas fa-plus"></i> Yeni Partner Hero Əlavə Et
                                     </a>
                                 @else
-                                    <button class="btn btn-secondary" disabled title="Maksimum 1 Partner-Banner məlumatı əlavə edilə bilər">Yeni Partner-Banner Əlavə Et</button>
+                                    <button class="btn btn-secondary" disabled title="Maksimum 1 Partner Hero məlumatı əlavə edilə bilər">Yeni Partner Hero Əlavə Et</button>
                                 @endif
                             </div>
 
@@ -99,43 +99,45 @@
                                                     <th>#</th>
                                                     <th>Şəkil</th>
                                                     <th>Başlıq (AZ)</th>
+                                                    <th>Açıqlama (AZ)</th>
                                                     <th>Sıra</th>
                                                     <th>Status</th>
                                                     <th>Əməliyyatlar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($partnerBanners as $partnerBanner)
+                                                @foreach($partnerHeroes as $partnerHero)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <div class="image-preview">
-                                                                @if($partnerBanner->image)
-                                                                    <img src="{{ asset($partnerBanner->image) }}" alt="{{ $partnerBanner->title_az }}" class="partner-img">
+                                                                @if($partnerHero->image)
+                                                                    <img src="{{ asset($partnerHero->image) }}" alt="{{ $partnerHero->title_az }}" class="partner-img">
                                                                 @else
                                                                     <span class="badge bg-danger">Şəkil Yoxdur</span>
                                                                 @endif
                                                             </div>
                                                         </td>
-                                                        <td>{{ $partnerBanner->title_az }}</td>
-                                                        <td>{{ $partnerBanner->order }}</td>
+                                                        <td>{{ $partnerHero->title_az }}</td>
+                                                        <td>{{ Str::limit($partnerHero->description_az, 100) }}</td>
+                                                        <td>{{ $partnerHero->order }}</td>
                                                         <td>
                                                             <div class="form-check form-switch form-switch-success">
-                                                                <form action="{{ route('back.pages.partner-banners.toggle-status', $partnerBanner->id) }}" method="POST">
+                                                                <form action="{{ route('back.pages.partner-heroes.toggle-status', $partnerHero->id) }}" method="POST">
                                                                     @csrf
-                                                                    <input class="form-check-input toggle-status" type="checkbox" role="switch" id="status_{{ $partnerBanner->id }}" {{ $partnerBanner->status ? 'checked' : '' }} data-id="{{ $partnerBanner->id }}">
+                                                                    <input class="form-check-input toggle-status" type="checkbox" role="switch" id="status_{{ $partnerHero->id }}" {{ $partnerHero->status ? 'checked' : '' }} data-id="{{ $partnerHero->id }}">
                                                                 </form>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('back.pages.partner-banners.edit', $partnerBanner->id) }}" class="btn btn-primary btn-sm" style="background-color: #5bf91b; border-color: green">
+                                                            <a href="{{ route('back.pages.partner-heroes.edit', $partnerHero->id) }}" class="btn btn-primary btn-sm" style="background-color: #5bf91b; border-color: green">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-                                                            <form id="delete-form-{{ $partnerBanner->id }}" action="{{ route('back.pages.partner-banners.destroy', $partnerBanner->id) }}" method="POST" class="d-none">
+                                                            <form id="delete-form-{{ $partnerHero->id }}" action="{{ route('back.pages.partner-heroes.destroy', $partnerHero->id) }}" method="POST" class="d-none">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
-                                                            <button class="btn btn-danger btn-sm" onclick="deleteData({{ $partnerBanner->id }})">
+                                                            <button class="btn btn-danger btn-sm" onclick="deleteData({{ $partnerHero->id }})">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </td>
@@ -154,43 +156,45 @@
                                                     <th>#</th>
                                                     <th>Şəkil</th>
                                                     <th>Başlıq (EN)</th>
+                                                    <th>Açıqlama (EN)</th>
                                                     <th>Sıra</th>
                                                     <th>Status</th>
                                                     <th>Əməliyyatlar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($partnerBanners as $partnerBanner)
+                                                @foreach($partnerHeroes as $partnerHero)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <div class="image-preview">
-                                                                @if($partnerBanner->image)
-                                                                    <img src="{{ asset($partnerBanner->image) }}" alt="{{ $partnerBanner->title_en }}" class="partner-img">
+                                                                @if($partnerHero->image)
+                                                                    <img src="{{ asset($partnerHero->image) }}" alt="{{ $partnerHero->title_en }}" class="partner-img">
                                                                 @else
                                                                     <span class="badge bg-danger">Şəkil Yoxdur</span>
                                                                 @endif
                                                             </div>
                                                         </td>
-                                                        <td>{{ $partnerBanner->title_en }}</td>
-                                                        <td>{{ $partnerBanner->order }}</td>
+                                                        <td>{{ $partnerHero->title_en }}</td>
+                                                        <td>{{ Str::limit($partnerHero->description_en, 100) }}</td>
+                                                        <td>{{ $partnerHero->order }}</td>
                                                         <td>
                                                             <div class="form-check form-switch form-switch-success">
-                                                                <form action="{{ route('back.pages.partner-banners.toggle-status', $partnerBanner->id) }}" method="POST">
+                                                                <form action="{{ route('back.pages.partner-heroes.toggle-status', $partnerHero->id) }}" method="POST">
                                                                     @csrf
-                                                                    <input class="form-check-input toggle-status" type="checkbox" role="switch" id="status_en_{{ $partnerBanner->id }}" {{ $partnerBanner->status ? 'checked' : '' }} data-id="{{ $partnerBanner->id }}">
+                                                                    <input class="form-check-input toggle-status" type="checkbox" role="switch" id="status_en_{{ $partnerHero->id }}" {{ $partnerHero->status ? 'checked' : '' }} data-id="{{ $partnerHero->id }}">
                                                                 </form>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('back.pages.partner-banners.edit', $partnerBanner->id) }}" class="btn btn-primary btn-sm" style="background-color: #5bf91b; border-color: green">
+                                                            <a href="{{ route('back.pages.partner-heroes.edit', $partnerHero->id) }}" class="btn btn-primary btn-sm" style="background-color: #5bf91b; border-color: green">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-                                                            <form id="delete-form-en-{{ $partnerBanner->id }}" action="{{ route('back.pages.partner-banners.destroy', $partnerBanner->id) }}" method="POST" class="d-none">
+                                                            <form id="delete-form-en-{{ $partnerHero->id }}" action="{{ route('back.pages.partner-heroes.destroy', $partnerHero->id) }}" method="POST" class="d-none">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
-                                                            <button class="btn btn-danger btn-sm" onclick="deleteData({{ $partnerBanner->id }})">
+                                                            <button class="btn btn-danger btn-sm" onclick="deleteData({{ $partnerHero->id }})">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </td>
@@ -209,43 +213,45 @@
                                                     <th>#</th>
                                                     <th>Şəkil</th>
                                                     <th>Başlıq (RU)</th>
+                                                    <th>Açıqlama (RU)</th>
                                                     <th>Sıra</th>
                                                     <th>Status</th>
                                                     <th>Əməliyyatlar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($partnerBanners as $partnerBanner)
+                                                @foreach($partnerHeroes as $partnerHero)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <div class="image-preview">
-                                                                @if($partnerBanner->image)
-                                                                    <img src="{{ asset($partnerBanner->image) }}" alt="{{ $partnerBanner->title_ru }}" class="partner-img">
+                                                                @if($partnerHero->image)
+                                                                    <img src="{{ asset($partnerHero->image) }}" alt="{{ $partnerHero->title_ru }}" class="partner-img">
                                                                 @else
                                                                     <span class="badge bg-danger">Şəkil Yoxdur</span>
                                                                 @endif
                                                             </div>
                                                         </td>
-                                                        <td>{{ $partnerBanner->title_ru }}</td>
-                                                        <td>{{ $partnerBanner->order }}</td>
+                                                        <td>{{ $partnerHero->title_ru }}</td>
+                                                        <td>{{ Str::limit($partnerHero->description_ru, 100) }}</td>
+                                                        <td>{{ $partnerHero->order }}</td>
                                                         <td>
                                                             <div class="form-check form-switch form-switch-success">
-                                                                <form action="{{ route('back.pages.partner-banners.toggle-status', $partnerBanner->id) }}" method="POST">
+                                                                <form action="{{ route('back.pages.partner-heroes.toggle-status', $partnerHero->id) }}" method="POST">
                                                                     @csrf
-                                                                    <input class="form-check-input toggle-status" type="checkbox" role="switch" id="status_ru_{{ $partnerBanner->id }}" {{ $partnerBanner->status ? 'checked' : '' }} data-id="{{ $partnerBanner->id }}">
+                                                                    <input class="form-check-input toggle-status" type="checkbox" role="switch" id="status_ru_{{ $partnerHero->id }}" {{ $partnerHero->status ? 'checked' : '' }} data-id="{{ $partnerHero->id }}">
                                                                 </form>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('back.pages.partner-banners.edit', $partnerBanner->id) }}" class="btn btn-primary btn-sm" style="background-color: #5bf91b; border-color: green">
+                                                            <a href="{{ route('back.pages.partner-heroes.edit', $partnerHero->id) }}" class="btn btn-primary btn-sm" style="background-color: #5bf91b; border-color: green">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-                                                            <form id="delete-form-ru-{{ $partnerBanner->id }}" action="{{ route('back.pages.partner-banners.destroy', $partnerBanner->id) }}" method="POST" class="d-none">
+                                                            <form id="delete-form-ru-{{ $partnerHero->id }}" action="{{ route('back.pages.partner-heroes.destroy', $partnerHero->id) }}" method="POST" class="d-none">
                                                                 @csrf
                                                                 @method('DELETE')
                                                             </form>
-                                                            <button class="btn btn-danger btn-sm" onclick="deleteData({{ $partnerBanner->id }})">
+                                                            <button class="btn btn-danger btn-sm" onclick="deleteData({{ $partnerHero->id }})">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </td>
@@ -351,4 +357,4 @@
         });
     });
 </script>
-@endpush 
+@endpush

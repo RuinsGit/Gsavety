@@ -248,6 +248,12 @@
                                 <span>Partner-Bannerlar</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.partner-heroes.index') }}" style="color: white;">
+                                <i class="ri-image-line" style="color: white;"></i>
+                                <span>Partner-Hero</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
