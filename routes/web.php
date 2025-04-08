@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\AboutCartSectionController;
 use App\Http\Controllers\Admin\AboutCenterCartController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\AboutFeaturedBoxController;
+use App\Http\Controllers\Admin\PartnerBannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -163,6 +164,10 @@ Route::prefix('admin')->group(function () {
               // Partner routes
               Route::resource('partners', PartnerController::class);
               Route::post('partners/toggle-status/{id}', [PartnerController::class, 'toggleStatus'])->name('partners.toggle-status');
+
+              // Partner-Banner routes
+              Route::resource('partner-banners', PartnerBannerController::class);
+              Route::post('partner-banners/toggle-status/{id}', [PartnerBannerController::class, 'toggleStatus'])->name('partner-banners.toggle-status');
 
               // Home Follow routes
               Route::resource('home-follows', HomeFollowController::class);

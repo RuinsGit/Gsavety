@@ -234,8 +234,22 @@
 
                         
                     </ul>
+
                 </li>
-                
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
+                        <i class="ri-image-line" style="color: white;"></i>
+                        <span style="color: white;">Partner-Bannerlar</span>
+                    </a>
+                    <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
+                        <li>
+                            <a href="{{ route('back.pages.partner-banners.index') }}" style="color: white;">
+                                <i class="ri-image-line" style="color: white;"></i>
+                                <span>Partner-Bannerlar</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
 
             </ul>
