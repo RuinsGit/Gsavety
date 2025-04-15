@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'status',
     ];
 
     /**
@@ -41,5 +43,37 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'status' => 'boolean',
     ];
+
+    /**
+     * Kullanıcının admin olup olmadığını kontrol eder
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Kullanıcının aktif olup olmadığını kontrol eder
+     * 
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->status === 1 || $this->status === true;
+    }
+
+    /**
+     * Aktif kullanıcıları filtreler
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }

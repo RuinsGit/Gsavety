@@ -277,6 +277,36 @@
                     </ul>
                 </li>   
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
+                        <i class="ri-user-line" style="color: white;"></i>
+                        <span style="color: white;">İstifadəçi İdarəetməsi</span>
+                    </a>
+                    <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
+                        <li>
+                            <a href="{{ route('back.pages.users.index') }}" style="color: white;">
+                                <i class="ri-user-line" style="color: white;"></i>
+                                <span>İstifadəçi İdarəetməsi</span>   
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
+                        <i class="ri-file-text-line" style="color: white;"></i>
+                        <span style="color: white;">Siparişler</span>
+                    </a>
+                    <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
+                        <li>    
+                            <a href="{{ route('back.pages.orders.index') }}" style="color: white;">
+                                <i class="ri-file-text-line" style="color: white;"></i>
+                                <span>Siparişler</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                    
 
             </ul>
         </div>

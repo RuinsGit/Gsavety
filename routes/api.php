@@ -9,6 +9,12 @@ use App\Http\Controllers\Api\SocialMediaApiController;
 use App\Http\Controllers\Api\SocialshareApiController;
 use App\Http\Controllers\Api\SocialfooterApiController;
 use App\Http\Controllers\Api\ContactApiController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\OrderApiController;
+use App\Http\Controllers\Api\CartApiController;
+use App\Http\Controllers\Api\CheckoutApiController;
+use App\Http\Controllers\Api\ProductApiController;
+use App\Http\Controllers\Api\CategoryApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -76,3 +82,101 @@ Route::prefix('contacts')->group(function () {
     Route::put('/{id}', [ContactApiController::class, 'update']);
     Route::delete('/{id}', [ContactApiController::class, 'destroy']);
 });
+
+// Public routes
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+// User-specific protected routes
+Route::middleware(['auth:sanctum', 'user'])->prefix('user')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/profile', [AuthController::class, 'me']);
+    
+    // Diğer kullanıcı API rotaları buraya eklenebilir
+    // ...
+});
+
+
+
+// Admin rotaları için gerekli middleware'i değiştirmiyoruz
+// Admin routes middleware'i mevcut admin yapısıyla çalışacak şekilde kalıyor
+
+// Sipariş API Rotaları
+Route::prefix('orders')->group(function () {
+    // Tüm siparişleri getir
+    Route::get('/', [OrderApiController::class, 'index']);
+    
+    // Yeni sipariş oluştur
+    Route::post('/', [OrderApiController::class, 'store']);
+    
+    // Belirli bir siparişin detayını getir
+    Route::get('/{id}', [OrderApiController::class, 'show']);
+    
+    // Belirli bir kullanıcının siparişlerini getir
+    Route::get('/user/{userId}', [OrderApiController::class, 'getUserOrders']);
+    
+    // Sipariş durumunu güncelle
+    Route::put('/{id}/status', [OrderApiController::class, 'updateStatus']);
+    
+    // Ödeme durumunu güncelle
+    Route::put('/{id}/payment-status', [OrderApiController::class, 'updatePaymentStatus']);
+});
+
+// Sepet API Rotaları
+Route::prefix('cart')->group(function () {
+    // Sepet içeriğini görüntüle
+    Route::get('/', [CartApiController::class, 'index']);
+    
+    // Sepete ürün ekle
+    Route::post('/add', [CartApiController::class, 'addToCart']);
+    
+    // Sepetten ürün çıkar
+    Route::post('/remove', [CartApiController::class, 'removeFromCart']);
+    
+    // Sepetteki ürün miktarını güncelle
+    Route::post('/update', [CartApiController::class, 'updateCartItem']);
+    
+    // Sepeti boşalt
+    Route::post('/clear', [CartApiController::class, 'clearCart']);
+});
+
+// Checkout API rotası
+Route::post('/checkout', [CheckoutApiController::class, 'checkout']);
+
+// Ürün API Rotaları
+Route::prefix('products')->group(function () {
+    // Tüm ürünleri getir (filtreleme ve sıralama destekli)
+    Route::get('/', [ProductApiController::class, 'index']);
+    
+    // Öne çıkan ürünleri getir
+    Route::get('/featured', [ProductApiController::class, 'featured']);
+    
+    // Ürün ara
+    Route::get('/search', [ProductApiController::class, 'search']);
+    
+    // Belirli bir ürünün renklerini getir
+    Route::get('/{productId}/colors', [ProductApiController::class, 'getProductColors']);
+    
+    // Belirli bir ürünün boyutlarını getir
+    Route::get('/{productId}/sizes', [ProductApiController::class, 'getProductSizes']);
+    
+    // Belirli bir ürünün stok durumunu getir
+    Route::get('/{productId}/stocks', [ProductApiController::class, 'getProductStocks']);
+    
+    // Belirli bir ürünün detayını getir (en sona koyuyoruz çakışma olmaması için)
+    Route::get('/{id}', [ProductApiController::class, 'show']);
+});
+
+// Kategori API Rotaları
+Route::prefix('categories')->group(function () {
+    // Tüm kategorileri getir
+    Route::get('/', [CategoryApiController::class, 'index']);
+    
+    // Belirli bir kategorinin detayını getir
+    Route::get('/{id}', [CategoryApiController::class, 'show']);
+    
+    // Belirli bir kategoriye ait ürünleri getir
+    Route::get('/{categoryId}/products', [CategoryApiController::class, 'getCategoryProducts']);
+});
+
+// Diğer API rotaları buraya eklenebilir

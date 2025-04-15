@@ -29,6 +29,8 @@ use App\Http\Controllers\Admin\PartnerBannerController;
 use App\Http\Controllers\Admin\PartnerHeroController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BlogBannerController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -222,6 +224,20 @@ Route::prefix('admin')->group(function () {
             // Blog Banner routes
             Route::resource('blog-banner', BlogBannerController::class);
             Route::post('blog-banner/toggle-status/{id}', [BlogBannerController::class, 'toggleStatus'])->name('blog-banner.toggle-status');
+
+            // User routes
+            Route::resource('users', UserController::class);
+            Route::post('users/toggle-status/{id}', [UserController::class, 'toggleStatus'])->name('users.toggle-status');
+
+            // Admin Sipariş Rotaları
+            Route::prefix('orders')->name('orders.')->group(function () {
+                Route::get('/', [OrderController::class, 'index'])->name('index');
+                Route::get('/export', [OrderController::class, 'export'])->name('export');
+                Route::get('/{id}', [OrderController::class, 'show'])->name('show');
+                Route::post('/{id}/update-status', [OrderController::class, 'updateStatus'])->name('update-status');
+                Route::post('/{id}/update-payment-status', [OrderController::class, 'updatePaymentStatus'])->name('update-payment-status');
+                Route::delete('/{id}', [OrderController::class, 'destroy'])->name('destroy');
+            });
         });
 
         
