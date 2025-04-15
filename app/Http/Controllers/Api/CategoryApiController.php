@@ -14,14 +14,28 @@ class CategoryApiController extends Controller
     /**
      * Tüm kategorileri listele
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::where('status', 1)
-            ->orderBy('sort_order', 'asc')
-            ->get();
+        $query = Category::where('status', 1)->orderBy('id', 'asc');
+        
+        // İlişkili ürünleri yükle (varsayılan olarak her zaman yükle)
+        $loadProducts = $request->has('with_products') ? (bool)$request->with_products : true;
+        
+        if ($loadProducts) {
+            $limit = $request->has('product_limit') ? (int)$request->product_limit : 10;
             
+            $query->with(['products' => function($q) use ($limit) {
+                $q->where('status', 1)
+                  ->orderBy('id', 'desc')
+                  ->limit($limit);
+            }]);
+        }
+            
+        $categories = $query->get();
+        
         return CategoryResource::collection($categories);
     }
     
@@ -29,11 +43,27 @@ class CategoryApiController extends Controller
      * Belirli bir kategorinin detayını getir
      *
      * @param  string  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \App\Http\Resources\CategoryResource
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $category = Category::findOrFail($id);
+        $query = Category::where('id', $id);
+        
+        // İlişkili ürünleri yükle (varsayılan olarak her zaman yükle)
+        $loadProducts = $request->has('with_products') ? (bool)$request->with_products : true;
+        
+        if ($loadProducts) {
+            $limit = $request->has('product_limit') ? (int)$request->product_limit : 10;
+            
+            $query->with(['products' => function($q) use ($limit) {
+                $q->where('status', 1)
+                  ->orderBy('id', 'desc')
+                  ->limit($limit);
+            }]);
+        }
+        
+        $category = $query->firstOrFail();
         
         return new CategoryResource($category);
     }

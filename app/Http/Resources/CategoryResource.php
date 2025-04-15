@@ -34,6 +34,10 @@ class CategoryResource extends JsonResource
             'image' => $this->image ? asset($this->image) : null,
             'status' => (bool) $this->status,
             'sort_order' => $this->sort_order,
+            'products' => ProductResource::collection($this->whenLoaded('products')),
+            'product_count' => $this->when($this->relationLoaded('products'), function() {
+                return $this->products->count();
+            }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
