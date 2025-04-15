@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\AboutFeaturedBoxController;
 use App\Http\Controllers\Admin\PartnerBannerController;
 use App\Http\Controllers\Admin\PartnerHeroController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BlogBannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -213,6 +215,13 @@ Route::prefix('admin')->group(function () {
             Route::post('about-center-cart/toggle-status/{id}', [AboutCenterCartController::class, 'toggleStatus'])->name('about-center-cart.toggle-status');
             Route::post('/admin/about-center-cart/upload-image', [AboutCenterCartController::class, 'uploadImage'])->name('about-center-cart.upload-image');
             
+            // Blog routes
+            Route::resource('blog', BlogController::class);
+            Route::post('blog/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blog.toggle-status');
+
+            // Blog Banner routes
+            Route::resource('blog-banner', BlogBannerController::class);
+            Route::post('blog-banner/toggle-status/{id}', [BlogBannerController::class, 'toggleStatus'])->name('blog-banner.toggle-status');
         });
 
         
