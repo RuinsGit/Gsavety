@@ -29,21 +29,13 @@ class StockResource extends JsonResource
             'color' => $this->whenLoaded('color', function() {
                 return [
                     'id' => $this->color->id,
-                    'name' => [
-                        'az' => $this->color->color_name_az,
-                        'en' => $this->color->color_name_en,
-                        'ru' => $this->color->color_name_ru,
-                    ]
+                    'name' => $this->color->color_name,
                 ];
             }),
             'size' => $this->whenLoaded('size', function() {
                 return [
                     'id' => $this->size->id,
-                    'name' => [
-                        'az' => $this->size->size_name_az,
-                        'en' => $this->size->size_name_en,
-                        'ru' => $this->size->size_name_ru,
-                    ],
+                    'name' => $this->size->size_name,
                     'value' => $this->size->size_value
                 ];
             }),

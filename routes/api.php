@@ -15,6 +15,10 @@ use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\Api\CheckoutApiController;
 use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\CategoryApiController;
+use App\Http\Controllers\Api\HomeHeroApiController;
+use App\Http\Controllers\Api\HomeCartSectionApiController;
+use App\Http\Controllers\Api\HomeFeaturedBoxApiController;
+use App\Http\Controllers\Api\HomeFollowApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -81,6 +85,30 @@ Route::prefix('contacts')->group(function () {
     Route::post('/', [ContactApiController::class, 'store']);
     Route::put('/{id}', [ContactApiController::class, 'update']);
     Route::delete('/{id}', [ContactApiController::class, 'destroy']);
+});
+
+// Home Hero Routes
+Route::prefix('home-heroes')->group(function () {
+    Route::get('/', [HomeHeroApiController::class, 'index']);
+    Route::get('/{id}', [HomeHeroApiController::class, 'show']);
+});
+
+// Home Cart Section Routes
+Route::prefix('home-cart-sections')->group(function () {
+    Route::get('/', [HomeCartSectionApiController::class, 'index']);
+    Route::get('/{id}', [HomeCartSectionApiController::class, 'show']);
+});
+
+// Home Featured Box Routes
+Route::prefix('home-featured-boxes')->group(function () {
+    Route::get('/', [HomeFeaturedBoxApiController::class, 'index']);
+    Route::get('/{id}', [HomeFeaturedBoxApiController::class, 'show']);
+});
+
+// Home Follow Routes
+Route::prefix('home-follows')->group(function () {
+    Route::get('/', [HomeFollowApiController::class, 'index']);
+    Route::get('/{id}', [HomeFollowApiController::class, 'show']);
 });
 
 // Public routes

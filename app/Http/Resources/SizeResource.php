@@ -17,11 +17,7 @@ class SizeResource extends JsonResource
         return [
             'id' => $this->id,
             'product_id' => $this->product_id,
-            'name' => [
-                'az' => $this->size_name_az,
-                'en' => $this->size_name_en,
-                'ru' => $this->size_name_ru,
-            ],
+            'name' => $this->size_name,
             'size_value' => $this->size_value,
             'status' => (bool) $this->status,
             'sort_order' => $this->sort_order,

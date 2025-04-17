@@ -18,16 +18,8 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'reference' => $this->reference,
             'sku' => $this->sku,
-            'name' => [
-                'az' => $this->name_az,
-                'en' => $this->name_en,
-                'ru' => $this->name_ru,
-            ],
-            'description' => [
-                'az' => $this->description_az,
-                'en' => $this->description_en,
-                'ru' => $this->description_ru,
-            ],
+            'name' => $this->name,
+            'description' => $this->description,
             'price' => $this->price,
             'discount_price' => $this->discount_price,
             'main_image' => $this->main_image ? asset($this->main_image) : null,
@@ -39,16 +31,8 @@ class ProductResource extends JsonResource
                 'ru' => $this->slug_ru,
             ],
             'meta' => [
-                'title' => [
-                    'az' => $this->meta_title_az,
-                    'en' => $this->meta_title_en,
-                    'ru' => $this->meta_title_ru,
-                ],
-                'description' => [
-                    'az' => $this->meta_description_az,
-                    'en' => $this->meta_description_en,
-                    'ru' => $this->meta_description_ru,
-                ],
+                'title' => $this->meta_title,
+                'description' => $this->meta_description,
             ],
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'properties' => PropertyResource::collection($this->whenLoaded('properties')),

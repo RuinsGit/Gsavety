@@ -17,11 +17,7 @@ class ColorResource extends JsonResource
         return [
             'id' => $this->id,
             'product_id' => $this->product_id,
-            'name' => [
-                'az' => $this->color_name_az,
-                'en' => $this->color_name_en,
-                'ru' => $this->color_name_ru,
-            ],
+            'name' => $this->color_name,
             'color_code' => $this->color_code,
             'color_image' => $this->color_image ? asset($this->color_image) : null,
             'status' => (bool) $this->status,
