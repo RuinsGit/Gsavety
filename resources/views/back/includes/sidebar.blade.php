@@ -128,6 +128,7 @@
                         </li>
                     </ul>
                 </li>
+                
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
@@ -141,6 +142,14 @@
                                 <span>Kategori</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.service-heroes.index') }}" style="color: white;">
+                                <i class="ri-folder-line" style="color: white;"></i>
+                                <span>Servis Hero</span>
+                            </a>
+                        </li>
+
+
                     </ul>
                 </li>
 
@@ -204,11 +213,17 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('back.pages.about-text-sections.index') }}" style="color: white;">
+                                <i class="ri-information-line" style="color: white;"></i>
+                                <span>Haqqımızda Mətin</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('back.pages.about-center-cart.index') }}" style="color: white;">
                                 <i class="ri-information-line" style="color: white;"></i>
                                 <span>Center Kart</span>
                             </a>
-                        </li>
+                        </a>
 
                         <li>
                             <a href="{{ route('back.pages.about-featured-boxes.index') }}" style="color: white;">
@@ -229,6 +244,12 @@
                             <a href="{{ route('back.pages.contact.index') }}" style="color: white;">
                                 <i class="ri-phone-line" style="color: white;"></i>
                                 <span>Əlaqə</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('back.pages.contact-heroes.index') }}" style="color: white;">
+                                <i class="ri-phone-line" style="color: white;"></i>
+                                <span>Əlaqə Hero</span>
                             </a>
                         </li>
 

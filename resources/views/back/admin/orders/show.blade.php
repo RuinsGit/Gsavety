@@ -44,12 +44,12 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Sipariş Detayı</h4>
+                    <h4 class="mb-sm-0">Sifariş  Detayı</h4>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Ana sayfa</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('back.pages.orders.index') }}">Siparişler</a></li>
-                            <li class="breadcrumb-item active">Sipariş Detayı</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Ana səhifə</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('back.pages.orders.index') }}">Sifarişlər</a></li>
+                            <li class="breadcrumb-item active">Sifariş Detayı</li>
                         </ol>
                     </div>
                 </div>
@@ -61,13 +61,13 @@
                 <div class="card">
                     <div class="card-header bg-light">
                         <div class="d-flex align-items-center">
-                            <h5 class="card-title mb-0 flex-grow-1">Sipariş #{{ $order->order_number }}</h5>
+                            <h5 class="card-title mb-0 flex-grow-1">Sifariş #{{ $order->order_number }}</h5>
                             <div class="flex-shrink-0">
                                 <a href="{{ route('back.pages.orders.index') }}" class="btn btn-secondary btn-sm">
                                     <i class="ri-arrow-left-line align-bottom"></i> Geri Dön
                                 </a>
                                 <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ $order->id }}">
-                                    <i class="ri-delete-bin-line align-bottom"></i> Siparişi Sil
+                                    <i class="ri-delete-bin-line align-bottom"></i> Sifarişi Sil
                                 </button>
                             </div>
                         </div>
@@ -76,26 +76,26 @@
                         <div class="row mb-4">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <div class="bg-light p-3 rounded">
-                                    <h6 class="mb-3">Sipariş Bilgileri</h6>
+                                    <h6 class="mb-3">Sifariş Bilgileri</h6>
                                     <table class="table table-borderless mb-0">
                                         <tbody>
                                             <tr>
-                                                <td>Sipariş Numarası:</td>
+                                                <td>Sifariş Nömrəsi:</td>
                                                 <td class="text-end"><strong>{{ $order->order_number }}</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>Tarih:</td>
+                                                <td>Tarix:</td>
                                                 <td class="text-end">{{ $order->created_at->format('d.m.Y H:i') }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Toplam Tutar:</td>
+                                                <td>Cəmi:</td>
                                                 <td class="text-end">{{ number_format($order->total_amount, 2) }} ₼</td>
                                             </tr>
                                             <tr>
-                                                <td>Ödeme Yöntemi:</td>
+                                                <td>Ödemə Yöntəmi:</td>
                                                 <td class="text-end">
                                                     @if($order->payment_method == 'cash_on_delivery')
-                                                        Kapıda Ödeme
+                                                        Kapıda Ödemə
                                                     @else
                                                         {{ $order->payment_method }}
                                                     @endif
@@ -115,7 +115,7 @@
                                                 <td class="text-end"><strong>{{ $order->first_name }} {{ $order->last_name }}</strong></td>
                                             </tr>
                                             <tr>
-                                                <td>E-posta:</td>
+                                                <td>E-poçt:</td>
                                                 <td class="text-end">{{ $order->email }}</td>
                                             </tr>
                                             <tr>
@@ -123,7 +123,7 @@
                                                 <td class="text-end">{{ $order->phone }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Adres:</td>
+                                                <td>Ünvan:</td>
                                                 <td class="text-end">
                                                     {{ $order->address }}
                                                     @if($order->city)
@@ -142,10 +142,10 @@
                             <table class="table table-bordered align-middle">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Ürün</th>
-                                        <th>Fiyat</th>
-                                        <th>Adet</th>
-                                        <th class="text-end">Toplam</th>
+                                        <th>Məhsul</th>
+                                        <th>Qiymət</th>
+                                        <th>A   det</th>
+                                        <th class="text-end">Cəmi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -192,7 +192,7 @@
 
                         @if($order->comment)
                         <div class="mt-4">
-                            <h6>Sipariş Notu:</h6>
+                            <h6>Sifariş Notu:</h6>
                             <p class="p-3 bg-light rounded">{{ $order->comment }}</p>
                         </div>
                         @endif
@@ -203,23 +203,23 @@
             <div class="col-xl-3">
                 <div class="card">
                     <div class="card-header bg-light">
-                        <h5 class="card-title mb-0">Sipariş Durumu</h5>
+                        <h5 class="card-title mb-0">Sifariş Durumu</h5>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('back.pages.orders.update-status', $order->id) }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="status" class="form-label">Durumu Güncelle</label>
+                                <label for="status" class="form-label">Statusu Güncelle</label>
                                 <select class="form-select" id="status" name="status">
-                                    <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Beklemede</option>
-                                    <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>İşleniyor</option>
+                                    <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Gözləmədə</option>
+                                    <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>İşlənir</option>
                                     <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Tamamlandı</option>
-                                    <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>İptal Edildi</option>
+                                    <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>İmtina Edildi</option>
                                 </select>
                             </div>
 
                             <div>
-                                <button type="submit" class="btn btn-primary w-100">Durumu Güncelle</button>
+                                <button type="submit" class="btn btn-primary w-100">Statusu Güncelle</button>
                             </div>
                         </form>
 
@@ -228,16 +228,16 @@
                         <form action="{{ route('back.pages.orders.update-payment-status', $order->id) }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="payment_status" class="form-label">Ödeme Durumunu Güncelle</label>
+                                <label for="payment_status" class="form-label">Ödemə Statusunu Güncelle</label>
                                 <select class="form-select" id="payment_status" name="payment_status">
-                                    <option value="pending" {{ $order->payment_status == 'pending' ? 'selected' : '' }}>Beklemede</option>
-                                    <option value="paid" {{ $order->payment_status == 'paid' ? 'selected' : '' }}>Ödendi</option>
-                                    <option value="failed" {{ $order->payment_status == 'failed' ? 'selected' : '' }}>Başarısız</option>
+                                    <option value="pending" {{ $order->payment_status == 'pending' ? 'selected' : '' }}>Gözləmədə</option>
+                                    <option value="paid" {{ $order->payment_status == 'paid' ? 'selected' : '' }}>Ödəndi</option>
+                                        <option value="failed" {{ $order->payment_status == 'failed' ? 'selected' : '' }}>Uğursuz</option>
                                 </select>
                             </div>
 
                             <div>
-                                <button type="submit" class="btn btn-info w-100">Ödeme Durumunu Güncelle</button>
+                                <button type="submit" class="btn btn-info w-100">Ödemə Statusunu Güncelle</button>
                             </div>
                         </form>
                     </div>
@@ -245,7 +245,7 @@
 
                 <div class="card mt-4">
                     <div class="card-header bg-light">
-                        <h5 class="card-title mb-0">Sipariş Geçmişi</h5>
+                        <h5 class="card-title mb-0">Sifariş Geçmişi</h5>
                     </div>
                     <div class="card-body">
                         <div class="timeline-group-wrapper">
@@ -255,8 +255,8 @@
                                 </div>
                                 <div class="timeline-marker bg-success"></div>
                                 <div class="timeline-content">
-                                    <h6 class="mb-0">Sipariş Oluşturuldu</h6>
-                                    <p class="text-muted mb-0">{{ $order->first_name }} {{ $order->last_name }} tarafından yeni sipariş verildi.</p>
+                                    <h6 class="mb-0">Sifariş Oluşturuldu</h6>
+                                    <p class="text-muted mb-0">{{ $order->first_name }} {{ $order->last_name }} tarafından yeni sifariş verildi.</p>
                                 </div>
                             </div>
 
@@ -268,13 +268,13 @@
                                 <div class="timeline-marker bg-primary"></div>
                                 <div class="timeline-content">
                                     <h6 class="mb-0">Durum Değiştirildi</h6>
-                                    <p class="text-muted mb-0">Sipariş durumu 
+                                    <p class="text-muted mb-0">Sifariş statusu 
                                         @if($order->status == 'processing')
-                                            <span class="badge bg-info">İşleniyor</span>
+                                            <span class="badge bg-info">İşlənir</span>
                                         @elseif($order->status == 'completed')
                                             <span class="badge bg-success">Tamamlandı</span>
                                         @elseif($order->status == 'cancelled')
-                                            <span class="badge bg-danger">İptal Edildi</span>
+                                            <span class="badge bg-danger">İmtina Edildi</span>
                                         @endif
                                         olarak güncellendi.
                                     </p>
@@ -289,12 +289,12 @@
                                 </div>
                                 <div class="timeline-marker {{ $order->payment_status == 'paid' ? 'bg-success' : 'bg-danger' }}"></div>
                                 <div class="timeline-content">
-                                    <h6 class="mb-0">Ödeme Durumu Değiştirildi</h6>
-                                    <p class="text-muted mb-0">Ödeme durumu 
+                                    <h6 class="mb-0">Ödemə Statusu Deyiştirildi</h6>
+                                    <p class="text-muted mb-0">Ödemə statusu 
                                         @if($order->payment_status == 'paid')
-                                            <span class="badge bg-success">Ödendi</span>
+                                            <span class="badge bg-success">Ödəndi</span>
                                         @elseif($order->payment_status == 'failed')
-                                            <span class="badge bg-danger">Başarısız</span>
+                                            <span class="badge bg-danger">Uğursuz</span>
                                         @endif
                                         olarak güncellendi.
                                     </p>
@@ -314,17 +314,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Onay</h5>
+                <h5 class="modal-title">Razılıq</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Bu siparişi silmek istediğinize emin misiniz? Bu işlem geri alınamaz!
+                Bu sifarişi silmek istediyinize əmin misiniz? Bu geri alına bilməz!
             </div>
             <div class="modal-footer">
                 <form action="{{ route('back.pages.orders.destroy', $order->id) }}" method="POST" id="deleteForm">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İmtina</button>
                     <button type="submit" class="btn btn-danger">Sil</button>
                 </form>
             </div>

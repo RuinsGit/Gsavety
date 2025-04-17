@@ -16,12 +16,13 @@ class HomeFollowApiController extends Controller
      */
     public function index()
     {
-        $follows = HomeFollow::where('status', 1)
+        $follow = HomeFollow::where('status', 1)
             ->orderBy('order', 'asc')
-            ->get();
-            
-        return HomeFollowResource::collection($follows);
+            ->first(); // sadece bir tane al
+    
+        return new HomeFollowResource($follow);
     }
+    
     
     /**
      * Belirli bir sosyal medya takip bölümünün detayını getir

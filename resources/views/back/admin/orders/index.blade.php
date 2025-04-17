@@ -44,11 +44,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Siparişler</h4>
+                    <h4 class="mb-sm-0">Sifarişlər</h4>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Ana sayfa</a></li>
-                            <li class="breadcrumb-item active">Siparişler</li>
+                            <li class="breadcrumb-item active">Sifarişlər</li>
                         </ol>
                     </div>
                 </div>
@@ -60,10 +60,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h4 class="card-title">Tüm Siparişler</h4>
+                            <h4 class="card-title">Bütün Sifarişlər</h4>
                             <div>
                                 <a href="{{ route('back.pages.orders.export') }}" class="btn btn-success waves-effect waves-light">
-                                    <i class="ri-file-excel-line align-middle me-1"></i> Dışa Aktar (CSV)
+                                    <i class="ri-file-excel-line align-middle me-1"></i> Çıxarış (CSV)
                                 </a>
                             </div>
                         </div>
@@ -73,15 +73,15 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Sipariş No</th>
-                                        <th>Tarih</th>
-                                        <th>Müşteri</th>
-                                        <th>E-posta</th>
+                                        <th>Sifariş No</th>
+                                        <th>Tarix</th>
+                                        <th>Müştəri</th>
+                                        <th>E-poçt</th>
                                         <th>Telefon</th>
-                                        <th>Toplam</th>
-                                        <th>Durum</th>
-                                        <th>Ödeme</th>
-                                        <th>İşlemler</th>
+                                        <th>Cəmi</th>
+                                        <th>Status</th>
+                                        <th>Ödəniş</th>
+                                        <th>İşləmlər</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -147,17 +147,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Onay</h5>
+                <h5 class="modal-title">Razılıq</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Bu siparişi silmek istediğinize emin misiniz? Bu işlem geri alınamaz!
+                Bu sifarişi silmek istediyinize əminsiniz? Bu geri alına bilməz!
             </div>
             <div class="modal-footer">
                 <form action="" method="POST" id="deleteForm">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İmtina</button>
                     <button type="submit" class="btn btn-danger">Sil</button>
                 </form>
             </div>

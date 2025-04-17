@@ -16,11 +16,11 @@ class HomeCartSectionApiController extends Controller
      */
     public function index()
     {
-        $cartSections = HomeCartSection::where('status', 1)
+        $cartSection = HomeCartSection::where('status', 1)
             ->orderBy('order', 'asc')
-            ->get();
-            
-        return HomeCartSectionResource::collection($cartSections);
+            ->first(); // sadece bir tane al
+    
+        return new HomeCartSectionResource($cartSection);
     }
     
     /**

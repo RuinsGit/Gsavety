@@ -23,6 +23,10 @@ use App\Http\Controllers\Api\AboutApiController;
 use App\Http\Controllers\Api\AboutCartSectionApiController;
 use App\Http\Controllers\Api\AboutFeaturedBoxApiController;
 use App\Http\Controllers\Api\AboutCenterCartApiController;
+use App\Http\Controllers\Api\PartnerApiController;
+use App\Http\Controllers\Api\AboutTextSectionApiController;
+use App\Http\Controllers\Api\ServiceHeroApiController;
+use App\Http\Controllers\Api\ContactHeroApiController;
 
 
 /*
@@ -227,3 +231,24 @@ Route::prefix('about-featured-boxes')->group(function () {
 
 // About Center Cart Routes
 Route::get('/about-center-cart', [AboutCenterCartApiController::class, 'index']);
+
+// About Text Section Routes
+Route::get('/about-text-section', [AboutTextSectionApiController::class, 'index']);
+
+// Partner Routes
+Route::prefix('partners')->group(function () {
+    Route::get('/', [PartnerApiController::class, 'index']);
+    Route::get('/{id}', [PartnerApiController::class, 'show']);
+});
+
+// Servis Hero rotaları
+Route::prefix('service-heroes')->group(function () {
+    Route::get('/', [ServiceHeroApiController::class, 'index']);
+    Route::get('/{id}', [ServiceHeroApiController::class, 'show']);
+});
+
+// Contact Hero rotaları
+Route::prefix('contact-heroes')->group(function () {
+    Route::get('/', [ContactHeroApiController::class, 'index']);
+    Route::get('/{id}', [ContactHeroApiController::class, 'show']);
+});

@@ -31,6 +31,9 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BlogBannerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\AboutTextSectionController;
+use App\Http\Controllers\Admin\ServiceHeroController;
+use App\Http\Controllers\Admin\ContactHeroController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -213,6 +216,10 @@ Route::prefix('admin')->group(function () {
             // About Center Cart routes
             Route::resource('about-center-cart', AboutCenterCartController::class);
 
+            // Service Hero routes
+            Route::resource('service-heroes', ServiceHeroController::class);
+            Route::post('service-heroes/toggle-status/{id}', [ServiceHeroController::class, 'toggleStatus'])->name('service-heroes.toggle-status');
+
             
             Route::post('about-center-cart/toggle-status/{id}', [AboutCenterCartController::class, 'toggleStatus'])->name('about-center-cart.toggle-status');
             Route::post('/admin/about-center-cart/upload-image', [AboutCenterCartController::class, 'uploadImage'])->name('about-center-cart.upload-image');
@@ -220,6 +227,17 @@ Route::prefix('admin')->group(function () {
             // Blog routes
             Route::resource('blog', BlogController::class);
             Route::post('blog/toggle-status/{id}', [BlogController::class, 'toggleStatus'])->name('blog.toggle-status');
+
+ // About Text Section Routes
+ Route::prefix('about-text-sections')->name('about-text-sections.')->group(function () {
+    Route::get('/', [AboutTextSectionController::class, 'index'])->name('index');
+    Route::put('/', [AboutTextSectionController::class, 'update'])->name('update');
+    Route::post('/toggle-status', [AboutTextSectionController::class, 'toggleStatus'])->name('toggle-status');
+});
+
+            // Contact Hero routes
+            Route::resource('contact-heroes', ContactHeroController::class);
+            Route::post('contact-heroes/toggle-status/{id}', [ContactHeroController::class, 'toggleStatus'])->name('contact-heroes.toggle-status');
 
             // Blog Banner routes
             Route::resource('blog-banner', BlogBannerController::class);
@@ -240,6 +258,6 @@ Route::prefix('admin')->group(function () {
             });
         });
 
-        
+       
     });
 });
