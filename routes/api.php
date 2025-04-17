@@ -19,6 +19,12 @@ use App\Http\Controllers\Api\HomeHeroApiController;
 use App\Http\Controllers\Api\HomeCartSectionApiController;
 use App\Http\Controllers\Api\HomeFeaturedBoxApiController;
 use App\Http\Controllers\Api\HomeFollowApiController;
+use App\Http\Controllers\Api\AboutApiController;
+use App\Http\Controllers\Api\AboutCartSectionApiController;
+use App\Http\Controllers\Api\AboutFeaturedBoxApiController;
+use App\Http\Controllers\Api\AboutCenterCartApiController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -207,4 +213,17 @@ Route::prefix('categories')->group(function () {
     Route::get('/{categoryId}/products', [CategoryApiController::class, 'getCategoryProducts']);
 });
 
-// Diğer API rotaları buraya eklenebilir
+// About Routes
+Route::get('/about', [AboutApiController::class, 'index']);
+
+// About Cart Section Routes
+Route::get('/about-cart-section', [AboutCartSectionApiController::class, 'index']);
+
+// About Featured Box Routes
+Route::prefix('about-featured-boxes')->group(function () {
+    Route::get('/', [AboutFeaturedBoxApiController::class, 'index']);
+    Route::get('/{id}', [AboutFeaturedBoxApiController::class, 'show']);
+});
+
+// About Center Cart Routes
+Route::get('/about-center-cart', [AboutCenterCartApiController::class, 'index']);

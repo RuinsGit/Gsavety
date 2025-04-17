@@ -15,4 +15,22 @@ class AboutCenterCart extends Model
         'description_ru',
         'image'
     ];
+
+    
+    public function getTitleAttribute()
+    {
+        $locale = app()->getLocale();
+        $column = "title_" . $locale;
+        
+        return $this->{$column};
+
+    }
+
+    public function getDescriptionAttribute()
+    {
+        $locale = app()->getLocale();
+        $column = "description_" . $locale;
+        
+        return $this->{$column};
+    }
 } 
