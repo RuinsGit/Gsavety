@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     /**
-     * Kullanıcı kayıt API - Sadece normal kullanıcılar için
+     * Kullanıcı kayıt API
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -23,7 +23,8 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:6',
+            'password_confirmation' => 'required|same:password',
         ]);
 
         if ($validator->fails()) {
@@ -34,15 +35,16 @@ class AuthController extends Controller
             ], 422);
         }
 
-        // Sadece normal kullanıcı olarak kayıt
+        // Kullanıcı oluştur
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user', // Her zaman 'user' rolü
-            'status' => true, // Aktif olarak başla
+            'role' => 'user',
+            'status' => true,
         ]);
 
+        // Token oluştur
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
@@ -53,6 +55,7 @@ class AuthController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'role' => $user->role,
                 ],
                 'access_token' => $token,
                 'token_type' => 'Bearer',
@@ -61,7 +64,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Kullanıcı giriş API - Sadece normal kullanıcılar için
+     * Kullanıcı giriş API
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -81,24 +84,25 @@ class AuthController extends Controller
             ], 422);
         }
 
-        // Kullanıcı var mı, aktif mi ve 'user' rolüne sahip mi kontrol et
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        // Kimlik doğrulama dene
+        if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
                 'success' => false,
                 'message' => 'Geçersiz giriş bilgileri',
             ], 401);
         }
 
-        // Sadece 'user' rolündeki kullanıcıları kontrol et
-        if ($user->role !== 'user') {
+        $user = User::where('email', $request->email)->first();
+
+        // Kullanıcı rolünü kontrol et
+        if ($user->role !== 'user' && $user->role !== 'admin') {
             return response()->json([
                 'success' => false,
-                'message' => 'Bu hesap frontend erişimine sahip değil.',
+                'message' => 'Geçersiz kullanıcı türü',
             ], 403);
         }
 
+        // Kullanıcı durumunu kontrol et
         if (!$user->status) {
             return response()->json([
                 'success' => false,
@@ -120,6 +124,7 @@ class AuthController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'role' => $user->role,
                 ],
                 'access_token' => $token,
                 'token_type' => 'Bearer',
@@ -152,7 +157,6 @@ class AuthController extends Controller
      */
     public function me(Request $request)
     {
-        // UserMiddleware zaten sadece 'user' rolündekilerin erişimine izin veriyor
         return response()->json([
             'success' => true,
             'data' => [
@@ -160,6 +164,7 @@ class AuthController extends Controller
                     'id' => $request->user()->id,
                     'name' => $request->user()->name,
                     'email' => $request->user()->email,
+                    'role' => $request->user()->role,
                 ]
             ]
         ]);

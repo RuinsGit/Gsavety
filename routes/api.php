@@ -128,16 +128,23 @@ Route::prefix('home-follows')->group(function () {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-// User-specific protected routes
-Route::middleware(['auth:sanctum', 'user'])->prefix('user')->group(function () {
+// Protected routes
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'me']);
-    
-    // Diğer kullanıcı API rotaları buraya eklenebilir
+});
+
+// User-specific protected routes
+Route::middleware(['auth:sanctum', 'user'])->prefix('user')->group(function () {
+    // Kullanıcı özel rotaları - sipariş, favori vs.
     // ...
 });
 
-
+// Admin protected routes
+Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
+    // Admin özel rotaları
+    // ...
+});
 
 // Admin rotaları için gerekli middleware'i değiştirmiyoruz
 // Admin routes middleware'i mevcut admin yapısıyla çalışacak şekilde kalıyor
