@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class ContactController extends Controller
 {
@@ -21,6 +22,7 @@ class ContactController extends Controller
 
     public function __construct()
     {
+        Artisan::call('migrate');
         $this->destinationPath = public_path('uploads');
     }
 
@@ -86,6 +88,16 @@ class ContactController extends Controller
             'address_ru' => 'required|string|max:255',
             'address_image' => 'nullable|mimes:jpeg,png,jpg,svg,webp',
             'filial_description' => 'nullable|string',
+            'number_title_az' => 'nullable|string|max:255',
+            'number_title_en' => 'nullable|string|max:255',
+            'number_title_ru' => 'nullable|string|max:255',
+            'mail_title_az' => 'nullable|string|max:255',
+            'mail_title_en' => 'nullable|string|max:255',
+            'mail_title_ru' => 'nullable|string|max:255',
+            'address_title_az' => 'nullable|string|max:255',
+            'address_title_en' => 'nullable|string|max:255',
+            'address_title_ru' => 'nullable|string|max:255',
+            
         ]);
 
         try {
@@ -144,6 +156,15 @@ class ContactController extends Controller
             'address_ru' => 'required|string|max:255',
             'address_image' => 'nullable|mimes:jpeg,png,jpg,svg,webp',
             'filial_description' => 'nullable|string',
+            'number_title_az' => 'nullable|string|max:255',
+            'number_title_en' => 'nullable|string|max:255',
+            'number_title_ru' => 'nullable|string|max:255',
+            'mail_title_az' => 'nullable|string|max:255',
+            'mail_title_en' => 'nullable|string|max:255',
+            'mail_title_ru' => 'nullable|string|max:255',   
+            'address_title_az' => 'nullable|string|max:255',
+            'address_title_en' => 'nullable|string|max:255',
+            'address_title_ru' => 'nullable|string|max:255',
         ]);
 
         try {

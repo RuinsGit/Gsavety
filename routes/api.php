@@ -30,6 +30,7 @@ use App\Http\Controllers\Api\ContactHeroApiController;
 use App\Http\Controllers\Api\ContactTitleApiController;
 use App\Http\Controllers\Api\BlogBannerApiController;
 use App\Http\Controllers\Api\BlogApiController;
+use App\Http\Controllers\Api\PartnerBannerApiController;
 
 
 /*
@@ -269,4 +270,10 @@ Route::prefix('contact-heroes')->group(function () {
 Route::prefix('contact-titles')->group(function () {
     Route::get('/', [ContactTitleApiController::class, 'index']);
     Route::get('/{id}', [ContactTitleApiController::class, 'show']);
+});
+
+// Partner Banner Routes
+Route::prefix('partner-banners')->group(function () {
+    Route::get('/', [PartnerBannerApiController::class, 'index']);
+    Route::get('/{id}', [PartnerBannerApiController::class, 'show']);
 });

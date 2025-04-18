@@ -88,6 +88,27 @@
                                 <div class="tab-content" id="langTabsContent">
                                     <div class="tab-pane fade show active" id="az" role="tabpanel" aria-labelledby="az-tab">
                                         <div class="mb-3">
+                                            <label class="form-label">Nömrə Başlığı (AZ)</label>
+                                            <input type="text" name="number_title_az" class="form-control @error('number_title_az') is-invalid @enderror" value="{{ old('number_title_az') }}">
+                                            @error('number_title_az')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">E-poçt Başlığı (AZ)</label>
+                                            <input type="text" name="mail_title_az" class="form-control @error('mail_title_az') is-invalid @enderror" value="{{ old('mail_title_az') }}">
+                                            @error('mail_title_az')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Ünvan Başlığı (AZ)</label>
+                                            <input type="text" name="address_title_az" class="form-control @error('address_title_az') is-invalid @enderror" value="{{ old('address_title_az') }}">
+                                            @error('address_title_az')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
                                             <label class="form-label">Ünvan (AZ)</label>
                                             <input type="text" name="address_az" class="form-control @error('address_az') is-invalid @enderror" value="{{ old('address_az') }}" required>
                                             @error('address_az')
@@ -97,6 +118,27 @@
                                     </div>
                                     <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-tab">
                                         <div class="mb-3">
+                                            <label class="form-label">Nömrə Başlığı (EN)</label>
+                                            <input type="text" name="number_title_en" class="form-control @error('number_title_en') is-invalid @enderror" value="{{ old('number_title_en') }}">
+                                            @error('number_title_en')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">E-poçt Başlığı (EN)</label>
+                                            <input type="text" name="mail_title_en" class="form-control @error('mail_title_en') is-invalid @enderror" value="{{ old('mail_title_en') }}">
+                                            @error('mail_title_en')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Ünvan Başlığı (EN)</label>
+                                            <input type="text" name="address_title_en" class="form-control @error('address_title_en') is-invalid @enderror" value="{{ old('address_title_en') }}">
+                                            @error('address_title_en')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
                                             <label class="form-label">Ünvan (EN)</label>
                                             <input type="text" name="address_en" class="form-control @error('address_en') is-invalid @enderror" value="{{ old('address_en') }}" required>
                                             @error('address_en')
@@ -105,6 +147,27 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="ru" role="tabpanel" aria-labelledby="ru-tab">
+                                        <div class="mb-3">
+                                            <label class="form-label">Nömrə Başlığı (RU)</label>
+                                            <input type="text" name="number_title_ru" class="form-control @error('number_title_ru') is-invalid @enderror" value="{{ old('number_title_ru') }}">
+                                            @error('number_title_ru')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">E-poçt Başlığı (RU)</label>
+                                            <input type="text" name="mail_title_ru" class="form-control @error('mail_title_ru') is-invalid @enderror" value="{{ old('mail_title_ru') }}">
+                                            @error('mail_title_ru')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Ünvan Başlığı (RU)</label>
+                                            <input type="text" name="address_title_ru" class="form-control @error('address_title_ru') is-invalid @enderror" value="{{ old('address_title_ru') }}">
+                                            @error('address_title_ru')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label">Ünvan (RU)</label>
                                             <input type="text" name="address_ru" class="form-control @error('address_ru') is-invalid @enderror" value="{{ old('address_ru') }}" required>

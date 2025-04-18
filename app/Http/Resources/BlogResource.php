@@ -17,10 +17,15 @@ class BlogResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'slug' => $this->slug,
+            'slug' =>[
+                'az' => $this->slug_az,
+                'en' => $this->slug_en,
+                'ru' => $this->slug_ru,
+            ],
             'description' => $this->description,
             'short_description' => $this->short_description,
             'image' => $this->image ? asset($this->image) : null,
+            'created_at' => $this->created_at->format('Y-m-d'),
             // 'status' => (bool) $this->status,
             // 'published_at' => $this->published_at,
             // 'created_at' => $this->created_at,

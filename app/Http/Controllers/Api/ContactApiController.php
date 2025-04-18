@@ -36,12 +36,21 @@ class ContactApiController extends Controller
         $data = $request->validate([
             'number' => 'required|string|max:255',
             'number_image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'number_title_az' => 'nullable|string|max:255',
+            'number_title_en' => 'nullable|string|max:255',
+            'number_title_ru' => 'nullable|string|max:255',
             'mail' => 'required|email|max:255',
             'mail_image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'mail_title_az' => 'nullable|string|max:255',
+            'mail_title_en' => 'nullable|string|max:255',
+            'mail_title_ru' => 'nullable|string|max:255',
             'address_az' => 'required|string|max:255',
             'address_en' => 'required|string|max:255',
             'address_ru' => 'required|string|max:255',
             'address_image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'address_title_az' => 'nullable|string|max:255',
+            'address_title_en' => 'nullable|string|max:255',
+            'address_title_ru' => 'nullable|string|max:255',
             'filial_description' => 'nullable|string',
         ]);
 
@@ -60,12 +69,21 @@ class ContactApiController extends Controller
         $data = $request->validate([
             'number' => 'required|string|max:255',
             'number_image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'number_title_az' => 'nullable|string|max:255',
+            'number_title_en' => 'nullable|string|max:255',
+            'number_title_ru' => 'nullable|string|max:255',
             'mail' => 'required|email|max:255',
             'mail_image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'mail_title_az' => 'nullable|string|max:255',
+            'mail_title_en' => 'nullable|string|max:255',
+            'mail_title_ru' => 'nullable|string|max:255',
             'address_az' => 'required|string|max:255',
             'address_en' => 'required|string|max:255',
             'address_ru' => 'required|string|max:255',
             'address_image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'address_title_az' => 'nullable|string|max:255',
+            'address_title_en' => 'nullable|string|max:255',
+            'address_title_ru' => 'nullable|string|max:255',
             'filial_description' => 'nullable|string',
         ]);
 
