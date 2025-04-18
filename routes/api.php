@@ -31,7 +31,8 @@ use App\Http\Controllers\Api\ContactTitleApiController;
 use App\Http\Controllers\Api\BlogBannerApiController;
 use App\Http\Controllers\Api\BlogApiController;
 use App\Http\Controllers\Api\PartnerBannerApiController;
-
+use App\Http\Controllers\Api\HomeQuestionApiController;
+use App\Http\Controllers\Api\ProductBannerApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,12 @@ Route::prefix('socialshares')->group(function () {
     Route::post('/', [SocialshareApiController::class, 'store']);
     Route::put('/{id}', [SocialshareApiController::class, 'update']);
     Route::delete('/{id}', [SocialshareApiController::class, 'destroy']);
+});
+
+// Product Banner Routes
+Route::prefix('product-banner')->group(function () {
+    Route::get('/', [ProductBannerApiController::class, 'index']);
+    Route::get('/{id}', [ProductBannerApiController::class, 'show']);
 });
 
 // Social Footer Routes
@@ -203,6 +210,12 @@ Route::prefix('products')->group(function () {
     Route::get('/{productId}/details', [ProductApiController::class, 'getProductDetails']);
     // Belirli bir ürünün detayını getir (en sona koyuyoruz çakışma olmaması için)
     Route::get('/{id}', [ProductApiController::class, 'show']);
+});
+
+// Home Question Routes
+Route::prefix('home-questions')->group(function () {
+    Route::get('/', [App\Http\Controllers\Api\HomeQuestionApiController::class, 'index']);
+    Route::get('/{id}', [App\Http\Controllers\Api\HomeQuestionApiController::class, 'show']);
 });
 
 // Kategori API Rotaları

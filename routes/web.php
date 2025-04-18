@@ -35,6 +35,8 @@ use App\Http\Controllers\Admin\AboutTextSectionController;
 use App\Http\Controllers\Admin\ServiceHeroController;
 use App\Http\Controllers\Admin\ContactHeroController;
 use App\Http\Controllers\Admin\ContactTitleController;
+use App\Http\Controllers\Admin\HomeQuestionController;
+use App\Http\Controllers\Admin\ProductBannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -102,6 +104,10 @@ Route::prefix('admin')->group(function () {
              Route::get('logos/{id}/edit', [LogoController::class, 'edit'])->name('logos.edit');
              Route::put('logos/{id}', [LogoController::class, 'update'])->name('logos.update');
              Route::delete('logos/{id}', [LogoController::class, 'destroy'])->name('logos.destroy');
+
+             // Product Banner routes
+             Route::resource('product-banner', ProductBannerController::class);
+             Route::post('product-banner/toggle-status/{id}', [ProductBannerController::class, 'toggleStatus'])->name('product-banner.toggle-status');
 
             
              // Social Media routes
@@ -261,6 +267,19 @@ Route::prefix('admin')->group(function () {
                 Route::post('/{id}/update-payment-status', [OrderController::class, 'updatePaymentStatus'])->name('update-payment-status');
                 Route::delete('/{id}', [OrderController::class, 'destroy'])->name('destroy');
             });
+
+                // HomeQuestion Routes
+                Route::get('home-questions', [HomeQuestionController::class, 'index'])->name('home-questions.index');
+                Route::get('home-questions/create', [HomeQuestionController::class, 'create'])->name('home-questions.create');
+                Route::post('home-questions', [HomeQuestionController::class, 'store'])->name('home-questions.store');
+                Route::get('home-questions/{id}/edit', [HomeQuestionController::class, 'edit'])->name('home-questions.edit');
+                Route::put('home-questions/{id}', [HomeQuestionController::class, 'update'])->name('home-questions.update');
+                Route::delete('home-questions/{id}', [HomeQuestionController::class, 'destroy'])->name('home-questions.destroy');
+                Route::post('home-questions/{id}/toggle-status', [HomeQuestionController::class, 'toggleStatus'])->name('home-questions.toggleStatus');
+                Route::post('home-questions/update-order', [HomeQuestionController::class, 'updateOrder'])->name('home-questions.updateOrder');
+
+
+
         });
 
        

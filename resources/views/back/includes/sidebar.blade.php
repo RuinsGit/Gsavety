@@ -264,22 +264,38 @@
                     </ul>
 
                 </li>
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
                         <i class="ri-image-line" style="color: white;"></i>
-                        <span style="color: white;">Partner-Bannerlar</span>
+                        <span style="color: white;">Partner</span>
                     </a>
                     <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
                         <li>
                             <a href="{{ route('back.pages.partner-banners.index') }}" style="color: white;">
                                 <i class="ri-image-line" style="color: white;"></i>
-                                <span>Partner-Bannerlar</span>
+                                <span>Partner</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('back.pages.partner-heroes.index') }}" style="color: white;">
                                 <i class="ri-image-line" style="color: white;"></i>
                                 <span>Partner-Hero</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
+                        <i class="ri-file-text-line" style="color: white;"></i>
+                        <span style="color: white;">Product Bannerlar</span>
+                    </a>
+                    <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
+                        <li>
+                            <a href="{{ route('back.pages.product-banner.index') }}" style="color: white;">
+                                <i class="ri-file-text-line" style="color: white;"></i>
+                                <span>Product Bannerlar</span>
                             </a>
                         </li>
                     </ul>
@@ -317,19 +333,25 @@
                                 <span>İstifadəçi İdarəetməsi</span>   
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.home-questions.index') }}" style="color: white;">
+                                <i class="ri-question-line" style="color: white;"></i>
+                                <span>Sual-Cavab</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect" style="background: #111; border-left: 3px solid #fff;">
                         <i class="ri-file-text-line" style="color: white;"></i>
-                        <span style="color: white;">Siparişler</span>
+                        <span style="color: white;">Sifarişler</span>
                     </a>
                     <ul class="sub-menu" style="background: #111; border-left: 3px solid #fff;">
                         <li>    
                             <a href="{{ route('back.pages.orders.index') }}" style="color: white;">
                                 <i class="ri-file-text-line" style="color: white;"></i>
-                                <span>Siparişler</span>
+                                <span>Sifarişler</span>
                             </a>
                         </li>
                     </ul>
