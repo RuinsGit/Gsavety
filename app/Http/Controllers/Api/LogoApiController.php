@@ -11,10 +11,14 @@ class LogoApiController extends Controller
 {
     public function index()
     {
-        $logos = Logo::all();
-        return LogoResource::collection($logos);
+        $logo = Logo::first(); // ya da ->latest()->first();
+    
+        if (!$logo) {
+            return response()->json(['message' => 'Logo not found'], 404);
+        }
+    
+        return new LogoResource($logo);
     }
-
     public function show($id)
     {
         try {
@@ -36,14 +40,14 @@ class LogoApiController extends Controller
         return new LogoResource($logo);
     }
 
-    public function getByGroup($group)
-    {
-        $logos = Logo::where('group', $group)->get();
-        
-        if ($logos->isEmpty()) {
-            return response()->json(['message' => 'No logos found for this group'], 404);
-        }
-        
-        return LogoResource::collection($logos);
+   public function getByGroup($group)
+{
+    $logo = Logo::where('group', $group)->first();
+
+    if (!$logo) {
+        return response()->json(['message' => 'No logo found for this group'], 404);
     }
+
+    return new LogoResource($logo);
+}
 }

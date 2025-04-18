@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PropertyResource extends JsonResource
+class BlogResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,13 @@ class PropertyResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'product_id' => $this->product_id,
-            'property_type' => $this->property_type,
-            'name' => $this->property_name,
-            'value' => $this->property_value,
-            // 'sort_order' => $this->sort_order,
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'short_description' => $this->short_description,
+            'image' => $this->image ? asset($this->image) : null,
+            // 'status' => (bool) $this->status,
+            // 'published_at' => $this->published_at,
             // 'created_at' => $this->created_at,
             // 'updated_at' => $this->updated_at,
         ];

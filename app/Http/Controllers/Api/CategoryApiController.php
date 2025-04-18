@@ -110,11 +110,28 @@ class CategoryApiController extends Controller
             $query->orderBy('id', 'desc');
         }
         
+        // İlişkili ürün bilgilerini yükle
+        $query->with([
+            'categories',
+            'properties' => function($q) {
+                $q->with('values');
+            },
+            'colors' => function($q) {
+                $q->where('status', 1)->orderBy('sort_order', 'asc');
+            },
+            'sizes' => function($q) {
+                $q->where('status', 1)->orderBy('sort_order', 'asc');
+            },
+            'stocks' => function($q) {
+                $q->where('status', 1)->with(['color', 'size']);
+            },
+            'images'
+        ]);
+        
         // Sayfalama
         $perPage = $request->has('per_page') ? (int)$request->per_page : 12;
         
-        $products = $query->with(['categories'])
-            ->paginate($perPage);
+        $products = $query->paginate($perPage);
             
         return ProductResource::collection($products);
     }

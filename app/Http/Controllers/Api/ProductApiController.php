@@ -23,6 +23,7 @@ class ProductApiController extends Controller
      */
     public function index(Request $request)
     {
+        // Ana sorgu
         $query = Product::query();
         
         // Kategori filtresi
@@ -32,23 +33,50 @@ class ProductApiController extends Controller
             });
         }
         
-        // Durum filtresi
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
-        }
-        
-        // Öne çıkan ürün filtresi
-        if ($request->has('is_featured')) {
-            $query->where('is_featured', $request->is_featured);
-        }
-        
         // Fiyat aralığı filtresi
         if ($request->has('min_price')) {
-            $query->where('price', '>=', $request->min_price);
+            $query->where('price', '>=', (float)$request->min_price);
         }
         
         if ($request->has('max_price')) {
-            $query->where('price', '<=', $request->max_price);
+            $query->where('price', '<=', (float)$request->max_price);
+        }
+        
+        // Ürün özelliklerine göre filtreleme
+        if ($request->has('properties')) {
+            $properties = is_array($request->properties) ? $request->properties : json_decode($request->properties, true);
+            
+            foreach ($properties as $propertyId => $values) {
+                $query->whereHas('properties', function($q) use ($propertyId, $values) {
+                    $q->where('properties.id', $propertyId)
+                      ->whereIn('product_property.value', (array)$values);
+                });
+            }
+        }
+        
+        // İlişkili ürün bilgilerini yükle
+        $query->with([
+            'categories',
+            'properties',
+            'colors' => function($q) {
+                $q->where('status', 1)->orderBy('sort_order', 'asc');
+            },
+            'sizes' => function($q) {
+                $q->where('status', 1)->orderBy('sort_order', 'asc');
+            },
+            'stocks' => function($q) {
+                $q->where('status', 1)->with(['color', 'size']);
+            },
+            'images'
+        ]);
+        
+        // Status filtresi (varsayılan olarak aktif ürünleri göster)
+        $status = $request->has('status') ? (int)$request->status : 1;
+        $query->where('status', $status);
+        
+        // Öne çıkan ürünler filtresi
+        if ($request->has('featured')) {
+            $query->where('is_featured', (bool)$request->featured);
         }
         
         // Sıralama
@@ -56,8 +84,11 @@ class ProductApiController extends Controller
             $sortDirection = $request->has('sort_dir') ? $request->sort_dir : 'asc';
             
             switch ($request->sort_by) {
-                case 'price':
-                    $query->orderBy('price', $sortDirection);
+                case 'price_low':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_high':
+                    $query->orderBy('price', 'desc');
                     break;
                 case 'name':
                     $query->orderBy('name_' . $request->locale ?? 'az', $sortDirection);
@@ -69,18 +100,16 @@ class ProductApiController extends Controller
                     $query->orderBy('created_at', 'asc');
                     break;
                 default:
-                    $query->orderBy('id', $sortDirection);
+                    $query->orderBy('id', 'desc');
             }
         } else {
             $query->orderBy('id', 'desc');
         }
         
         // Sayfalama
-        $perPage = $request->has('per_page') ? (int)$request->per_page : 12;
+        $perPage = $request->has('per_page') ? (int)$request->per_page : 15;
         
-        $products = $query->with(['categories'])->paginate($perPage);
-        
-        return ProductResource::collection($products);
+        return ProductResource::collection($query->paginate($perPage));
     }
     
     /**
@@ -92,9 +121,24 @@ class ProductApiController extends Controller
     {
         $products = Product::where('status', 1)
             ->where('is_featured', 1)
-            ->with(['categories'])
+            ->with([
+                'categories',
+                'properties' => function($q) {
+                    $q->with('values');
+                },
+                'colors' => function($q) {
+                    $q->where('status', 1)->orderBy('sort_order', 'asc');
+                },
+                'sizes' => function($q) {
+                    $q->where('status', 1)->orderBy('sort_order', 'asc');
+                },
+                'stocks' => function($q) {
+                    $q->where('status', 1)->with(['color', 'size']);
+                },
+                'images'
+            ])
             ->orderBy('id', 'desc')
-            ->limit(8)
+            ->take(10)
             ->get();
             
         return ProductResource::collection($products);
@@ -139,10 +183,16 @@ class ProductApiController extends Controller
         $product = Product::with([
             'categories',
             'properties',
-            'colors',
-            'sizes',
-            'images',
-            'stocks'
+            'colors' => function($q) {
+                $q->where('status', 1)->orderBy('sort_order', 'asc');
+            },
+            'sizes' => function($q) {
+                $q->where('status', 1)->orderBy('sort_order', 'asc');
+            },
+            'stocks' => function($q) {
+                $q->where('status', 1)->with(['color', 'size']);
+            },
+            'images'
         ])->findOrFail($id);
         
         return new ProductResource($product);
@@ -194,5 +244,45 @@ class ProductApiController extends Controller
             ->get();
             
         return StockResource::collection($stocks);
+    }
+    
+    /**
+     * Bir ürünün tüm detaylarını getir (renkler, boyutlar, stoklar, resimler)
+     *
+     * @param  string  $productId
+     * @return \Illuminate\Http\Response
+     */
+    public function getProductDetails($productId)
+    {
+        $product = Product::with([
+            'categories',
+            'properties',
+            'colors' => function($q) {
+                $q->where('status', 1)->orderBy('sort_order', 'asc');
+            },
+            'sizes' => function($q) {
+                $q->where('status', 1)->orderBy('sort_order', 'asc');
+            },
+            'stocks' => function($q) {
+                $q->where('status', 1)->with(['color', 'size']);
+            },
+            'images'
+        ])->findOrFail($productId);
+        
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'product' => new ProductResource($product),
+                'colors' => ColorResource::collection($product->colors),
+                'sizes' => SizeResource::collection($product->sizes),
+                'stocks' => StockResource::collection($product->stocks),
+                'images' => $product->images->map(function($image) {
+                    return [
+                        'id' => $image->id,
+                        'url' => asset($image->image)
+                    ];
+                })
+            ]
+        ]);
     }
 } 

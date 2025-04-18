@@ -37,4 +37,9 @@ class ProductProperty extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function values()
+    {
+        return $this->hasMany(ProductPropertyValue::class, 'property_id');
+    }
 }

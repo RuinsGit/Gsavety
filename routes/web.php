@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\AboutTextSectionController;
 use App\Http\Controllers\Admin\ServiceHeroController;
 use App\Http\Controllers\Admin\ContactHeroController;
+use App\Http\Controllers\Admin\ContactTitleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -205,6 +206,10 @@ Route::prefix('admin')->group(function () {
               Route::resource('about-cart-sections', AboutCartSectionController::class);
               Route::post('about-cart-sections/toggle-status/{id}', [AboutCartSectionController::class, 'toggleStatus'])->name('about-cart-sections.toggle-status');
 
+              // Contact Title routes
+              Route::resource('contact-titles', ContactTitleController::class);
+              Route::post('contact-titles/toggle-status/{id}', [ContactTitleController::class, 'toggleStatus'])->name('contact-titles.toggle-status');
+              
                // Contact routes
             Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
             Route::get('contact/create', [ContactController::class, 'create'])->name('contact.create');

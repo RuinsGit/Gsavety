@@ -27,6 +27,9 @@ use App\Http\Controllers\Api\PartnerApiController;
 use App\Http\Controllers\Api\AboutTextSectionApiController;
 use App\Http\Controllers\Api\ServiceHeroApiController;
 use App\Http\Controllers\Api\ContactHeroApiController;
+use App\Http\Controllers\Api\ContactTitleApiController;
+use App\Http\Controllers\Api\BlogBannerApiController;
+use App\Http\Controllers\Api\BlogApiController;
 
 
 /*
@@ -183,24 +186,13 @@ Route::post('/checkout', [CheckoutApiController::class, 'checkout']);
 
 // Ürün API Rotaları
 Route::prefix('products')->group(function () {
-    // Tüm ürünleri getir (filtreleme ve sıralama destekli)
     Route::get('/', [ProductApiController::class, 'index']);
-    
-    // Öne çıkan ürünleri getir
     Route::get('/featured', [ProductApiController::class, 'featured']);
-    
-    // Ürün ara
     Route::get('/search', [ProductApiController::class, 'search']);
-    
-    // Belirli bir ürünün renklerini getir
     Route::get('/{productId}/colors', [ProductApiController::class, 'getProductColors']);
-    
-    // Belirli bir ürünün boyutlarını getir
     Route::get('/{productId}/sizes', [ProductApiController::class, 'getProductSizes']);
-    
-    // Belirli bir ürünün stok durumunu getir
     Route::get('/{productId}/stocks', [ProductApiController::class, 'getProductStocks']);
-    
+    Route::get('/{productId}/details', [ProductApiController::class, 'getProductDetails']);
     // Belirli bir ürünün detayını getir (en sona koyuyoruz çakışma olmaması için)
     Route::get('/{id}', [ProductApiController::class, 'show']);
 });
@@ -235,6 +227,19 @@ Route::get('/about-center-cart', [AboutCenterCartApiController::class, 'index'])
 // About Text Section Routes
 Route::get('/about-text-section', [AboutTextSectionApiController::class, 'index']);
 
+// Blog Banner Routes
+Route::prefix('blog-banners')->group(function () {
+    Route::get('/', [BlogBannerApiController::class, 'index']);
+    Route::get('/{id}', [BlogBannerApiController::class, 'show']);
+});
+
+// Blog Routes
+Route::prefix('blogs')->group(function () {
+    Route::get('/', [BlogApiController::class, 'index']);
+    Route::get('/{id}', [BlogApiController::class, 'show']);
+    Route::get('/slug/{slug}', [BlogApiController::class, 'showBySlug']);
+});
+
 // Partner Routes
 Route::prefix('partners')->group(function () {
     Route::get('/', [PartnerApiController::class, 'index']);
@@ -251,4 +256,10 @@ Route::prefix('service-heroes')->group(function () {
 Route::prefix('contact-heroes')->group(function () {
     Route::get('/', [ContactHeroApiController::class, 'index']);
     Route::get('/{id}', [ContactHeroApiController::class, 'show']);
+});
+
+// Contact Title rotaları
+Route::prefix('contact-titles')->group(function () {
+    Route::get('/', [ContactTitleApiController::class, 'index']);
+    Route::get('/{id}', [ContactTitleApiController::class, 'show']);
 });

@@ -253,6 +253,13 @@
                             </a>
                         </li>
 
+                        <li>
+                            <a href="{{ route('back.pages.contact-titles.index') }}" style="color: white;">
+                                <i class="ri-phone-line" style="color: white;"></i>
+                                <span>Əlaqə Başlıqları</span>
+                            </a>
+                        </li>
+
                         
                     </ul>
 
