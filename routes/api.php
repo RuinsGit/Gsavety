@@ -140,6 +140,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'me']);
+    Route::put('/profile', [AuthController::class, 'updateProfile']);
+    Route::get('/user-orders', [AuthController::class, 'getUserOrders']);
+    Route::get('/user-cart', [App\Http\Controllers\Api\CartApiController::class, 'getUserCart']);
 });
 
 // User-specific protected routes
@@ -158,15 +161,15 @@ Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function ()
 // Admin routes middleware'i mevcut admin yapısıyla çalışacak şekilde kalıyor
 
 // Sipariş API Rotaları
-Route::prefix('orders')->group(function () {
+Route::prefix('orders')->middleware('auth:sanctum')->group(function () {
     // Tüm siparişleri getir
     Route::get('/', [OrderApiController::class, 'index']);
     
     // Yeni sipariş oluştur
     Route::post('/', [OrderApiController::class, 'store']);
     
-    // Belirli bir siparişin detayını getir
-    Route::get('/{id}', [OrderApiController::class, 'show']);
+    // Giriş yapmış kullanıcının siparişlerini getir (token ile kimlik doğrulama)
+    Route::get('/my-orders', [OrderApiController::class, 'getMyOrders']);
     
     // Belirli bir kullanıcının siparişlerini getir
     Route::get('/user/{userId}', [OrderApiController::class, 'getUserOrders']);
@@ -176,6 +179,9 @@ Route::prefix('orders')->group(function () {
     
     // Ödeme durumunu güncelle
     Route::put('/{id}/payment-status', [OrderApiController::class, 'updatePaymentStatus']);
+    
+    // Belirli bir siparişin detayını getir (en sona aldık, çünkü /{id} formatı diğer rotalarla çakışabilir)
+    Route::get('/{id}', [OrderApiController::class, 'show']);
 });
 
 // Sepet API Rotaları
@@ -186,6 +192,9 @@ Route::prefix('cart')->group(function () {
     // Sepete ürün ekle
     Route::post('/add', [CartApiController::class, 'addToCart']);
     
+    // Sepete toplu ürün ekle
+    Route::post('/add-multiple', [CartApiController::class, 'addMultipleToCart']);
+    
     // Sepetten ürün çıkar
     Route::post('/remove', [CartApiController::class, 'removeFromCart']);
     
@@ -194,16 +203,24 @@ Route::prefix('cart')->group(function () {
     
     // Sepeti boşalt
     Route::post('/clear', [CartApiController::class, 'clearCart']);
+    
+    // Ürün ID'sine göre sepetten temizle
+    Route::post('/clear-product', [CartApiController::class, 'clearCartByProductId']);
+    
+    // Ürün özelliklerine göre sepetten temizle
+    Route::post('/clear-product-attributes', [CartApiController::class, 'clearCartByProductAttributes']);
 });
 
 // Checkout API rotası
-Route::post('/checkout', [CheckoutApiController::class, 'checkout']);
+Route::post('/checkout', [CheckoutApiController::class, 'checkout'])->middleware('auth:sanctum');
 
 // Ürün API Rotaları
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductApiController::class, 'index']);
     Route::get('/featured', [ProductApiController::class, 'featured']);
     Route::get('/search', [ProductApiController::class, 'search']);
+    Route::get('/filters', [ProductApiController::class, 'getFilterOptions']);
+    Route::get('/sort-by-age', [ProductApiController::class, 'sortByAge']);
     Route::get('/{productId}/colors', [ProductApiController::class, 'getProductColors']);
     Route::get('/{productId}/sizes', [ProductApiController::class, 'getProductSizes']);
     Route::get('/{productId}/stocks', [ProductApiController::class, 'getProductStocks']);

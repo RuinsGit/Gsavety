@@ -354,6 +354,12 @@
                                 <span>Sifarişler</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.carts.index') }}" style="color: white;">
+                                <i class="ri-file-text-line" style="color: white;"></i>
+                                <span>Sepetler</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                     

@@ -63,7 +63,7 @@ class ProductResource extends JsonResource
                     'id' => $color->id,
                     'name' => $color->{"color_name_" . $locale} ?? $color->color_name_az,
                     'color_code' => $color->color_code,
-                    // 'color_image' => $color->color_image ? asset($color->color_image) : null,
+                    'color_image' => $color->color_image ? asset($color->color_image) : null,
                     'status' => (bool) $color->status,
                     'sort_order' => $color->sort_order
                 ];
@@ -93,7 +93,7 @@ class ProductResource extends JsonResource
                         'id' => $stock->color->id,
                         'name' => $stock->color->{"color_name_" . $locale} ?? $stock->color->color_name_az,
                         'color_code' => $stock->color->color_code,
-                        // 'color_image' => $stock->color->color_image ? asset($stock->color->color_image) : null,
+                        'color_image' => $stock->color->color_image ? asset($stock->color->color_image) : null,
                     ] : null,
                     'size' => $stock->size ? [
                         'id' => $stock->size->id,

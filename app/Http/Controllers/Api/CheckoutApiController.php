@@ -25,6 +25,7 @@ class CheckoutApiController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
+            
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'address' => 'nullable|string',
@@ -33,7 +34,7 @@ class CheckoutApiController extends Controller
             'postal_code' => 'nullable|string|max:20',
             'country' => 'nullable|string|max:100',
             'comment' => 'nullable|string',
-            'payment_method' => 'required|string|in:cash_on_delivery,credit_card,bank_transfer',
+            'payment_method' => 'nullable|string|in:cash_on_delivery,credit_card,bank_transfer',
             'cart_items' => 'nullable|array' // İstek ile birlikte sepet verisi almak için (opsiyonel)
         ]);
         
@@ -44,6 +45,10 @@ class CheckoutApiController extends Controller
                 'errors' => $validator->errors()
             ], 422);
         }
+        
+        // Eğer kullanıcı giriş yapmışsa bilgilerini alalım
+        $user = Auth::user();
+        $userId = $user ? $user->id : null;
         
         // Sepeti kontrol et - önce session'dan, sonra istekten
         $cart = Session::get('cart', []);
@@ -147,11 +152,14 @@ class CheckoutApiController extends Controller
         // Sipariş oluştur
         $order = new Order();
         $order->order_number = 'ORD-' . strtoupper(Str::random(10));
-        $order->user_id = Auth::check() ? Auth::id() : null;
-        $order->first_name = $request->first_name;
-        $order->last_name = $request->last_name;
-        $order->email = $request->email;
-        $order->phone = $request->phone;
+        $order->user_id = $userId;
+        
+        // Eğer kullanıcı giriş yapmışsa ve form alanları boş ise kullanıcı bilgilerini kullan
+        $order->first_name = $request->first_name ?: ($user ? $user->name : '');
+        $order->last_name = $request->last_name ?: ($user ? $user->last_name : '');
+        $order->email = $request->email ?: ($user ? $user->email : '');
+        $order->phone = $request->phone ?: ($user ? $user->phone : '');
+        
         $order->address = $request->address;
         $order->city = $request->city;
         $order->state = $request->state;

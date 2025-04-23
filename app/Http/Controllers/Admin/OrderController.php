@@ -32,7 +32,7 @@ class OrderController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,processing,completed,cancelled',
+            'status' => 'nullable|in:pending,processing,completed,cancelled',
         ]);
 
         $order = Order::findOrFail($id);
@@ -48,7 +48,7 @@ class OrderController extends Controller
     public function updatePaymentStatus(Request $request, $id)
     {
         $request->validate([
-            'payment_status' => 'required|in:pending,paid,failed',
+            'payment_status' => 'nullable|in:pending,paid,failed',
         ]);
 
         $order = Order::findOrFail($id);

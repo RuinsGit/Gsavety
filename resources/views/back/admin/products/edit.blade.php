@@ -327,6 +327,20 @@
                                                                 </div>
                                                             </div>
                                                             
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-12">
+                                                                    <label class="form-label">Xüsusiyyət Tipi</label>
+                                                                    <select class="form-select" name="property_type[]">
+                                                                        <option value="">Tip seçin</option>
+                                                                        <option value="technical" {{ $property->property_type == 'technical' ? 'selected' : '' }}>Texniki Özəlliklər</option>
+                                                                        <option value="physical" {{ $property->property_type == 'physical' ? 'selected' : '' }}>Fiziki Özəlliklər</option>
+                                                                        <option value="material" {{ $property->property_type == 'material' ? 'selected' : '' }}>Material</option>
+                                                                        <option value="usage" {{ $property->property_type == 'usage' ? 'selected' : '' }}>İstifadə Qaydaları</option>
+                                                                        <option value="other" {{ $property->property_type == 'other' ? 'selected' : '' }}>Digər</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            
                                                             <div class="row">
                                                                 <div class="col-md-4">
                                                                     <label class="form-label">Xüsusiyyət Dəyəri (AZ)</label>
@@ -368,6 +382,20 @@
                                                             <div class="col-md-4">
                                                                 <label class="form-label">Xüsusiyyət Adı (RU)</label>
                                                                 <input type="text" class="form-control" name="property_name_ru[]">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-12">
+                                                                <label class="form-label">Xüsusiyyət Tipi</label>
+                                                                <select class="form-select" name="property_type[]">
+                                                                    <option value="">Tip seçin</option>
+                                                                    <option value="technical">Texniki Özəlliklər</option>
+                                                                    <option value="physical">Fiziki Özəlliklər</option>
+                                                                    <option value="material">Material</option>
+                                                                    <option value="usage">İstifadə Qaydaları</option>
+                                                                    <option value="other">Digər</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         
@@ -494,7 +522,7 @@
             var propertyCount = $('.property-item').length + 1;
             var propertyItem = $('.property-item').first().clone();
             propertyItem.find('input').val('');
-            propertyItem.find('select').val('fit');
+            propertyItem.find('select').val('');
             propertyItem.find('h6').text('Xüsusiyyət #' + propertyCount);
             $('#properties-container').append(propertyItem);
         });

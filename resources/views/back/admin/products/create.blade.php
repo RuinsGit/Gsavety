@@ -319,6 +319,20 @@
                                     </div>
                                                     </div>
                                                     
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <label class="form-label">Xüsusiyyət Tipi</label>
+                                                            <select class="form-select" name="property_type[]">
+                                                                <option value="">Tip seçin</option>
+                                                                <option value="technical">Texniki Özəlliklər</option>
+                                                                <option value="physical">Fiziki Özəlliklər</option>
+                                                                <option value="material">Material</option>
+                                                                <option value="usage">İstifadə Qaydaları</option>
+                                                                <option value="other">Digər</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <label class="form-label">Xüsusiyyət Dəyəri (AZ)</label>
@@ -441,7 +455,7 @@
             var propertyCount = $('.property-item').length + 1;
             var propertyItem = $('.property-item').first().clone();
             propertyItem.find('input').val('');
-            propertyItem.find('select').val('fit');
+            propertyItem.find('select').val('');
             propertyItem.find('h6').text('Xüsusiyyət #' + propertyCount);
             $('#properties-container').append(propertyItem);
         });

@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\ContactHeroController;
 use App\Http\Controllers\Admin\ContactTitleController;
 use App\Http\Controllers\Admin\HomeQuestionController;
 use App\Http\Controllers\Admin\ProductBannerController;
+use App\Http\Controllers\Admin\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -266,6 +267,15 @@ Route::prefix('admin')->group(function () {
                 Route::post('/{id}/update-status', [OrderController::class, 'updateStatus'])->name('update-status');
                 Route::post('/{id}/update-payment-status', [OrderController::class, 'updatePaymentStatus'])->name('update-payment-status');
                 Route::delete('/{id}', [OrderController::class, 'destroy'])->name('destroy');
+            });
+            
+            // Admin Sepet Rotaları
+            Route::prefix('carts')->name('carts.')->group(function () {
+                Route::get('/', [CartController::class, 'index'])->name('index');
+                Route::get('/statistics', [CartController::class, 'statistics'])->name('statistics');
+                Route::get('/user/{userId}', [CartController::class, 'userCarts'])->name('user');
+                Route::get('/{id}', [CartController::class, 'show'])->name('show');
+                Route::delete('/{id}', [CartController::class, 'destroy'])->name('destroy');
             });
 
                 // HomeQuestion Routes

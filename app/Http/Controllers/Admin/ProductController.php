@@ -95,7 +95,7 @@ class ProductController extends Controller
                 if (!empty($name)) {
                     $property = new ProductProperty();
                     $property->product_id = $product->id;
-                    $property->property_type = 'other'; 
+                    $property->property_type = $request->property_type[$key] ?? 'other'; 
                     $property->property_name_az = $name;
                     $property->property_name_en = $request->property_name_en[$key] ?? '';
                     $property->property_name_ru = $request->property_name_ru[$key] ?? '';
@@ -208,7 +208,7 @@ class ProductController extends Controller
                 if (!empty($name)) {
                     $property = new ProductProperty();
                     $property->product_id = $product->id;
-                    $property->property_type = 'other'; 
+                    $property->property_type = $request->property_type[$key] ?? 'other'; 
                     $property->property_name_az = $name;
                     $property->property_name_en = $request->property_name_en[$key] ?? '';
                     $property->property_name_ru = $request->property_name_ru[$key] ?? '';
