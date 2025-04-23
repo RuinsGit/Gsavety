@@ -32,8 +32,8 @@ class ProductImageController extends Controller
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'product_color_id' => 'nullable|exists:product_colors,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'alt_text_az' => 'nullable|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
+            'alt_text_az' => 'nullable|string', 
             'alt_text_en' => 'nullable|string',
             'alt_text_ru' => 'nullable|string',
         ]);
@@ -90,7 +90,7 @@ class ProductImageController extends Controller
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'product_color_id' => 'nullable|exists:product_colors,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
             'alt_text_az' => 'nullable|string',
             'alt_text_en' => 'nullable|string',
             'alt_text_ru' => 'nullable|string',

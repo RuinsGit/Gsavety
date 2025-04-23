@@ -56,7 +56,7 @@ class HomeCartSectionController extends Controller
             'description_az' => 'required|string',
             'description_en' => 'nullable|string',
             'description_ru' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
             'order' => 'nullable|integer',
         ]);
 
@@ -65,7 +65,7 @@ class HomeCartSectionController extends Controller
 
         // Resim yükleme işlemi
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
+            $image = $request->file('image');   
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/home-cart-sections'), $imageName);
             $data['image'] = 'uploads/home-cart-sections/' . $imageName;
@@ -105,7 +105,7 @@ class HomeCartSectionController extends Controller
             'description_az' => 'required|string',
             'description_en' => 'nullable|string',
             'description_ru' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
             'order' => 'nullable|integer',
         ]);
 

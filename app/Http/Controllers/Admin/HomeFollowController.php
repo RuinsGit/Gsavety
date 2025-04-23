@@ -55,7 +55,7 @@ class HomeFollowController extends Controller
             'name_en' => 'nullable|string|max:255',
             'name_ru' => 'nullable|string|max:255',
             'link' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'order' => 'nullable|integer',
         ]);
 
@@ -105,7 +105,7 @@ class HomeFollowController extends Controller
             'name_en' => 'nullable|string|max:255',
             'name_ru' => 'nullable|string|max:255',
             'link' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'order' => 'nullable|integer',
         ]);
 

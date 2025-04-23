@@ -53,14 +53,14 @@ class AboutController extends Controller
             'description_az' => 'required|string',
             'description_en' => 'nullable|string',
             'description_ru' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
         ]);
 
         $data = $request->all();
         $data['status'] = $request->has('status') ? 1 : 0;
 
-        // Görsel yükleme - Resim
+        // Görsel yükleme - Resim   
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_image.' . $image->getClientOriginalExtension();
@@ -112,8 +112,8 @@ class AboutController extends Controller
             'description_az' => 'required|string',
             'description_en' => 'nullable|string',
             'description_ru' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
         ]);
 
         $data = $request->all();

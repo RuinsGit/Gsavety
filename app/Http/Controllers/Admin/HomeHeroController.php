@@ -35,7 +35,7 @@ class HomeHeroController extends Controller
             'title_az' => 'required|string',
             'title_en' => 'nullable|string',
             'title_ru' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
             'order' => 'nullable|integer',
         ]);
 
@@ -85,7 +85,7 @@ class HomeHeroController extends Controller
             'title_az' => 'required|string',
             'title_en' => 'nullable|string',
             'title_ru' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
             'order' => 'nullable|integer',
         ]);
 

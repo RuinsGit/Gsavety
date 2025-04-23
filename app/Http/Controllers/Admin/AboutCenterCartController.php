@@ -123,7 +123,7 @@ class AboutCenterCartController extends Controller
                 'description_az' => 'required|string',
                 'description_en' => 'required|string',
                 'description_ru' => 'required|string',
-                'image' => 'nullable|mimes:jpeg,png,jpg,svg,webp|max:2048',
+                'image' => 'nullable|mimes:jpeg,png,jpg,svg,webp|max:9999',
             ]);
             
             if ($validator->fails()) {
@@ -202,7 +202,7 @@ class AboutCenterCartController extends Controller
                 'description_az' => 'required|string',
                 'description_en' => 'required|string',
                 'description_ru' => 'required|string',
-                'image' => 'nullable|mimes:jpeg,png,jpg,svg,webp|max:2048',
+                'image' => 'nullable|mimes:jpeg,png,jpg,svg,webp|max:9999',
             ]);
             
             if ($validator->fails()) {
