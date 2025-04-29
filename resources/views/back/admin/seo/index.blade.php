@@ -45,7 +45,7 @@
                     <div class="page-title-box d-flex align-items-center justify-content-between">
                         <h4 class="mb-0">SEO Siyahısı</h4>
                         <div class="page-title-right">
-                            @if($seos->count() < 11)
+                            @if($seos->count() < 60)
                                 <a href="{{ route('back.pages.seo.create') }}" class="btn btn-primary">
                                     <i class="fas fa-plus"></i> Yeni
                                 </a>

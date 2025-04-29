@@ -88,6 +88,16 @@
                                                 <td class="text-end">{{ $order->created_at->format('d.m.Y H:i') }}</td>
                                             </tr>
                                             <tr>
+                                                <td>Sifariş Tipi:</td>
+                                                <td class="text-end">
+                                                    @if($order->type == 'retail')
+                                                        <span class="badge bg-success">Perakendə</span>
+                                                    @else
+                                                        <span class="badge bg-primary">Korparatif</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>Cəmi:</td>
                                                 <td class="text-end">{{ number_format($order->total_amount, 2) }} ₼</td>
                                             </tr>
@@ -114,6 +124,12 @@
                                                 <td>Ad Soyad:</td>
                                                 <td class="text-end"><strong>{{ $order->first_name }} {{ $order->last_name }}</strong></td>
                                             </tr>
+                                            @if($order->type == 'corporate')
+                                            <tr>
+                                                <td>Şirkət Adı:</td>
+                                                <td class="text-end"><strong>{{ $order->company_name }}</strong></td>
+                                            </tr>
+                                            @endif
                                             <tr>
                                                 <td>E-poçt:</td>
                                                 <td class="text-end">{{ $order->email }}</td>
@@ -238,6 +254,28 @@
 
                             <div>
                                 <button type="submit" class="btn btn-info w-100">Ödemə Statusunu Güncelle</button>
+                            </div>
+                        </form>
+                        
+                        <hr>
+                        
+                        <form action="{{ route('back.pages.orders.update-type', $order->id) }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="type" class="form-label">Sifariş Tipini Güncelle</label>
+                                <select class="form-select" id="type" name="type" onchange="toggleCompanyNameField()">
+                                    <option value="retail" {{ $order->type == 'retail' ? 'selected' : '' }}>Perakendə</option>
+                                    <option value="corporate" {{ $order->type == 'corporate' ? 'selected' : '' }}>Korparatif</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3" id="companyNameField" style="{{ $order->type == 'corporate' ? '' : 'display: none;' }}">
+                                <label for="company_name" class="form-label">Şirkət Adı</label>
+                                <input type="text" class="form-control" id="company_name" name="company_name" value="{{ $order->company_name }}">
+                            </div>
+
+                            <div>
+                                <button type="submit" class="btn btn-secondary w-100">Sifariş Tipini Güncelle</button>
                             </div>
                         </form>
                     </div>
@@ -392,5 +430,17 @@
             });
         });
     });
+    
+    // Şirket adı alanını göster/gizle
+    function toggleCompanyNameField() {
+        var typeSelect = document.getElementById('type');
+        var companyNameField = document.getElementById('companyNameField');
+        
+        if (typeSelect.value === 'corporate') {
+            companyNameField.style.display = 'block';
+        } else {
+            companyNameField.style.display = 'none';
+        }
+    }
 </script>
 @endpush 

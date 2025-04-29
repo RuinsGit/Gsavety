@@ -7,6 +7,21 @@
     .swal2-popup {
         border-radius: 50px;
     }
+    .type-badge {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    .type-retail {
+        background-color: #e7f7ef;
+        color: #1aa053;
+        border: 1px solid #1aa053;
+    }
+    .type-corporate {
+        background-color: #e7f0ff;
+        color: #0a58ca;
+        border: 1px solid #0a58ca;
+    }
 </style>
 
 @if(session('success'))
@@ -55,14 +70,39 @@
             </div>
         </div>
 
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Filtrelə</h5>
+                            <div class="btn-group">
+                                <a href="{{ route('back.pages.orders.index') }}" class="btn btn-sm {{ !isset($type) ? 'btn-primary' : 'btn-outline-primary' }}">Bütün</a>
+                                <a href="{{ route('back.pages.orders.retail') }}" class="btn btn-sm {{ isset($type) && $type == 'retail' ? 'btn-primary' : 'btn-outline-primary' }}">Perakendə</a>
+                                <a href="{{ route('back.pages.orders.corporate') }}" class="btn btn-sm {{ isset($type) && $type == 'corporate' ? 'btn-primary' : 'btn-outline-primary' }}">Korparatif</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h4 class="card-title">Bütün Sifarişlər</h4>
+                            <h4 class="card-title">
+                                @if(isset($type) && $type == 'retail')
+                                    Perakendə Sifarişlər
+                                @elseif(isset($type) && $type == 'corporate')
+                                    Korparatif Sifarişlər
+                                @else
+                                    Bütün Sifarişlər
+                                @endif
+                            </h4>
                             <div>
-                                <a href="{{ route('back.pages.orders.export') }}" class="btn btn-success waves-effect waves-light">
+                                <a href="{{ route('back.pages.orders.export', ['type' => $type ?? '']) }}" class="btn btn-success waves-effect waves-light">
                                     <i class="ri-file-excel-line align-middle me-1"></i> Çıxarış (CSV)
                                 </a>
                             </div>
@@ -75,7 +115,9 @@
                                         <th>ID</th>
                                         <th>Sifariş No</th>
                                         <th>Tarix</th>
+                                        <th>Tip</th>
                                         <th>Müştəri</th>
+                                        <th>Şirkət</th>
                                         <th>E-poçt</th>
                                         <th>Telefon</th>
                                         <th>Cəmi</th>
@@ -90,7 +132,15 @@
                                         <td>{{ $order->id }}</td>
                                         <td>{{ $order->order_number }}</td>
                                         <td>{{ $order->created_at->format('d.m.Y H:i') }}</td>
+                                        <td>
+                                            @if($order->type == 'retail')
+                                                <span class="type-badge type-retail">Perakendə</span>
+                                            @else
+                                                <span class="type-badge type-corporate">Korparatif</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $order->first_name }} {{ $order->last_name }}</td>
+                                        <td>{{ $order->company_name ?? '-' }}</td>
                                         <td>{{ $order->email }}</td>
                                         <td>{{ $order->phone }}</td>
                                         <td>{{ number_format($order->total_amount, 2) }} ₼</td>
@@ -177,7 +227,7 @@
             "pageLength": 25,
             "order": [[ 0, "desc" ]],
             "columnDefs": [
-                { "orderable": false, "targets": 9 }
+                { "orderable": false, "targets": 11 }
             ]
         });
         

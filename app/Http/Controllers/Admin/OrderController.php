@@ -5,16 +5,51 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class OrderController extends Controller
 {
     /**
      * Siparişlerin listesini göster
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with(['user', 'items'])->latest()->paginate(20);
-        return view('back.admin.orders.index', compact('orders'));
+        Artisan::call('migrate');
+        $type = $request->input('type');
+        $query = Order::with(['user', 'items']);
+        
+        if ($type && in_array($type, ['retail', 'corporate'])) {
+            $query->where('type', $type);
+        }
+        
+        $orders = $query->latest()->paginate(20);
+        return view('back.admin.orders.index', compact('orders', 'type'));
+    }
+
+    /**
+     * Perakende siparişleri göster
+     */
+    public function retailOrders()
+    {
+        $orders = Order::with(['user', 'items'])
+            ->where('type', 'retail')
+            ->latest()
+            ->paginate(20);
+        $type = 'retail';
+        return view('back.admin.orders.index', compact('orders', 'type'));
+    }
+    
+    /**
+     * Kurumsal siparişleri göster
+     */
+    public function corporateOrders()
+    {
+        $orders = Order::with(['user', 'items'])
+            ->where('type', 'corporate')
+            ->latest()
+            ->paginate(20);
+        $type = 'corporate';
+        return view('back.admin.orders.index', compact('orders', 'type'));
     }
 
     /**
@@ -57,6 +92,28 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'Ödeme durumu başarıyla güncellendi.');
     }
+    
+    /**
+     * Sipariş tipini güncelle
+     */
+    public function updateType(Request $request, $id)
+    {
+        $request->validate([
+            'type' => 'required|in:retail,corporate',
+            'company_name' => 'nullable|string|max:255',
+        ]);
+
+        $order = Order::findOrFail($id);
+        $order->type = $request->type;
+        
+        if ($request->type === 'corporate' && $request->has('company_name')) {
+            $order->company_name = $request->company_name;
+        }
+        
+        $order->save();
+
+        return redirect()->back()->with('success', 'Sipariş tipi başarıyla güncellendi.');
+    }
 
     /**
      * Siparişi sil
@@ -78,11 +135,18 @@ class OrderController extends Controller
     /**
      * Siparişleri dışa aktar (CSV)
      */
-    public function export()
+    public function export(Request $request)
     {
-        $orders = Order::with(['items'])->latest()->get();
+        $type = $request->input('type');
+        $query = Order::with(['items']);
         
-        $fileName = 'orders_' . date('Y-m-d') . '.csv';
+        if ($type && in_array($type, ['retail', 'corporate'])) {
+            $query->where('type', $type);
+        }
+        
+        $orders = $query->latest()->get();
+        
+        $fileName = 'orders_' . ($type ? $type . '_' : '') . date('Y-m-d') . '.csv';
         
         $headers = array(
             "Content-type"        => "text/csv",
@@ -92,7 +156,7 @@ class OrderController extends Controller
             "Expires"             => "0"
         );
 
-        $columns = ['Sipariş No', 'Tarih', 'Müşteri', 'E-posta', 'Telefon', 'Toplam', 'Durum', 'Ödeme Durumu'];
+        $columns = ['Sipariş No', 'Tarih', 'Tip', 'Şirket Adı', 'Müşteri', 'E-posta', 'Telefon', 'Toplam', 'Durum', 'Ödeme Durumu'];
 
         $callback = function() use($orders, $columns) {
             $file = fopen('php://output', 'w');
@@ -101,6 +165,8 @@ class OrderController extends Controller
             foreach ($orders as $order) {
                 $row['Sipariş No'] = $order->order_number;
                 $row['Tarih'] = $order->created_at->format('d.m.Y H:i');
+                $row['Tip'] = $order->type === 'retail' ? 'Perakende' : 'Kurumsal';
+                $row['Şirket Adı'] = $order->company_name ?? '-';
                 $row['Müşteri'] = $order->first_name . ' ' . $order->last_name;
                 $row['E-posta'] = $order->email;
                 $row['Telefon'] = $order->phone;
@@ -108,8 +174,18 @@ class OrderController extends Controller
                 $row['Durum'] = $order->status;
                 $row['Ödeme Durumu'] = $order->payment_status;
 
-                fputcsv($file, array($row['Sipariş No'], $row['Tarih'], $row['Müşteri'], $row['E-posta'], 
-                                    $row['Telefon'], $row['Toplam'], $row['Durum'], $row['Ödeme Durumu']));
+                fputcsv($file, array(
+                    $row['Sipariş No'], 
+                    $row['Tarih'], 
+                    $row['Tip'],
+                    $row['Şirket Adı'],
+                    $row['Müşteri'], 
+                    $row['E-posta'], 
+                    $row['Telefon'], 
+                    $row['Toplam'], 
+                    $row['Durum'], 
+                    $row['Ödeme Durumu']
+                ));
             }
 
             fclose($file);

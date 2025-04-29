@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\BlogApiController;
 use App\Http\Controllers\Api\PartnerBannerApiController;
 use App\Http\Controllers\Api\HomeQuestionApiController;
 use App\Http\Controllers\Api\ProductBannerApiController;
+use App\Http\Controllers\Api\QuestionApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,6 +181,15 @@ Route::prefix('orders')->middleware('auth:sanctum')->group(function () {
     // Ödeme durumunu güncelle
     Route::put('/{id}/payment-status', [OrderApiController::class, 'updatePaymentStatus']);
     
+    // Sipariş tipini güncelle (perakende/kurumsal)
+    Route::put('/{id}/type', [OrderApiController::class, 'updateType']);
+    
+    // Perakende siparişleri listele (GET ve POST metodlarını destekler)
+    Route::match(['get', 'post'], '/retail', [OrderApiController::class, 'getRetailOrders']);
+    
+    // Kurumsal siparişleri listele (GET ve POST metodlarını destekler)
+    Route::match(['get', 'post'], '/corporate', [OrderApiController::class, 'getCorporateOrders']);
+    
     // Belirli bir siparişin detayını getir (en sona aldık, çünkü /{id} formatı diğer rotalarla çakışabilir)
     Route::get('/{id}', [OrderApiController::class, 'show']);
 });
@@ -306,4 +316,19 @@ Route::prefix('contact-titles')->group(function () {
 Route::prefix('partner-banners')->group(function () {
     Route::get('/', [PartnerBannerApiController::class, 'index']);
     Route::get('/{id}', [PartnerBannerApiController::class, 'show']);
+});
+
+// Contact Request Routes
+Route::prefix('contact-requests')->group(function () {
+    Route::get('/', [App\Http\Controllers\Api\ContactRequestApiController::class, 'index']);
+    Route::get('/{id}', [App\Http\Controllers\Api\ContactRequestApiController::class, 'show']);
+    Route::post('/', [App\Http\Controllers\Api\ContactRequestApiController::class, 'store']);
+    Route::post('/{id}/toggle-status', [App\Http\Controllers\Api\ContactRequestApiController::class, 'updateStatus']);
+    Route::delete('/{id}', [App\Http\Controllers\Api\ContactRequestApiController::class, 'destroy']);
+});
+
+// Question Routes
+Route::prefix('questions')->group(function () {
+    Route::get('/', [App\Http\Controllers\Api\QuestionApiController::class, 'index']);
+    Route::get('/{id}', [App\Http\Controllers\Api\QuestionApiController::class, 'show']);
 });

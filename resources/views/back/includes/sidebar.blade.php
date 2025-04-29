@@ -252,6 +252,18 @@
                                 <span>Əlaqə Hero</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('back.pages.contact-requests.index') }}" style="color: white;">
+                                <i class="ri-phone-line" style="color: white;"></i>
+                                <span>Əlaqə Müraciətləri</span>
+                            </a>
+                        </li>
+                        <li>
+                                <a href="{{ route('back.pages.questions.index') }}" style="color: white;">
+                                    <i class="ri-phone-line" style="color: white;"></i>
+                                    <span>Sual-Cavab</span>
+                                </a>
+                            </li>
 
                         <li>
                             <a href="{{ route('back.pages.contact-titles.index') }}" style="color: white;">

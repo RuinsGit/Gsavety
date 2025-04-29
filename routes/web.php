@@ -38,6 +38,8 @@ use App\Http\Controllers\Admin\ContactTitleController;
 use App\Http\Controllers\Admin\HomeQuestionController;
 use App\Http\Controllers\Admin\ProductBannerController;
 use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\ContactRequestController;
+use App\Http\Controllers\Admin\QuestionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -262,10 +264,13 @@ Route::prefix('admin')->group(function () {
             // Admin Sipariş Rotaları
             Route::prefix('orders')->name('orders.')->group(function () {
                 Route::get('/', [OrderController::class, 'index'])->name('index');
+                Route::get('/retail', [OrderController::class, 'retailOrders'])->name('retail');
+                Route::get('/corporate', [OrderController::class, 'corporateOrders'])->name('corporate');
                 Route::get('/export', [OrderController::class, 'export'])->name('export');
                 Route::get('/{id}', [OrderController::class, 'show'])->name('show');
                 Route::post('/{id}/update-status', [OrderController::class, 'updateStatus'])->name('update-status');
                 Route::post('/{id}/update-payment-status', [OrderController::class, 'updatePaymentStatus'])->name('update-payment-status');
+                Route::post('/{id}/update-type', [OrderController::class, 'updateType'])->name('update-type');
                 Route::delete('/{id}', [OrderController::class, 'destroy'])->name('destroy');
             });
             
@@ -288,7 +293,21 @@ Route::prefix('admin')->group(function () {
                 Route::post('home-questions/{id}/toggle-status', [HomeQuestionController::class, 'toggleStatus'])->name('home-questions.toggleStatus');
                 Route::post('home-questions/update-order', [HomeQuestionController::class, 'updateOrder'])->name('home-questions.updateOrder');
 
+                // Contact Request Routes
+                Route::get('contact-requests', [ContactRequestController::class, 'index'])->name('contact-requests.index');
+                Route::get('contact-requests/{id}', [ContactRequestController::class, 'show'])->name('contact-requests.show');
+                Route::delete('contact-requests/{id}', [ContactRequestController::class, 'destroy'])->name('contact-requests.destroy');
+                Route::post('contact-requests/{id}/toggle-status', [ContactRequestController::class, 'toggleStatus'])->name('contact-requests.toggle-status');
 
+                // Question Routes
+                Route::get('questions', [App\Http\Controllers\Admin\QuestionController::class, 'index'])->name('questions.index');
+                Route::get('questions/create', [App\Http\Controllers\Admin\QuestionController::class, 'create'])->name('questions.create');
+                Route::post('questions', [App\Http\Controllers\Admin\QuestionController::class, 'store'])->name('questions.store');
+                Route::get('questions/{id}', [App\Http\Controllers\Admin\QuestionController::class, 'show'])->name('questions.show');
+                Route::get('questions/{id}/edit', [App\Http\Controllers\Admin\QuestionController::class, 'edit'])->name('questions.edit');
+                Route::put('questions/{id}', [App\Http\Controllers\Admin\QuestionController::class, 'update'])->name('questions.update');
+                Route::delete('questions/{id}', [App\Http\Controllers\Admin\QuestionController::class, 'destroy'])->name('questions.destroy');
+                Route::post('questions/{id}/toggle-status', [App\Http\Controllers\Admin\QuestionController::class, 'toggleStatus'])->name('questions.toggle-status');
 
         });
 
