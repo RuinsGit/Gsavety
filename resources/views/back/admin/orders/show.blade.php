@@ -105,7 +105,7 @@
                                                 <td>Ödemə Yöntəmi:</td>
                                                 <td class="text-end">
                                                     @if($order->payment_method == 'cash_on_delivery')
-                                                        Kapıda Ödemə
+                                                        Qapıda Ödemə
                                                     @else
                                                         {{ $order->payment_method }}
                                                     @endif
