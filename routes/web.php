@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\ProductBannerController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\ContactRequestController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\SeoScriptController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,6 +99,15 @@ Route::prefix('admin')->group(function () {
              Route::delete('seo/{id}', [SeoController::class, 'destroy'])->name('seo.destroy');
              Route::post('seo/toggle-status/{id}', [SeoController::class, 'toggleStatus'])->name('seo.toggle-status.post');
              Route::post('seo/toggle-status/{id}', [SeoController::class, 'toggleStatus'])->name('seo.toggle-status');
+
+             // SEO Script routes
+             Route::get('seo-script', [SeoScriptController::class, 'index'])->name('seo_script.index');
+             Route::get('seo-script/create', [SeoScriptController::class, 'create'])->name('seo_script.create');
+             Route::post('seo-script', [SeoScriptController::class, 'store'])->name('seo_script.store');
+             Route::get('seo-script/{seoScript}/edit', [SeoScriptController::class, 'edit'])->name('seo_script.edit');
+             Route::put('seo-script/{seoScript}', [SeoScriptController::class, 'update'])->name('seo_script.update');
+             Route::delete('seo-script/{seoScript}', [SeoScriptController::class, 'destroy'])->name('seo_script.destroy');
+             Route::post('seo-script/toggle-status/{id}', [SeoScriptController::class, 'toggleStatus'])->name('seo_script.toggle-status');
 
              // Logo routes
              Route::get('logos', [LogoController::class, 'index'])->name('logos.index');

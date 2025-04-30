@@ -34,6 +34,7 @@ use App\Http\Controllers\Api\PartnerBannerApiController;
 use App\Http\Controllers\Api\HomeQuestionApiController;
 use App\Http\Controllers\Api\ProductBannerApiController;
 use App\Http\Controllers\Api\QuestionApiController;
+use App\Http\Controllers\Api\SeoScriptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,12 @@ Route::prefix('seo')->group(function () {
     Route::post('/', [SeoController::class, 'store']);
     Route::put('/{id}', [SeoController::class, 'update']);
     Route::delete('/{id}', [SeoController::class, 'destroy']);
+});
+
+// SEO Script Routes
+Route::prefix('seo-scripts')->group(function () {
+    Route::get('/', [SeoScriptController::class, 'index']);
+    Route::get('/{id}', [SeoScriptController::class, 'show']);
 });
 
 // Social Media Routes

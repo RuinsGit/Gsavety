@@ -47,11 +47,17 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('back.pages.seo_script.index') }}" style="color: white;">
+                                <i class="ri-file-line" style="color: white;"></i>
+                                <span >SEO Script</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('back.pages.logos.index') }}" style="color: white;">
                                 <i class="ri-file-line" style="color: white;"></i>
                                 <span >Logo</span>
                             </a>
-                        </li>
+                        </a>
 
 
                     </ul>
